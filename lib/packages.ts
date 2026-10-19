@@ -92,7 +92,7 @@ export const INTERNET_PACKAGES: PackageItem[] = [
       "Trang bị Modem WiFi 6 chuẩn AX thế hệ mới",
       "Triển khai hòa mạng nhanh chóng trong 24 giờ",
       "Đường truyền ổn định, không giới hạn dung lượng",
-      "Đội ngũ chăm sóc kỹ thuật tận tâm 24/7"
+      "Đội ngũ chăm sóc và đồng hành tận tâm"
     ]
   },
   {
@@ -191,7 +191,7 @@ export const INTERNET_PACKAGES: PackageItem[] = [
       "Băng thông trong nước 300 Mbps, cam kết quốc tế tối thiểu 10.8 Mbps",
       "Miễn phí 01 địa chỉ IP Tĩnh giúp vận hành server & VPN mượt mà",
       "Thiết bị cân bằng tải chịu tải cao nhiều người dùng đồng thời",
-      "Kênh giám sát hạ tầng kỹ thuật ưu tiên 24/7/365",
+      "Hạ tầng băng thông rộng cam kết kết nối thông suốt liên tục",
       "Hợp đồng pháp nhân xuất hóa đơn VAT điện tử nhanh chóng"
     ]
   },
@@ -393,8 +393,8 @@ export const ADVANTAGES = [
   },
   {
     id: "adv-3",
-    title: "Chăm sóc & Đồng hành 24/7",
-    description: "Kênh tổng đài tư vấn trực tuyến mọi lúc mọi nơi, giải quyết mọi thắc mắc của khách hàng trong tích tắc.",
+    title: "Chăm sóc & Đồng hành tận tâm",
+    description: "Kênh tư vấn đăng ký thuê bao trực tuyến nhanh chóng, giải đáp mọi thông tin gói cước trong tích tắc.",
     icon: "Headphones"
   },
   {
@@ -486,7 +486,7 @@ export const TESTIMONIALS: TestimonialItem[] = [
     avatar: "/images/gioithieu_07.webp",
     rating: 5,
     packageUsed: "Gói Super 500 Biz",
-    content: "Đội ngũ kỹ thuật hỗ trợ rất nhanh nhẹn và chuyên nghiệp. Thủ tục xuất hóa đơn VAT điện tử rõ ràng, mạng chạy thông suốt liên tục 24/7 giúp công ty xử lý đơn hàng suôn sẻ."
+    content: "Đội ngũ triển khai dịch vụ rất nhanh nhẹn và chuyên nghiệp. Thủ tục xuất hóa đơn VAT điện tử rõ ràng, mạng chạy thông suốt liên tục giúp công ty xử lý đơn hàng suôn sẻ."
   }
 ];
 

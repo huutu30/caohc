@@ -31,7 +31,7 @@ const FAQS: FaqItem[] = [
   },
   {
     q: "Khi thiết bị ngoại tuyến hoặc đường truyền tạm ngưng thì liên hệ thế nào?",
-    a: "Quý khách có thể dễ dàng quản lý thiết bị, kiểm tra tình trạng kết nối hoặc gửi yêu cầu chăm sóc trực tiếp 24/7 thông qua ứng dụng thông minh Hi FPT, hoặc liên hệ qua đường dây tư vấn chính thức của chúng tôi.",
+    a: "Quý khách có thể dễ dàng quản lý thiết bị, kiểm tra tình trạng kết nối hoặc gửi yêu cầu chăm sóc trực tiếp thông qua ứng dụng thông minh Hi FPT, hoặc liên hệ qua đường dây tư vấn chính thức của chúng tôi.",
   },
 ];
 

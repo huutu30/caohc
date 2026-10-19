@@ -29,25 +29,25 @@ export default function ContactPage() {
     {
       region: "Hà Nội (Trụ sở chính)",
       address: "Tòa nhà FPT Tower, số 10 Phạm Văn Bạch, Cầu Giấy, Hà Nội",
-      hotline: "1900 6600",
+      hotline: "0902.184.284",
       hours: "07:30 - 18:30 (Thứ 2 - Chủ Nhật)",
     },
     {
       region: "TP. Hồ Chí Minh",
       address: "Lô 37-39A, đường 19, Khu Chế Xuất Tân Thuận, Quận 7, TP.HCM",
-      hotline: "1900 6600",
+      hotline: "0902.184.284",
       hours: "07:30 - 18:30 (Thứ 2 - Chủ Nhật)",
     },
     {
       region: "Đà Nẵng",
       address: "Số 182-184 Đường 2 Tháng 9, Quận Hải Châu, TP. Đà Nẵng",
-      hotline: "1900 6600",
+      hotline: "0902.184.284",
       hours: "07:30 - 18:00 (Thứ 2 - Thứ 7)",
     },
     {
       region: "Hải Phòng",
       address: "Số 137 Tô Hiệu, Trại Cau, Lê Chân, TP. Hải Phòng",
-      hotline: "1900 6600",
+      hotline: "0902.184.284",
       hours: "07:30 - 18:00 (Thứ 2 - Thứ 7)",
     },
   ];
@@ -154,12 +154,12 @@ export default function ContactPage() {
               </h3>
               <div className="space-y-3 text-sm">
                 <div>
-                  <p className="text-xs text-blue-200">Tổng đài đăng ký thuê bao:</p>
+                  <p className="text-xs text-blue-200">Hotline đăng ký thuê bao:</p>
                   <a
-                    href="tel:19006600"
+                    href="tel:0902184284"
                     className="text-2xl font-black text-amber-400 hover:underline block"
                   >
-                    1900 6600
+                    0902.184.284
                   </a>
                 </div>
                 <div>

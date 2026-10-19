@@ -139,12 +139,12 @@ export default function RegistrationForm({
             </div>
 
             <div className="relative z-10 pt-8 mt-8 border-t border-white/15">
-              <p className="text-xs text-blue-200">Hotline tư vấn nhanh 24/7:</p>
+              <p className="text-xs text-blue-200">Hotline đăng ký thuê bao:</p>
               <a
-                href="tel:19006600"
+                href="tel:0902184284"
                 className="text-2xl font-black text-amber-400 hover:underline tracking-wide block mt-1"
               >
-                1900 6600
+                0902.184.284
               </a>
             </div>
           </div>
