@@ -3,7 +3,6 @@
 import React from "react";
 import EplHeroSection from "@/components/epl/EplHeroSection";
 import EplComparisonMatrix from "@/components/epl/EplComparisonMatrix";
-import EplScheduleSection from "@/components/epl/EplScheduleSection";
 import EplPackagesSlider from "@/components/epl/EplPackagesSlider";
 import EplFptPlayOnlySection from "@/components/epl/EplFptPlayOnlySection";
 import EplPromotionFeatures from "@/components/epl/EplPromotionFeatures";
@@ -18,10 +17,7 @@ export default function NgoaiHangAnhPage() {
       {/* 2. BẢNG SO SÁNH TÍNH NĂNG GÓI V.VIP CHUẨN FPT.VN (TRIAN COMPARISON MATRIX) */}
       <EplComparisonMatrix />
 
-      {/* 3. LỊCH THI ĐẤU, KẾT QUẢ & BẢNG XẾP HẠNG PREMIER LEAGUE */}
-      <EplScheduleSection />
-
-      {/* 4. SLIDER BẢNG GIÁ COMBO INTERNET TRUYỀN HÌNH V.VIP KÈM BỘ LỌC KHU VỰC */}
+      {/* 3. SLIDER BẢNG GIÁ COMBO INTERNET TRUYỀN HÌNH V.VIP KÈM BỘ LỌC KHU VỰC */}
       <EplPackagesSlider />
 
       {/* 5. GÓI TÀI KHOẢN FPT PLAY ONLY (CHO KHÁCH ĐÃ CÓ MẠNG) */}
