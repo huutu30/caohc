@@ -1,11 +1,11 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { Check, Zap, ArrowRight, Gift, Sparkles } from "lucide-react";
 import { PackageItem, ComboItem } from "@/lib/packages";
 import { formatCurrency, cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useRegister } from "@/context/RegisterContext";
 
 interface PricingCardProps {
   item: PackageItem | (ComboItem & { speed: string; uploadSpeed?: string; equipment?: string; devicesRecommended?: string });
@@ -20,6 +20,8 @@ export default function PricingCard({
   onSelect,
   className,
 }: PricingCardProps) {
+  const { openRegisterModal } = useRegister();
+
   // Compute price and bonus based on billing cycle
   let displayPrice = item.priceMonthly;
   let giftText = "";
@@ -153,26 +155,33 @@ export default function PricingCard({
 
         {/* ACTION BUTTON */}
         <div className="pt-2">
-          {onSelect ? (
-            <Button
-              onClick={() => onSelect(item)}
-              variant={isPopular ? "default" : "primary"}
-              className="w-full h-12 rounded-xl font-bold text-sm shadow-md transition-all hover:scale-[1.02]"
-            >
-              Đăng ký gói này
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
-          ) : (
-            <Link href={`/dang-ky?package=${item.id}&cycle=${billingCycle}`} className="w-full block">
-              <Button
-                variant={isPopular ? "default" : "primary"}
-                className="w-full h-12 rounded-xl font-bold text-sm shadow-md transition-all hover:scale-[1.02]"
-              >
-                Đăng ký gói này
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
-            </Link>
-          )}
+          <Button
+            onClick={() => {
+              if (onSelect) {
+                onSelect(item);
+              } else {
+                openRegisterModal({
+                  id: item.id,
+                  name: item.name,
+                  price: displayPrice,
+                  category: "ca_nhan",
+                  categoryName: item.categoryLabel || "Internet",
+                  downloadSpeed: item.speed,
+                  uploadSpeed: item.uploadSpeed || "150 Mbps",
+                  image: item.image || "/images/giga.webp",
+                  modem: item.equipment || "Modem Wi-Fi 6",
+                  recommendedDevices: item.devicesRecommended || "1 - 10 thiết bị",
+                  features: item.features || [],
+                  description: item.description || "",
+                });
+              }
+            }}
+            variant={isPopular ? "default" : "primary"}
+            className="w-full h-12 rounded-xl font-bold text-sm shadow-md transition-all hover:scale-[1.02] flex items-center justify-center space-x-2"
+          >
+            <span>Đăng ký gói này</span>
+            <ArrowRight className="h-4 w-4 ml-1" />
+          </Button>
         </div>
       </div>
     </div>
