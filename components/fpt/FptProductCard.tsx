@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Check, Zap, Wifi, ArrowRight } from "lucide-react";
 import { useRegister } from "@/context/RegisterContext";
+import { useRegion } from "@/context/RegionContext";
 import { FptPackage } from "@/data/fptPackages";
 
 export interface FptProductCardItem {
@@ -14,7 +15,7 @@ export interface FptProductCardItem {
   badge?: string;
   isPopular?: boolean;
   image: string;
-  price: number;
+  price: number | { hcm: number; tinh: number };
   originalPrice?: number;
   speed: string;
   uploadSpeed?: string;
@@ -32,8 +33,10 @@ interface FptProductCardProps {
 
 export default function FptProductCard({ item, className = "" }: FptProductCardProps) {
   const { openRegisterModal } = useRegister();
+  const { getPrice } = useRegion();
 
-  const formattedPrice = new Intl.NumberFormat("vi-VN").format(item.price);
+  const dynamicPrice = getPrice(item) || (typeof item.price === "number" ? item.price : item.price?.tinh || 0);
+  const formattedPrice = new Intl.NumberFormat("vi-VN").format(dynamicPrice);
   const formattedOriginalPrice = item.originalPrice
     ? new Intl.NumberFormat("vi-VN").format(item.originalPrice)
     : null;
@@ -173,7 +176,7 @@ export default function FptProductCard({ item, className = "" }: FptProductCardP
                 categoryName: "Gói cước",
                 downloadSpeed: item.speed,
                 uploadSpeed: item.uploadSpeed || item.speed,
-                price: item.price,
+                price: dynamicPrice,
                 image: item.image,
                 modem: item.equipment || "Modem Wi-Fi 6",
                 recommendedDevices: item.recommendedDevices || "1 - 10 thiết bị",

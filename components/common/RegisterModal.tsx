@@ -8,7 +8,7 @@ import { FPT_PACKAGES } from "@/data/fptPackages";
 
 export default function RegisterModal() {
   const { isRegisterModalOpen, closeRegisterModal, selectedPackage } = useRegister();
-  const { activeProvince } = useRegion();
+  const { activeProvince, getPrice } = useRegion();
 
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -32,6 +32,12 @@ export default function RegisterModal() {
   if (!isRegisterModalOpen) return null;
 
   const currentPkg = FPT_PACKAGES.find((p) => p.id === chosenPkgId) || FPT_PACKAGES[1];
+  const selectedPrice = selectedPackage
+    ? "price" in selectedPackage
+      ? selectedPackage.price
+      : selectedPackage.priceNgoaiThanh
+    : 0;
+  const pkgPrice = selectedPrice || getPrice(currentPkg) || currentPkg.price;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,7 +123,7 @@ export default function RegisterModal() {
                 >
                   {FPT_PACKAGES.map((pkg) => (
                     <option key={pkg.id} value={pkg.id}>
-                      {pkg.name} - {pkg.downloadSpeed} ({pkg.price.toLocaleString("vi-VN")} đ/tháng)
+                      {pkg.name} - {pkg.downloadSpeed} ({(getPrice(pkg) || pkg.price).toLocaleString("vi-VN")} đ/tháng)
                     </option>
                   ))}
                 </select>
@@ -242,6 +248,17 @@ export default function RegisterModal() {
                     />
                   </div>
                 </div>
+              </div>
+
+              {/* TẠM TÍNH THEO TỈNH THÀNH */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between text-xs">
+                <span className="text-slate-600 font-medium">Giá cước tại {activeProvince.name}:</span>
+                <span className="font-black text-[#F26F21] text-sm">
+                  {(pkgPrice * (billingCycle === "1M" ? 1 : billingCycle === "6M" ? 6 : 12)).toLocaleString("vi-VN")} đ
+                  <span className="text-[10px] font-normal text-slate-400 ml-1">
+                    ({billingCycle === "1M" ? "/tháng" : billingCycle === "6M" ? "/6 tháng" : "/12 tháng"})
+                  </span>
+                </span>
               </div>
 
               {/* CAM KẾT CHÍNH SÁCH */}

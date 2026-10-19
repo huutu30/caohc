@@ -1,85 +1,138 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { CITY_DATA } from "@/data/cityData";
+import { getProductPrice } from "@/data/priceHelper";
 
 export interface Province {
   id: string;
   name: string;
-  region: "hcm" | "hn" | "tinh";
+  shortName: string;
+  region: "hcm" | "tinh";
 }
 
-export const PROVINCES: Province[] = [
-  { id: "ha-noi", name: "Hà Nội", region: "hn" },
-  { id: "ho-chi-minh", name: "TP. Hồ Chí Minh", region: "hcm" },
-  { id: "da-nang", name: "Đà Nẵng", region: "tinh" },
-  { id: "hai-phong", name: "Hải Phòng", region: "tinh" },
-  { id: "can-tho", name: "Cần Thơ", region: "tinh" },
-  { id: "binh-duong", name: "Bình Dương", region: "tinh" },
-  { id: "dong-nai", name: "Đồng Nai", region: "tinh" },
-  { id: "ba-ria-vung-tau", name: "Bà Rịa - Vũng Tàu", region: "tinh" },
-  { id: "quang-ninh", name: "Quảng Ninh", region: "tinh" },
-  { id: "bac-ninh", name: "Bắc Ninh", region: "tinh" },
-  { id: "khanh-hoa", name: "Khánh Hòa", region: "tinh" },
-  { id: "lam-dong", name: "Lâm Đồng", region: "tinh" },
-  { id: "thua-thien-hue", name: "Thừa Thiên Huế", region: "tinh" },
-  { id: "nghe-an", name: "Nghệ An", region: "tinh" },
-  { id: "thanh-hoa", name: "Thanh Hóa", region: "tinh" },
-  { id: "thai-nguyen", name: "Thái Nguyên", region: "tinh" },
-  { id: "vinh-phuc", name: "Vĩnh Phúc", region: "tinh" },
-  { id: "long-an", name: "Long An", region: "tinh" },
-  { id: "tien-giang", name: "Tiền Giang", region: "tinh" },
-  { id: "an-giang", name: "An Giang", region: "tinh" },
-  { id: "kien-giang", name: "Kiên Giang", region: "tinh" },
-  { id: "dak-lak", name: "Đắk Lắk", region: "tinh" },
-  { id: "binh-dinh", name: "Bình Định", region: "tinh" },
-  { id: "toan-quoc", name: "Tất cả tỉnh thành", region: "tinh" },
-];
+interface CityInfo {
+  name: string;
+  shortName?: string;
+  region: string;
+}
+
+const cityMap = CITY_DATA as Record<string, CityInfo>;
+
+// Chuyển đổi CITY_DATA sang danh sách PROVINCES có sắp xếp ưu tiên
+const priorityIds = ["toan-quoc", "ha-noi", "hcm", "da-nang", "hai-phong", "can-tho"];
+
+export const PROVINCES: Province[] = Object.entries(cityMap)
+  .map(([id, info]) => ({
+    id,
+    name: info.name,
+    shortName: info.shortName || info.name,
+    region: (info.region === "hcm" ? "hcm" : "tinh") as "hcm" | "tinh",
+  }))
+  .sort((a, b) => {
+    const aPri = priorityIds.indexOf(a.id);
+    const bPri = priorityIds.indexOf(b.id);
+    if (aPri !== -1 && bPri !== -1) return aPri - bPri;
+    if (aPri !== -1) return -1;
+    if (bPri !== -1) return 1;
+    return a.name.localeCompare(b.name, "vi");
+  });
+
+interface ItemPriceInput {
+  id?: string;
+  price?: number | { hcm: number; tinh: number } | Record<string, number>;
+}
 
 interface RegionContextType {
+  activeCity: string;
   activeProvince: Province;
-  setActiveProvince: (province: Province) => void;
+  region: "hcm" | "tinh";
+  changeCity: (cityId: string) => void;
+  setActiveProvince: (province: Province | string) => void;
   customerType: "personal" | "business";
   setCustomerType: (type: "personal" | "business") => void;
+  getPrice: (item: ItemPriceInput) => number;
 }
 
 const RegionContext = createContext<RegionContextType | undefined>(undefined);
 
-export const RegionProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [activeProvince, setActiveProvince] = useState<Province>(PROVINCES[0]);
-  const [customerType, setCustomerType] = useState<"personal" | "business">(
-    "personal"
-  );
+export const RegionProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const pathname = usePathname();
 
+  // Helper bóc tách city từ đường dẫn URL (vd: /dang-ky-internet-wifi/[city] hoặc /lap-internet-wifi/[city])
+  const getCityFromPath = (path: string | null): string => {
+    if (!path) return "toan-quoc";
+    const match = path.match(/^\/(?:dang-ky-internet-wifi|lap-internet-wifi)\/([^/]+)/);
+    if (match && cityMap[match[1]]) {
+      return match[1];
+    }
+    return "toan-quoc";
+  };
+
+  const [activeCity, setActiveCity] = useState<string>("toan-quoc");
+  const [customerType, setCustomerType] = useState<"personal" | "business">("personal");
+
+  // Khôi phục từ URL path hoặc localStorage khi mount
   useEffect(() => {
+    const pathCity = getCityFromPath(pathname);
+    if (pathCity !== "toan-quoc") {
+      setActiveCity(pathCity);
+      return;
+    }
+
     try {
-      const saved = localStorage.getItem("fpt_active_province");
-      if (saved) {
-        const found = PROVINCES.find((p) => p.id === saved);
-        if (found) setActiveProvince(found);
+      const saved = localStorage.getItem("fpt_active_city") || localStorage.getItem("fpt_active_province");
+      if (saved && cityMap[saved]) {
+        setActiveCity(saved);
       }
     } catch {
       // Ignore localStorage errors
     }
-  }, []);
+  }, [pathname]);
 
-  const handleSetProvince = (province: Province) => {
-    setActiveProvince(province);
+  const changeCity = (cityId: string) => {
+    if (!cityMap[cityId]) return;
+    setActiveCity(cityId);
     try {
-      localStorage.setItem("fpt_active_province", province.id);
+      localStorage.setItem("fpt_active_city", cityId);
     } catch {
       // Ignore localStorage errors
     }
   };
 
+  const setActiveProvince = (provinceOrId: Province | string) => {
+    const id = typeof provinceOrId === "string" ? provinceOrId : provinceOrId.id;
+    changeCity(id);
+  };
+
+  // Vùng miền: nội thành Hà Nội & HCM -> 'hcm'; các tỉnh khác -> 'tinh'
+  const cityInfo = cityMap[activeCity] || cityMap["toan-quoc"];
+  const region: "hcm" | "tinh" = cityInfo.region === "hcm" ? "hcm" : "tinh";
+
+  const activeProvince: Province = {
+    id: activeCity,
+    name: cityInfo.name,
+    shortName: cityInfo.shortName || cityInfo.name,
+    region,
+  };
+
+  // Helper tính giá cước tự động theo tỉnh thành hiện tại
+  const getPrice = (item: ItemPriceInput): number => {
+    return getProductPrice(item, activeCity, region);
+  };
+
   return (
     <RegionContext.Provider
       value={{
+        activeCity,
         activeProvince,
-        setActiveProvince: handleSetProvince,
+        region,
+        changeCity,
+        setActiveProvince,
         customerType,
         setCustomerType,
+        getPrice,
       }}
     >
       {children}

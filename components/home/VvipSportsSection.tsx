@@ -16,8 +16,7 @@ export default function VvipSportsSection() {
   const { activeProvince } = useRegion();
   const { openRegisterModal } = useRegister();
 
-  const isNoiThanh =
-    activeProvince.region === "hn" || activeProvince.region === "hcm";
+  const isNoiThanh = activeProvince.region === "hcm";
 
   return (
     <section

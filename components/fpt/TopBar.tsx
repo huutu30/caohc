@@ -8,7 +8,12 @@ export default function TopBar() {
   const { activeProvince, setActiveProvince, customerType, setCustomerType } =
     useRegion();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const filteredProvinces = PROVINCES.filter((p) =>
+    p.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   useEffect(() => {
     const handleOutside = (e: MouseEvent) => {
@@ -71,17 +76,29 @@ export default function TopBar() {
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 top-full mt-2 w-64 max-h-80 overflow-y-auto bg-white text-slate-800 rounded-xl shadow-2xl border border-slate-200 p-2 z-50 animate-in fade-in slide-in-from-top-1">
-                <div className="px-3 py-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
-                  Chọn khu vực áp dụng ưu đãi
+              <div className="absolute right-0 top-full mt-2 w-72 max-h-96 overflow-y-auto bg-white text-slate-800 rounded-xl shadow-2xl border border-slate-200 p-2.5 z-50 animate-in fade-in slide-in-from-top-1">
+                <div className="px-2 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 flex items-center justify-between">
+                  <span>Chọn tỉnh/thành xem giá</span>
+                  <span className="text-[10px] text-orange-600 font-bold">63 Tỉnh Thành</span>
                 </div>
-                <div className="py-1">
-                  {PROVINCES.map((prov: Province) => (
+                <div className="p-1.5 border-b border-slate-100">
+                  <input
+                    type="text"
+                    placeholder="Tìm nhanh tỉnh/thành..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-slate-200 focus:outline-none focus:border-[#F26F21]"
+                    autoFocus
+                  />
+                </div>
+                <div className="py-1 max-h-60 overflow-y-auto">
+                  {filteredProvinces.map((prov: Province) => (
                     <button
                       key={prov.id}
                       onClick={() => {
                         setActiveProvince(prov);
                         setDropdownOpen(false);
+                        setSearchQuery("");
                       }}
                       className={`w-full text-left px-3 py-2 text-xs rounded-lg transition-colors flex items-center justify-between cursor-pointer ${
                         activeProvince.id === prov.id
@@ -95,6 +112,11 @@ export default function TopBar() {
                       )}
                     </button>
                   ))}
+                  {filteredProvinces.length === 0 && (
+                    <div className="px-3 py-4 text-center text-xs text-slate-400">
+                      Không tìm thấy tỉnh/thành phù hợp
+                    </div>
+                  )}
                 </div>
               </div>
             )}

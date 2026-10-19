@@ -14,9 +14,11 @@ import {
   Clock,
   Sparkles,
   Send,
+  MapPin,
 } from "lucide-react";
 import FptProductCard from "@/components/fpt/FptProductCard";
 import { FPT_PACKAGES } from "@/data/fptPackages";
+import { useRegion } from "@/context/RegionContext";
 
 export interface PackageDetailData {
   id: string;
@@ -40,6 +42,7 @@ interface FptPackageDetailViewProps {
 }
 
 export default function FptPackageDetailView({ data }: FptPackageDetailViewProps) {
+  const { activeProvince, getPrice } = useRegion();
   const [billingCycle, setBillingCycle] = useState<"1M" | "6M" | "12M">("6M");
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
@@ -47,11 +50,12 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const formattedPrice = new Intl.NumberFormat("vi-VN").format(data.price);
+  const currentPrice = getPrice(data) || data.price;
+  const formattedPrice = new Intl.NumberFormat("vi-VN").format(currentPrice);
   
   // Calculate price based on cycle
   const cycleMultiplier = billingCycle === "1M" ? 1 : billingCycle === "6M" ? 6 : 12;
-  const totalAmount = data.price * cycleMultiplier;
+  const totalAmount = currentPrice * cycleMultiplier;
   const formattedTotal = new Intl.NumberFormat("vi-VN").format(totalAmount);
 
   // Speed numbers for hero display
@@ -112,6 +116,13 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
             {data.description}
           </p>
+
+          {/* ACTIVE LOCATION PILL */}
+          <div className="mt-4 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700">
+            <MapPin className="size-3.5 text-[#F26F21]" />
+            <span>Khu vực áp dụng: </span>
+            <span className="text-[#004a9c] font-bold">{activeProvince.name}</span>
+          </div>
         </div>
 
         {/* 3 HIGHLIGHT METRIC CARDS (MATCHING FPT.VN EXACT GRID) */}
