@@ -1,139 +1,169 @@
 "use client";
 
 import React from "react";
-import { Check, Tv } from "lucide-react";
+import Image from "next/image";
+import { Info } from "lucide-react";
 import { useRegister } from "@/context/RegisterContext";
+import { useProductDetail } from "@/context/ProductDetailContext";
 
 export default function EplFptPlayOnlySection() {
   const { openRegisterModal } = useRegister();
+  const { openDetailModal } = useProductDetail();
 
-  const playPackages = [
+  const vvipPackages = [
     {
-      id: "fpt-play-vvip-1",
-      name: "Gói FPT Play V.VIP 1",
-      badge: "Cá Nhân",
-      price: 89000,
-      devices: "Xem đồng thời trên 01 thiết bị",
+      id: "goi-vvip1",
+      name: "Gói V.VIP 1",
+      price: 130000,
+      image: "/images/fpt_vvip_1.webp",
       features: [
-        "Trọn vẹn 380 trận Ngoại Hạng Anh trực tiếp Full HD, 4K",
-        "Đăng nhập và xem cùng lúc trên 01 thiết bị",
-        "Gần 120 kênh truyền hình giải trí trong nước và quốc tế",
-        "Xem mượt mà trên Smart TV, Smartphone, Tablet, PC",
-        "Kho phim chiếu rạp, anime và show truyền hình đặc sắc",
+        "Kho giải trí đa dạng, đặc biệt bóng đá Anh và bóng đá Việt",
+        "Xem Ngoại Hạng Anh & FA Cup trên 1 thiết bị (Nội dung khác 5 thiết bị)",
+        "Gần 100 kênh truyền hình, phim bộ, phim bom tấn Âu Mỹ",
+        "Hỗ trợ xem trên TV, Box, Mobile, Web, Desktop App",
+        "Chất lượng Full HD 1080p; hỗ trợ 4K",
       ],
-      isPopular: false,
+      description:
+        "Trọn vẹn giải trí đỉnh cao, đặc biệt bóng đá Ngoại Hạng Anh & FA Cup. Xem trên 1 thiết bị với nội dung thể thao, 5 thiết bị cho các nội dung giải trí khác.",
     },
     {
-      id: "fpt-play-vvip-2",
-      name: "Gói FPT Play V.VIP 2",
-      badge: "Xem Nhiều Nhất",
-      price: 120000,
-      devices: "Xem đồng thời trên 02 thiết bị",
+      id: "goi-vvip2",
+      name: "Gói V.VIP 2",
+      price: 160000,
+      image: "/images/fpt_vvip_2.webp",
       features: [
-        "Bản quyền độc quyền 380 trận Ngoại Hạng Anh (EPL)",
-        "Đăng nhập và xem cùng lúc trên 02 thiết bị",
-        "Trọn gói Cúp C1 UEFA Champions League, Europa League",
-        "Theo dõi FA Cup, giải bóng đá vô địch quốc gia V.League",
-        "Không giới hạn kho phim bom tấn chiếu rạp 4K",
+        "Kho giải trí đa dạng, đặc biệt bóng đá Anh và bóng đá Việt",
+        "Xem Ngoại Hạng Anh & FA Cup trên 2 thiết bị cùng lúc (Nội dung khác 5 thiết bị)",
+        "Gần 100 kênh truyền hình, phim bộ, phim bom tấn Âu Mỹ",
+        "Hỗ trợ xem trên TV, Box, Mobile, Web, Desktop App",
+        "Chất lượng Full HD 1080p; hỗ trợ 4K",
       ],
-      isPopular: true,
-    },
-    {
-      id: "fpt-play-svip",
-      name: "Gói FPT Play SVIP",
-      badge: "Đặc Quyền VIP",
-      price: 140000,
-      devices: "Xem đồng thời trên 05 thiết bị",
-      features: [
-        "Đặc quyền xem cùng lúc lên đến 05 thiết bị",
-        "Toàn bộ thể thao đỉnh cao: EPL, Cúp C1, NBA, Golf, MMA",
-        "Không bị làm phiền bởi quảng cáo khi xem phim (No-Ads)",
-        "Hỗ trợ kênh âm thanh vòm Dolby 5.1 sống động",
-        "Đặc quyền ưu tiên băng thông truyền hình FPT Play",
-      ],
-      isPopular: false,
+      description:
+        "Trọn vẹn giải trí đỉnh cao, bản quyền độc quyền Ngoại Hạng Anh & FA Cup. Đăng nhập và xem đồng thời trên 2 thiết bị cùng lúc cho thể thao.",
     },
   ];
 
   return (
-    <section className="w-full bg-[#03091e] py-12 sm:py-16 text-white border-t border-white/10">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-2">
-            <Tv className="size-3.5" />
-            <span>Chỉ Mua Tài Khoản FPT Play</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
-            Gói Tài Khoản FPT Play Xem Ngoại Hạng Anh
+    <section className="w-full relative py-12 sm:py-20 text-white bg-gradient-to-b from-[#0a051d] via-[#0d092b] to-[#040212] overflow-hidden border-t border-white/10">
+      {/* Background Stadium Glow & Ambient Light */}
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        <div className="absolute -top-32 left-1/4 w-96 h-96 rounded-full bg-blue-600/20 blur-[120px]" />
+        <div className="absolute -bottom-32 right-1/4 w-96 h-96 rounded-full bg-purple-600/20 blur-[120px]" />
+      </div>
+
+      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Title */}
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+            Bảng giá Xem Ngoại Hạng Anh 2026-27 với gói V.VIP FPT Play
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-slate-300">
-            Dành cho khách hàng đã có sẵn mạng Internet và chỉ có nhu cầu đăng ký tài khoản FPT Play xem trên Smart TV, Điện thoại hoặc Máy tính.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {playPackages.map((pkg) => (
+        {/* 2 Packages Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+          {vvipPackages.map((pkg) => (
             <div
               key={pkg.id}
-              className={`rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 ${
-                pkg.isPopular
-                  ? "bg-gradient-to-b from-[#142d72] to-[#0a183d] border-2 border-orange-500 shadow-xl shadow-orange-500/15 scale-100 sm:scale-105 relative z-10"
-                  : "bg-[#0b1b44]/70 border border-white/10 hover:border-white/20"
-              }`}
+              className="rounded-2xl overflow-hidden bg-gradient-to-b from-[#131d42]/95 to-[#0c132f]/98 border border-[#2b3a67]/70 shadow-2xl flex flex-col justify-between transition-all duration-300 hover:border-amber-400/50 hover:shadow-amber-500/10 group"
             >
-              {pkg.isPopular && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-red-600 to-orange-500 text-white text-[11px] font-black uppercase tracking-wider shadow">
-                  {pkg.badge}
-                </span>
-              )}
-
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-black text-white">{pkg.name}</h3>
-                  {!pkg.isPopular && (
-                    <span className="px-2.5 py-0.5 rounded-full bg-white/10 text-[10px] font-bold text-slate-300">
-                      {pkg.badge}
-                    </span>
-                  )}
-                </div>
-
-                <div className="mb-4">
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-black text-[#f57020]">
-                      {new Intl.NumberFormat("vi-VN").format(pkg.price)}đ
-                    </span>
-                    <span className="text-xs text-slate-400 font-medium">/tháng</span>
-                  </div>
-                  <span className="text-[11px] text-amber-300 font-bold block mt-1">
-                    {pkg.devices}
-                  </span>
-                </div>
-
-                <ul className="space-y-2.5 text-xs text-slate-300 border-t border-white/10 pt-4">
-                  {pkg.features.map((feat, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <Check className="size-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Header Image */}
+              <div className="relative w-full aspect-[1250/902] overflow-hidden bg-[#0d1430]">
+                <Image
+                  src={pkg.image}
+                  alt={pkg.name}
+                  fill
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 450px"
+                  priority
+                />
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/10">
-                <button
-                  onClick={() =>
-                    openRegisterModal({
-                      id: pkg.id,
-                      name: pkg.name,
-                      categoryName: "Tài khoản FPT Play",
-                      price: pkg.price,
-                      features: pkg.features,
-                    })
-                  }
-                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#e86010] to-[#ff7d2e] hover:from-[#d5540a] hover:to-[#e86010] text-white text-xs font-black uppercase tracking-wider transition-all shadow-md cursor-pointer"
-                >
-                  Đăng ký tài khoản
-                </button>
+              {/* Body Content */}
+              <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-black text-white mb-1.5">
+                    {pkg.name}
+                  </h3>
+
+                  {/* Price */}
+                  <div className="flex items-center gap-1.5 mb-4">
+                    <span className="text-2xl sm:text-3xl font-black text-[#f5a623] tracking-tight">
+                      {new Intl.NumberFormat("vi-VN").format(pkg.price)}đ
+                    </span>
+                    <span className="text-xs sm:text-sm text-slate-400 font-medium">
+                      /tháng
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        openDetailModal({
+                          id: pkg.id,
+                          name: pkg.name,
+                          category: "ca_nhan",
+                          categoryName: "Tài khoản FPT Play",
+                          downloadSpeed: "Tốc độ cao",
+                          uploadSpeed: "Tốc độ cao",
+                          price: pkg.price,
+                          features: pkg.features,
+                          description: pkg.description,
+                          image: pkg.image,
+                          modem: "Thiết bị xem cá nhân / Smart TV",
+                          recommendedDevices: "1 - 5 thiết bị",
+                        })
+                      }
+                      className="text-slate-400 hover:text-amber-400 transition ml-1 p-0.5 rounded cursor-pointer"
+                      title="Xem thông tin chi tiết gói"
+                    >
+                      <Info className="size-4" />
+                    </button>
+                  </div>
+
+                  {/* Feature Bullets */}
+                  <ul className="space-y-3 text-xs sm:text-[13px] text-slate-200 border-t border-white/10 pt-4">
+                    {pkg.features.map((feat, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <span className="shrink-0 mt-0.5 text-emerald-400">
+                          {/* Neon Green Soccer Ball Icon with orbital effect */}
+                          <svg
+                            className="size-4.5"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                          >
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" />
+                            <path
+                              d="M12 7l3 2.5v3.5l-3 2.5-3-2.5V9.5z"
+                              fill="currentColor"
+                              fillOpacity="0.25"
+                            />
+                            <path d="M12 7V3M15 9.5l3.5-2M15 13l3.5 2M12 15.5V21M9 13l-3.5 2M9 9.5l-3.5-2" />
+                          </svg>
+                        </span>
+                        <span className="leading-snug">{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* CTA Button */}
+                <div className="mt-7 pt-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      openRegisterModal({
+                        id: pkg.id,
+                        name: pkg.name,
+                        categoryName: "Tài khoản FPT Play",
+                        price: pkg.price,
+                        features: pkg.features,
+                      })
+                    }
+                    className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#f5a623] via-[#ffb834] to-[#f5a623] hover:from-[#e59515] hover:to-[#e59515] text-[#1c1204] text-sm sm:text-base font-black tracking-wider uppercase transition-all shadow-lg shadow-amber-500/20 active:scale-[0.99] cursor-pointer"
+                  >
+                    ĐĂNG KÝ NGAY
+                  </button>
+                </div>
               </div>
             </div>
           ))}
