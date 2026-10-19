@@ -227,7 +227,7 @@ export const FPT_PACKAGES: FptPackage[] = [
     pricePrepaid12M: 9600000,
     gift6M: "Tặng 01 tháng cước + 01 IP Tĩnh",
     gift12M: "Tặng 02 tháng cước + IP Tĩnh + Thiết bị cân bằng tải",
-    image: "/images/lux-800.webp",
+    image: "/images/lux800.webp",
     modem: "01 Router Wi-Fi 6 Doanh Nghiệp + 01 Mesh Wi-Fi 6",
     recommendedDevices: "30 - 60 thiết bị",
     description: "Giải pháp WiFi 6 doanh nghiệp cao cấp cho quán cafe, nhà hàng, văn phòng công ty đòi hỏi độ ổn định cao.",

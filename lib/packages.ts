@@ -443,7 +443,7 @@ export const TESTIMONIALS: TestimonialItem[] = [
     name: "Nguyễn Minh Đức",
     role: "Gamer & Streamer eSports",
     location: "Cầu Giấy, Hà Nội",
-    avatar: "/images/members.webp",
+    avatar: "/images/avatars/user1.svg",
     rating: 5,
     packageUsed: "Gói F-Game 1Gbps",
     content: "Mình live stream game Liên Minh và CS:GO hàng đêm, từ ngày dùng gói F-Game ping cực ổn định ở mức 4-6ms, không hề gặp tình trạng giật giật hay rớt mạng lúc combat!"
@@ -453,7 +453,7 @@ export const TESTIMONIALS: TestimonialItem[] = [
     name: "Trần Thị Mai Anh",
     role: "Chủ Quán Cafe The Morning",
     location: "Quận 1, TP. Hồ Chí Minh",
-    avatar: "/images/introduction.webp",
+    avatar: "/images/avatars/user2.svg",
     rating: 5,
     packageUsed: "Gói Super 300 Biz",
     content: "Quán mình có sức chứa hơn 50 khách cùng lúc giờ cao điểm. Modem WiFi 6 chịu tải rất khỏe, khách khen mạng mượt để làm việc từ xa, không ai phàn nàn chập chờn cả."
@@ -463,7 +463,7 @@ export const TESTIMONIALS: TestimonialItem[] = [
     name: "Lê Hoàng Long",
     role: "Kỹ sư Công nghệ thông tin",
     location: "Hải Châu, Đà Nẵng",
-    avatar: "/images/gioithieu_03.webp",
+    avatar: "/images/avatars/user3.svg",
     rating: 5,
     packageUsed: "Gói Meta 1Gbps",
     content: "Tốc độ download/upload 1Gbps đối xứng thực sự rất ấn tượng. Mình thường xuyên đồng bộ source code và kéo file Docker image lớn chỉ mất vài giây. Rất đáng tiền!"
@@ -473,7 +473,7 @@ export const TESTIMONIALS: TestimonialItem[] = [
     name: "Phạm Thu Hương",
     role: "Nội trợ & Bán hàng Online",
     location: "Thanh Xuân, Hà Nội",
-    avatar: "/images/gioithieu_05.webp",
+    avatar: "/images/avatars/user4.svg",
     rating: 5,
     packageUsed: "Combo Sky Thể Thao",
     content: "Chồng mình mê bóng đá Ngoại Hạng Anh, các con thì thích xem hoạt hình và học tiếng Anh. Đầu thu giọng nói rất dễ dùng cho cả người lớn tuổi, hình ảnh 4K sắc nét."
@@ -483,7 +483,7 @@ export const TESTIMONIALS: TestimonialItem[] = [
     name: "Vũ Quang Huy",
     role: "Giám đốc Công ty Vận tải",
     location: "Ngô Quyền, Hải Phòng",
-    avatar: "/images/gioithieu_07.webp",
+    avatar: "/images/avatars/user5.svg",
     rating: 5,
     packageUsed: "Gói Super 500 Biz",
     content: "Đội ngũ triển khai dịch vụ rất nhanh nhẹn và chuyên nghiệp. Thủ tục xuất hóa đơn VAT điện tử rõ ràng, mạng chạy thông suốt liên tục giúp công ty xử lý đơn hàng suôn sẻ."
