@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Zap, Wifi, ArrowRight } from "lucide-react";
+import { Check, ArrowDown, ArrowUp, ArrowRight, Info } from "lucide-react";
 import { useRegister } from "@/context/RegisterContext";
 import { useRegion } from "@/context/RegionContext";
 import { FptPackage } from "@/data/fptPackages";
@@ -34,12 +34,10 @@ interface FptProductCardProps {
 export default function FptProductCard({ item, className = "" }: FptProductCardProps) {
   const { openRegisterModal } = useRegister();
   const { getPrice } = useRegion();
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const dynamicPrice = getPrice(item) || (typeof item.price === "number" ? item.price : item.price?.tinh || 0);
   const formattedPrice = new Intl.NumberFormat("vi-VN").format(dynamicPrice);
-  const formattedOriginalPrice = item.originalPrice
-    ? new Intl.NumberFormat("vi-VN").format(item.originalPrice)
-    : null;
 
   // Determine detail link matching fpt.vn routes
   const detailHref =
@@ -48,18 +46,21 @@ export default function FptProductCard({ item, className = "" }: FptProductCardP
       ? `/goi-cuoc/combo/${item.id}`
       : `/goi-cuoc/internet/${item.id}`);
 
+  const downloadSpeed = item.speed.replace(/^Tốc độ\s*/i, "");
+  const uploadSpeed = (item.uploadSpeed || item.speed).replace(/^Tốc độ\s*/i, "");
+
   return (
     <div
-      className={`group relative flex flex-col rounded-2xl bg-white border border-[#EAECF0] hover:border-[#F26F21]/40 transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 overflow-hidden ${
-        item.isPopular ? "ring-2 ring-[#F26F21]/80" : ""
+      className={`group relative flex flex-col rounded-2xl bg-white border border-[#EAECF0] hover:border-[#004a9c]/50 transition-all duration-300 shadow-xs hover:shadow-xl hover:-translate-y-1 overflow-hidden ${
+        item.isPopular ? "ring-2 ring-[#004a9c]/70" : ""
       } ${className}`}
     >
-      {/* BADGE (BÁN CHẠY NHẤT / HOT) - ROUNDED BR CORNER LIKE FPT.VN */}
+      {/* BADGE (BÁN CHẠY NHẤT / HOT / TAGLINE) - ROUNDED BR CORNER MATCHING FPT.VN */}
       {item.badge && (
         <div className="absolute top-0 left-0 z-20">
           <span
-            className={`inline-flex items-center px-3.5 py-1.5 rounded-br-2xl text-[11px] font-black uppercase tracking-wider shadow-sm text-white ${
-              item.isPopular
+            className={`inline-flex items-center px-3.5 py-1.5 rounded-br-2xl text-[11px] font-black uppercase tracking-wider shadow-xs text-white ${
+              item.isPopular || item.badge.toLowerCase().includes("bán chạy")
                 ? "bg-[#F26F21]"
                 : "bg-[#0B1A3D]"
             }`}
@@ -69,103 +70,100 @@ export default function FptProductCard({ item, className = "" }: FptProductCardP
         </div>
       )}
 
-      {/* TOP IMAGE CONTAINER (169/130 ASPECT RATIO MATCHING FPT.VN) */}
+      {/* TOP IMAGE CONTAINER (16/11 ASPECT RATIO MATCHING FPT.VN) */}
       <Link
         href={detailHref}
-        className="block relative aspect-[16/11] w-full bg-[#F8F9FA] flex items-center justify-center p-4 overflow-hidden border-b border-[#EAECF0]/60 cursor-pointer"
+        className="block relative aspect-[16/11] w-full bg-[#F8F9FA] flex items-center justify-center p-3 overflow-hidden border-b border-[#EAECF0]/60 cursor-pointer"
         title={`Xem chi tiết ${item.name}`}
       >
         <Image
           src={item.image}
           alt={item.name}
           fill
-          className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-contain p-1 group-hover:scale-105 transition-transform duration-500"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
         />
       </Link>
 
       {/* BODY CONTENT */}
-      <div className="flex flex-1 flex-col p-5">
-        {/* TITLE & SPEED HIGHLIGHT */}
-        <div className="mb-3">
+      <div className="flex flex-1 flex-col p-4 md:p-5">
+        {/* TITLE */}
+        <div className="mb-2">
           <Link href={detailHref} className="block group-hover:text-[#004a9c] transition-colors">
-            <h3 className="text-xl font-black text-[#101828] group-hover:text-[#004a9c] transition-colors leading-snug">
+            <h3 className="text-base md:text-lg font-bold text-[#101828] group-hover:text-[#004a9c] transition-colors line-clamp-1 leading-snug">
               {item.name}
             </h3>
           </Link>
-          {item.description && (
-            <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
-              {item.description}
-            </p>
-          )}
         </div>
 
-        {/* SPEED & EQUIPMENT BOX (FPT.VN STYLE) */}
-        <div className="bg-[#F8F9FA] rounded-xl p-3 border border-slate-200/70 mb-4 flex items-center justify-between">
-          <div className="space-y-1">
-            <div className="flex items-center gap-1.5 text-xs">
-              <Zap className="size-3.5 text-[#F26F21]" />
-              <span className="text-slate-500 font-medium">Tốc độ:</span>
-              <span className="font-extrabold text-[#004a9c]">
-                {item.speed}
-                {item.uploadSpeed && item.uploadSpeed !== item.speed && (
-                  <span className="text-slate-400 font-normal text-[11px] ml-1">
-                    (Up: {item.uploadSpeed})
-                  </span>
-                )}
-              </span>
-            </div>
-
-            {item.equipment && (
-              <div className="flex items-center gap-1.5 text-xs">
-                <Wifi className="size-3.5 text-[#004a9c]" />
-                <span className="text-slate-500 font-medium">Thiết bị:</span>
-                <span className="font-semibold text-slate-700 text-[11px] max-w-[150px] truncate">
-                  {item.equipment}
-                </span>
+        {/* PRICE BLOCK (BLUE COLOR LIKE FPT.VN WITH INFO TOOLTIP) */}
+        <div className="flex items-center gap-1.5 mb-3 relative">
+          <span className="text-xl md:text-2xl font-bold text-[#004a9c] tracking-tight">
+            {formattedPrice}đ
+          </span>
+          <span className="text-xs text-slate-500 font-medium self-end mb-0.5">
+            /tháng
+          </span>
+          
+          {/* Info Tooltip */}
+          <div 
+            className="relative inline-flex items-center self-end mb-1 cursor-pointer"
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            onClick={() => setShowTooltip(!showTooltip)}
+          >
+            <Info className="size-3.5 text-slate-400 hover:text-slate-600 transition-colors" />
+            {showTooltip && (
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 p-2 bg-slate-900 text-white text-[10px] rounded-lg shadow-xl z-30 pointer-events-none text-center leading-normal">
+                Mức giá đã bao gồm VAT và có thể thay đổi tùy thuộc theo từng khu vực tỉnh/thành.
               </div>
             )}
           </div>
+        </div>
 
-          {/* Speed Gauge Icon Box */}
-          <div className="size-9 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center shrink-0 text-[#F26F21] shadow-xs">
-            <Zap className="size-4 fill-current" />
+        {/* SPEED & GAUGE BOX (STANDARDIZED FPT.VN STYLE) */}
+        <div className="bg-[#F8F9FA] rounded-xl p-3 border border-slate-200/70 mb-3.5 flex items-center justify-between">
+          <div className="flex-1">
+            <span className="text-[11px] text-slate-500 font-medium block mb-1">
+              Tốc độ (Download/ Upload)
+            </span>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 font-bold text-xs md:text-sm text-slate-800">
+                <ArrowDown className="size-3.5 text-slate-500 stroke-[2.5]" />
+                <span>{downloadSpeed}</span>
+              </div>
+              <div className="flex items-center gap-1 font-bold text-xs md:text-sm text-slate-800">
+                <ArrowUp className="size-3.5 text-slate-500 stroke-[2.5]" />
+                <span>{uploadSpeed}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Speedometer Arc Gauge Icon */}
+          <div className="size-11 shrink-0 flex items-center justify-center">
+            <svg className="size-10 text-[#F26F21]" viewBox="0 0 48 36" fill="none">
+              <path d="M6 30 A 18 18 0 0 1 42 30" stroke="#E2E8F0" strokeWidth="4" strokeLinecap="round" />
+              <path d="M6 30 A 18 18 0 0 1 36 14" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+              <circle cx="24" cy="30" r="3" fill="#004a9c" />
+              <line x1="24" y1="30" x2="33" y2="18" stroke="#004a9c" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
           </div>
         </div>
 
         {/* FEATURES CHECKLIST */}
-        <div className="space-y-2 mb-5 flex-1">
-          {item.features.slice(0, 4).map((feat, idx) => (
+        <div className="space-y-2 mb-4 flex-1">
+          {item.features.slice(0, 3).map((feat, idx) => (
             <div key={idx} className="flex items-start gap-2 text-xs text-slate-600">
               <div className="size-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
                 <Check className="size-3" strokeWidth={3} />
               </div>
-              <span className="leading-snug">{feat}</span>
+              <span className="leading-snug line-clamp-2">{feat}</span>
             </div>
           ))}
         </div>
 
-        {/* PRICE BLOCK */}
-        <div className="pt-3 border-t border-[#EAECF0] mb-4">
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-xs text-slate-500 font-medium">Chỉ từ</span>
-            <span className="text-2xl sm:text-3xl font-black text-[#F26F21] tracking-tight">
-              {formattedPrice}đ
-            </span>
-            <span className="text-xs text-slate-500 font-medium">/tháng</span>
-            {formattedOriginalPrice && (
-              <span className="text-xs text-slate-400 line-through ml-auto">
-                {formattedOriginalPrice}đ
-              </span>
-            )}
-          </div>
-          <p className="text-[11px] text-slate-400 mt-0.5">
-            (Đã bao gồm thuế VAT)
-          </p>
-        </div>
-
-        {/* ACTION BUTTONS (FPT.VN STYLE) */}
-        <div className="space-y-2">
+        {/* ACTION BUTTONS (BLUE PRIMARY BUTTON MATCHING FPT.VN) */}
+        <div className="space-y-2 mt-auto">
           {/* PRIMARY BUTTON: ĐĂNG KÝ NGAY */}
           <button
             onClick={() =>
@@ -184,23 +182,21 @@ export default function FptProductCard({ item, className = "" }: FptProductCardP
                 description: item.description || item.name,
               })
             }
-            className="w-full bg-[#F26F21] hover:bg-[#E05E10] text-white py-3 px-4 rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full bg-[#004a9c] hover:bg-[#003875] text-white py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm shadow-sm hover:shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Đăng ký ngay</span>
-            <ArrowRight className="size-4" />
           </button>
 
-          {/* SECONDARY LINK: XEM CHI TIẾT GÓI CƯỚC (DIRECT NAVIGATION TO DETAIL PAGE) */}
+          {/* SECONDARY LINK: XEM CHI TIẾT GÓI CƯỚC */}
           <Link
             href={detailHref}
-            className="w-full py-2.5 text-center text-xs font-bold text-[#004a9c] hover:text-[#F26F21] transition-colors flex items-center justify-center gap-1.5 group/link cursor-pointer"
+            className="w-full py-1.5 text-center text-xs font-bold text-[#004a9c] hover:text-[#f57020] transition-colors flex items-center justify-center gap-1 group/link cursor-pointer"
           >
-            <span>Xem chi tiết gói cước</span>
-            <ArrowRight className="size-3.5 group-hover/link:translate-x-1 transition-transform" />
+            <span>Xem chi tiết</span>
+            <ArrowRight className="size-3 group-hover/link:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>
     </div>
   );
 }
-
