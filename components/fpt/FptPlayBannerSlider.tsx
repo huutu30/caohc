@@ -15,7 +15,7 @@ export default function FptPlayBannerSlider() {
       name: "Gói V.VIP 1",
       price: 130000,
       period: "tháng",
-      image: "/images/vvip1.webp",
+      image: "/images/vvip1.jpg",
       features: [
         "Kho giải trí đa dạng, đặc biệt bóng đá Anh và bóng đá Việt",
         "Xem Ngoại Hạng Anh và FA Cup",
@@ -27,7 +27,7 @@ export default function FptPlayBannerSlider() {
       name: "Gói V.VIP 2",
       price: 160000,
       period: "tháng",
-      image: "/images/vvip2.webp",
+      image: "/images/vvip2.jpg",
       features: [
         "Kho giải trí đa dạng, đặc biệt bóng đá Anh và bóng đá Việt",
         "Xem Ngoại Hạng Anh và FA Cup",
@@ -47,13 +47,15 @@ export default function FptPlayBannerSlider() {
         <div className="w-full lg:w-[320px] shrink-0 flex flex-col">
           <Link
             href="/ngoai-hang-anh"
-            className="relative aspect-[318/421] w-full rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group block flex-1"
+            className="relative aspect-[318/421] w-full rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group block flex-1 bg-slate-900"
           >
             <Image
-              src="/images/fpt_play_only_banner.webp"
+              src="/images/fpt_play_only_banner.jpg"
               alt="Đã mê Ngoại Hạng phải chọn FPT"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
+              sizes="(max-width: 1024px) 100vw, 320px"
+              priority
             />
           </Link>
         </div>
@@ -65,13 +67,14 @@ export default function FptPlayBannerSlider() {
               key={pkg.id}
               className="rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-lg transition-all flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
             >
-              {/* TOP BANNER IMAGE (VVIP1 / VVIP2) */}
-              <div className="relative w-full aspect-[800/577] overflow-hidden bg-slate-900">
+              {/* TOP BANNER IMAGE (OFFICIAL VVIP1 / VVIP2 FROM FPT.VN) */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-900">
                 <Image
                   src={pkg.image}
                   alt={pkg.name}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 100vw, 450px"
                 />
               </div>
 
