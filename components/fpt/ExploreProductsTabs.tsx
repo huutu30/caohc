@@ -66,6 +66,7 @@ export default function ExploreProductsTabs() {
               recommendedDevices: pkg.recommendedDevices,
               description: pkg.description,
               features: pkg.features,
+              detailUrl: `/goi-cuoc/internet/${pkg.id}`,
             }}
           />
         ))}

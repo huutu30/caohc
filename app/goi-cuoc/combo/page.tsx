@@ -14,6 +14,7 @@ export default function ComboPackagesPage() {
     {
       id: "combo-sky-vvip-lite",
       name: "Combo Internet Sky V.VIP",
+      category: "combo",
       badge: "BÁN CHẠY NHẤT",
       isPopular: true,
       image: "/images/c-the-thao-sky.webp",
@@ -29,10 +30,12 @@ export default function ComboPackagesPage() {
         "Modem Wi-Fi 6 AX1800 băng tần kép thế hệ mới",
         "Đăng nhập đồng thời trên 3 thiết bị xem mượt mà",
       ],
+      detailUrl: "/goi-cuoc/combo/combo-sky-vvip",
     },
     {
       id: "combo-giga-vvip",
       name: "Combo Internet Giga V.VIP",
+      category: "combo",
       badge: "TIẾT KIỆM",
       isPopular: false,
       image: "/images/combo-giga.webp",
@@ -48,10 +51,12 @@ export default function ComboPackagesPage() {
         "Trang bị Modem Wi-Fi 6 chuẩn AX tân tiến",
         "Bàn giao thiết bị tận nhà trong vòng 24 giờ",
       ],
+      detailUrl: "/goi-cuoc/combo/combo-giga-vvip",
     },
     {
       id: "combo-meta-vvip",
       name: "Combo Internet Meta V.VIP",
+      category: "combo",
       badge: "1GBPS ĐỐI XỨNG",
       isPopular: false,
       image: "/images/c-the-thao-meta.webp",
@@ -67,10 +72,12 @@ export default function ComboPackagesPage() {
         "Xem mượt mà đồng thời trên 5 thiết bị",
         "Đặc quyền chăm sóc và phục vụ ưu tiên",
       ],
+      detailUrl: "/goi-cuoc/combo/combo-meta-vvip",
     },
     {
       id: "combo-sky-f1-vvip",
       name: "Combo Sky F1 (Kèm Mesh)",
+      category: "combo",
       badge: "NHÀ NHIỀU TẦNG",
       isPopular: false,
       image: "/images/c-the-thao-sky-f1.webp",
@@ -86,6 +93,7 @@ export default function ComboPackagesPage() {
         "Tích hợp FPT Play Box điều khiển giọng nói",
         "Tặng thêm tới 2 tháng cước sử dụng",
       ],
+      detailUrl: "/goi-cuoc/combo/combo-sky-vvip",
     },
   ];
 

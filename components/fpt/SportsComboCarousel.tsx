@@ -106,6 +106,7 @@ export default function SportsComboCarousel() {
             item={{
               id: combo.id,
               name: combo.name,
+              category: "combo",
               badge: combo.badge,
               isPopular: combo.isPopular,
               image: combo.image,
@@ -115,6 +116,7 @@ export default function SportsComboCarousel() {
               equipment: combo.modem,
               description: combo.description,
               features: combo.features,
+              detailUrl: `/goi-cuoc/combo/${combo.id}`,
             }}
           />
         ))}

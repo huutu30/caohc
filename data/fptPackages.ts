@@ -318,6 +318,8 @@ export const VVIP_SPORTS_PACKAGES: FptVvipSportsCombo[] = [
   }
 ];
 
+export const FPT_VVIP_COMBOS = VVIP_SPORTS_PACKAGES;
+
 // 5 DỊCH VỤ NỔI BẬT DƯỚI HERO BANNER (QUICK ACCESS CIRCLES)
 export const QUICK_SERVICES = [
   {
@@ -356,3 +358,38 @@ export const QUICK_SERVICES = [
     icon: "Wifi"
   }
 ];
+
+export function getPackageById(id: string): FptPackage | undefined {
+  return FPT_PACKAGES.find((p) => p.id.toLowerCase() === id.toLowerCase());
+}
+
+export function getComboById(id: string): FptVvipSportsCombo | undefined {
+  return FPT_VVIP_COMBOS.find((c) => c.id.toLowerCase() === id.toLowerCase());
+}
+
+export function findPackageOrCombo(slug: string): 
+  | { type: "internet"; data: FptPackage }
+  | { type: "combo"; data: FptVvipSportsCombo }
+  | null {
+  const clean = slug.toLowerCase().replace(/^goi-/, "").replace(/-f1$/, "");
+  
+  // Try exact ID match in packages
+  const directPkg = FPT_PACKAGES.find((p) => p.id.toLowerCase() === slug.toLowerCase() || p.id.toLowerCase() === clean);
+  if (directPkg) return { type: "internet", data: directPkg };
+
+  // Try exact ID match in combos
+  const directCombo = FPT_VVIP_COMBOS.find(
+    (c) => c.id.toLowerCase() === slug.toLowerCase() || c.id.toLowerCase().replace("combo-", "") === clean
+  );
+  if (directCombo) return { type: "combo", data: directCombo };
+
+  // Substring search
+  const subPkg = FPT_PACKAGES.find((p) => slug.toLowerCase().includes(p.id.toLowerCase()));
+  if (subPkg) return { type: "internet", data: subPkg };
+
+  const subCombo = FPT_VVIP_COMBOS.find((c) => slug.toLowerCase().includes(c.id.toLowerCase().replace("combo-", "")));
+  if (subCombo) return { type: "combo", data: subCombo };
+
+  return null;
+}
+
