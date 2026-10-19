@@ -35,7 +35,7 @@ export default function DiscoverySection() {
         "Cảnh báo thông minh tức thì về điện thoại",
       ],
       linkText: "Xem các dòng Camera",
-      linkHref: "#camera",
+      linkHref: "/camera",
     },
     {
       id: "f-safe-go",

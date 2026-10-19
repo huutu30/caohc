@@ -29,7 +29,7 @@ export default function ProductCategories() {
     {
       title: "FPT Camera",
       image: "/images/product-camera.png",
-      href: "/#camera",
+      href: "/camera",
     },
     {
       title: "Dịch Vụ Số",

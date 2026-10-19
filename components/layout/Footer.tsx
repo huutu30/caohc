@@ -185,6 +185,15 @@ export default function Footer() {
                   Internet Doanh nghiệp IP Tĩnh
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/camera"
+                  className="hover:text-[#f57020] transition-colors flex items-center"
+                >
+                  <ArrowRight className="w-3.5 h-3.5 mr-2 text-slate-500" />
+                  FPT Camera AI An Ninh Đám Mây
+                </Link>
+              </li>
             </ul>
           </div>
 

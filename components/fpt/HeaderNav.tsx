@@ -120,7 +120,7 @@ export default function HeaderNav() {
       items: [
         {
           name: "FPT Camera Cloud",
-          href: "/#camera",
+          href: "/camera",
           desc: "Camera an ninh đám mây nhận diện AI, bảo mật tuyệt đối",
           badge: "AI Cloud",
           icon: Camera,
