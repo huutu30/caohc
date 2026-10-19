@@ -1,14 +1,18 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { ChevronRight, ChevronLeft } from "lucide-react";
+import { ChevronRight, ChevronLeft, MapPin } from "lucide-react";
 import FptProductCard, { FptProductCardItem } from "@/components/fpt/FptProductCard";
+import { useRegion } from "@/context/RegionContext";
 
 // =========================================================================
 // 6 GÓI COMBO THỂ THAO CHÍNH THỨC TRÊN SECTION 1 CỦA FPT.VN
 // ORDER: GIGA -> SKY -> META -> SPEEDX1 -> LUX 500 -> LUX 800
-// GIÁ CƯỚC TỰ ĐỘNG LỌC THEO TỈNH THÀNH (HCM NỘI THÀNH, NGOẠI THÀNH, TOÀN QUỐC, TỈNH)
+// LOGIC CHUẨN:
+// 1. NỘI THÀNH: KHÔNG CÓ GÓI COMBO GIGA V.VIP (ẨN HOÀN TOÀN)
+// 2. NGOẠI THÀNH / TỈNH: CÓ GÓI COMBO GIGA V.VIP (220K - 230K)
+// 3. GIÁ CƯỚC TỰ ĐỘNG LẤY TỪ PROVINCE_PRICES THEO TỪNG VÙNG MIỀN
 // =========================================================================
 const SECTION_1_COMBOS: FptProductCardItem[] = [
   {
@@ -17,7 +21,7 @@ const SECTION_1_COMBOS: FptProductCardItem[] = [
     badge: "BÁN CHẠY NHẤT",
     isPopular: true,
     image: "/images/giga-vvip.webp",
-    price: { hcm: 240000, tinh: 220000 },
+    price: { hcm: 220000, tinh: 220000 },
     speed: "300 Mbps",
     uploadSpeed: "300 Mbps",
     equipment: "Modem Wi-Fi 6 AX1800",
@@ -124,7 +128,62 @@ const SECTION_1_COMBOS: FptProductCardItem[] = [
 ];
 
 export default function SportsComboCarousel() {
+  const { region, activeProvince, setActiveProvince } = useRegion();
+  const [activeArea, setActiveArea] = useState<"noi-thanh" | "ngoai-thanh">(
+    region === "hcm" ? "noi-thanh" : "ngoai-thanh"
+  );
+  const [isLoading, setIsLoading] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Sync default selection whenever global region context changes
+  useEffect(() => {
+    const targetArea = region === "hcm" ? "noi-thanh" : "ngoai-thanh";
+    if (targetArea !== activeArea) {
+      setIsLoading(true);
+      setActiveArea(targetArea);
+      const timer = setTimeout(() => setIsLoading(false), 200);
+      return () => clearTimeout(timer);
+    }
+  }, [region, activeArea]);
+
+  const handleAreaChange = (newArea: "noi-thanh" | "ngoai-thanh") => {
+    if (newArea === activeArea) return;
+    setIsLoading(true);
+    setActiveArea(newArea);
+
+    if (newArea === "noi-thanh") {
+      if (activeProvince.id === "hcm-ngoai-thanh") {
+        setActiveProvince("hcm");
+      } else if (activeProvince.id === "ha-noi-ngoai-thanh") {
+        setActiveProvince("ha-noi");
+      } else if (region !== "hcm") {
+        setActiveProvince("hcm");
+      }
+    } else {
+      if (activeProvince.id === "hcm") {
+        setActiveProvince("hcm-ngoai-thanh");
+      } else if (activeProvince.id === "ha-noi") {
+        setActiveProvince("ha-noi-ngoai-thanh");
+      } else if (region === "hcm") {
+        setActiveProvince("toan-quoc");
+      }
+    }
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 200);
+  };
+
+  // Check if current area is Noi thanh
+  const isNoiThanh = activeArea === "noi-thanh";
+
+  // Ở nội thành thì KHÔNG có gói combo giga vvip, gói này chỉ có ở ngoại thành và tỉnh
+  const displayedCombos = SECTION_1_COMBOS.filter((item) => {
+    if (isNoiThanh) {
+      return item.id !== "combo-giga-vvip";
+    }
+    return true;
+  });
 
   const handleScroll = (direction: "left" | "right") => {
     if (!scrollContainerRef.current) return;
@@ -140,6 +199,40 @@ export default function SportsComboCarousel() {
         Xem thể thao đỉnh cao với các Combo Internet - Truyền hình - Ngoại Hạng Anh
       </h2>
 
+      {/* AREA SELECTOR TABS (NỘI THÀNH VS NGOẠI THÀNH / TỈNH) */}
+      <div className="flex flex-col items-center justify-center mt-3 mb-2 gap-2">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-[#004a9c] uppercase tracking-wider">
+          <MapPin className="size-3.5 text-[#ef4444]" />
+          <span>Vui lòng chọn khu vực:</span>
+          <span className="text-slate-500 font-semibold normal-case">
+            ({activeProvince.name})
+          </span>
+        </div>
+
+        <div className="inline-flex p-1 bg-white border-2 border-blue-100 rounded-xl shadow-xs gap-1">
+          <button
+            type="button"
+            onClick={() => handleAreaChange("noi-thanh")}
+            className={`px-5 py-2 text-xs sm:text-sm font-bold rounded-lg transition-all cursor-pointer ${activeArea === "noi-thanh"
+                ? "bg-gradient-to-r from-[#e86010] to-[#ff8030] text-white shadow-md shadow-orange-500/25"
+                : "text-slate-600 hover:text-[#e86010]"
+              }`}
+          >
+            Nội thành
+          </button>
+          <button
+            type="button"
+            onClick={() => handleAreaChange("ngoai-thanh")}
+            className={`px-5 py-2 text-xs sm:text-sm font-bold rounded-lg transition-all cursor-pointer ${activeArea === "ngoai-thanh"
+                ? "bg-gradient-to-r from-[#e86010] to-[#ff8030] text-white shadow-md shadow-orange-500/25"
+                : "text-slate-600 hover:text-[#e86010]"
+              }`}
+          >
+            Ngoại thành / Tỉnh
+          </button>
+        </div>
+      </div>
+
       {/* CAROUSEL WRAPPER WITH NAVIGATION ARROWS */}
       <div className="relative mt-4 px-2 sm:px-6">
         {/* PREV BUTTON */}
@@ -154,9 +247,10 @@ export default function SportsComboCarousel() {
         {/* HORIZONTAL SCROLL CAROUSEL (FPT.VN SLIDER MATCH) */}
         <div
           ref={scrollContainerRef}
-          className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth no-scrollbar py-3 px-1 snap-x snap-mandatory"
+          className={`flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth no-scrollbar py-3 px-1 snap-x snap-mandatory transition-opacity duration-200 ${isLoading ? "opacity-50" : "opacity-100"
+            }`}
         >
-          {SECTION_1_COMBOS.map((combo) => (
+          {displayedCombos.map((combo) => (
             <div
               key={combo.id}
               className="w-[280px] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)] shrink-0 snap-start"

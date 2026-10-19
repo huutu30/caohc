@@ -24,7 +24,11 @@ export default function ExploreProductsTabs() {
   let cardItems: FptProductCardItem[] = [];
 
   if (activeTab === "combo_vvip") {
-    cardItems = VVIP_SPORTS_PACKAGES.map((c) => ({
+    const isNoiThanh = activeProvince.region === "hcm";
+    const availableCombos = isNoiThanh
+      ? VVIP_SPORTS_PACKAGES.filter((c) => c.id !== "combo-giga-vvip")
+      : VVIP_SPORTS_PACKAGES;
+    cardItems = availableCombos.map((c) => ({
       id: c.id,
       name: c.name,
       category: "combo",

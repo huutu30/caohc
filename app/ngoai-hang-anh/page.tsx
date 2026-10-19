@@ -17,7 +17,12 @@ export default function NgoaiHangAnhPage() {
   const { activeProvince } = useRegion();
   const { openRegisterModal } = useRegister();
 
-  const cardItems: FptProductCardItem[] = VVIP_SPORTS_PACKAGES.map(
+  const isNoiThanh = activeProvince.region === "hcm";
+  const displayedCombos = isNoiThanh
+    ? VVIP_SPORTS_PACKAGES.filter((c) => c.id !== "combo-giga-vvip")
+    : VVIP_SPORTS_PACKAGES;
+
+  const cardItems: FptProductCardItem[] = displayedCombos.map(
     (combo: FptVvipSportsCombo) => ({
       id: combo.id,
       name: combo.name,
