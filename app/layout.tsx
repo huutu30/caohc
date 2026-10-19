@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
+import Providers from "@/components/Providers";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
@@ -14,13 +15,13 @@ const beVietnamPro = Be_Vietnam_Pro({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fpt.vn"),
-  title: "FPT Telecom - Đăng Ký Lắp Đặt Mạng Internet WiFi 6 & FPT Play",
+  title: "FPT Telecom - Đăng Ký Hòa Mạng Internet Wi-Fi 6 & FPT Play",
   description:
-    "Cổng thông tin & tiếp nhận đăng ký lắp đặt Internet cáp quang FPT, WiFi 6 siêu tốc, Combo FPT Play Ngoại Hạng Anh. Bàn giao thiết bị trong 24h, tặng tới 2 tháng cước.",
+    "Cổng thông tin & tiếp nhận đăng ký hòa mạng Internet cáp quang FPT, Wi-Fi 6 siêu tốc, Combo FPT Play Ngoại Hạng Anh. Bàn giao thiết bị trong 24h, tặng tới 2 tháng cước.",
   keywords: [
     "FPT Telecom",
     "Internet FPT",
-    "Lắp mạng FPT",
+    "Đăng ký mạng FPT",
     "WiFi 6 FPT",
     "Combo FPT Play",
     "Cáp quang FPT",
@@ -30,9 +31,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "FPT Telecom" }],
   openGraph: {
-    title: "FPT Telecom - Đăng Ký Internet Cáp Quang WiFi 6 Siêu Tốc",
+    title: "FPT Telecom - Đăng Ký Internet Cáp Quang Wi-Fi 6 Siêu Tốc",
     description:
-      "Trang bị miễn phí Modem WiFi 6 thế hệ mới, tặng 1-2 tháng cước khi thanh toán trước. Đội ngũ kỹ thuật hỗ trợ triển khai trong 24h.",
+      "Trang bị miễn phí Modem Wi-Fi 6 thế hệ mới, tặng 1-2 tháng cước khi thanh toán trước. Đội ngũ triển khai dịch vụ nhanh trong 24h.",
     url: "https://fpt.vn",
     siteName: "FPT Telecom",
     locale: "vi_VN",
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
         url: "/images/banner_1_desktop.webp",
         width: 1200,
         height: 630,
-        alt: "FPT Telecom Internet Cáp Quang WiFi 6",
+        alt: "FPT Telecom Internet Cáp Quang Wi-Fi 6",
       },
     ],
   },
@@ -64,7 +65,7 @@ export default function RootLayout({
     legalName: "Công ty Cổ phần Viễn thông FPT",
     url: "https://fpt.vn",
     logo: "https://fpt.vn/images/fpt.webp",
-    telephone: "19006600",
+    telephone: "0902184284",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Số 10 Phạm Văn Bạch, Cầu Giấy",
@@ -85,11 +86,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${beVietnamPro.variable} font-sans antialiased bg-slate-50 min-h-screen flex flex-col`}>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <FloatingContact />
-        <Footer />
+      <body
+        className={`${beVietnamPro.variable} font-sans antialiased bg-slate-50 min-h-screen flex flex-col selection:bg-[#f57020] selection:text-white`}
+      >
+        <Providers>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <FloatingContact />
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
