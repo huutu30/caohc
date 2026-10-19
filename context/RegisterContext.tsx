@@ -6,9 +6,9 @@ import { FptPackage, FptVvipSportsCombo } from "@/data/fptPackages";
 interface RegisterContextType {
   isOpen: boolean;
   isRegisterModalOpen: boolean;
-  selectedPackage: FptPackage | FptVvipSportsCombo | null;
-  openModal: (pkg?: FptPackage | FptVvipSportsCombo | null) => void;
-  openRegisterModal: (pkg?: FptPackage | FptVvipSportsCombo | null) => void;
+  selectedPackage: any | null;
+  openModal: (pkg?: any) => void;
+  openRegisterModal: (pkg?: any) => void;
   closeModal: () => void;
   closeRegisterModal: () => void;
 }
@@ -17,9 +17,9 @@ const RegisterContext = createContext<RegisterContextType | undefined>(undefined
 
 export function RegisterProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState<FptPackage | FptVvipSportsCombo | null>(null);
+  const [selectedPackage, setSelectedPackage] = useState<any | null>(null);
 
-  const openModal = (pkg?: FptPackage | FptVvipSportsCombo | null) => {
+  const openModal = (pkg?: any) => {
     if (pkg) setSelectedPackage(pkg);
     setIsOpen(true);
   };
