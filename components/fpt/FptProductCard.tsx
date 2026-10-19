@@ -51,24 +51,8 @@ export default function FptProductCard({ item, className = "" }: FptProductCardP
 
   return (
     <div
-      className={`group relative flex flex-col h-full rounded-2xl bg-white border border-[#EAECF0] hover:border-[#004a9c]/50 transition-all duration-300 shadow-xs hover:shadow-xl hover:-translate-y-1 overflow-hidden ${
-        item.isPopular ? "ring-2 ring-[#004a9c]/70" : ""
-      } ${className}`}
+      className={`group relative flex flex-col h-full rounded-2xl bg-white border border-[#EAECF0] hover:border-[#004a9c]/50 transition-all duration-300 shadow-xs hover:shadow-xl hover:-translate-y-1 overflow-hidden ${className}`}
     >
-      {/* BADGE (BÁN CHẠY NHẤT / HOT / TAGLINE) - ROUNDED BR CORNER MATCHING FPT.VN */}
-      {item.badge && (
-        <div className="absolute top-0 left-0 z-20">
-          <span
-            className={`inline-flex items-center px-3.5 py-1.5 rounded-br-2xl text-[11px] font-black uppercase tracking-wider shadow-xs text-white ${
-              item.isPopular || item.badge.toLowerCase().includes("bán chạy")
-                ? "bg-[#F26F21]"
-                : "bg-[#0B1A3D]"
-            }`}
-          >
-            {item.badge}
-          </span>
-        </div>
-      )}
 
       {/* TOP IMAGE CONTAINER (16/11 ASPECT RATIO MATCHING FPT.VN) */}
       <Link

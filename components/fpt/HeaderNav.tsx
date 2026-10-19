@@ -9,12 +9,10 @@ import {
   X,
   Sparkles,
   Wifi,
-  Tv,
   Camera,
   Flame,
   Zap,
   Shield,
-  Smartphone,
   PhoneCall
 } from "lucide-react";
 import { useRegister } from "@/context/RegisterContext";
@@ -38,12 +36,19 @@ export default function HeaderNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
-  // MEGA MENU STRUCTURE MATCHING FPT.VN SCREENSHOT
+  // MEGA MENU STRUCTURE: 2 COLUMNS (INTERNET - WIFI & THIẾT BỊ - AN NINH)
   const megaColumns: MegaColumn[] = [
     {
       title: "Internet - Wifi",
       icon: Wifi,
       items: [
+        {
+          name: "Xem Ngoại Hạng Anh",
+          href: "/ngoai-hang-anh",
+          desc: "Bản quyền trọn vẹn 380 trận Ngoại Hạng Anh & FPT Play",
+          badge: "Nổi bật",
+          icon: Flame,
+        },
         {
           name: "Internet gia đình",
           href: "/internet/gia-dinh",
@@ -64,7 +69,7 @@ export default function HeaderNav() {
         },
         {
           name: "Internet Wi-Fi 7",
-          href: "/internet/wifi-7",
+          href: "/internet-wifi-7-xgspon",
           desc: "Đột phá chuẩn Wi-Fi 7 thế hệ mới đến 10 Gbps",
           badge: "Mới",
           icon: Sparkles,
@@ -74,25 +79,6 @@ export default function HeaderNav() {
           href: "/internet/doanh-nghiep",
           desc: "Băng thông quốc tế cam kết lớn, miễn phí IP Tĩnh",
           icon: Shield,
-        },
-        {
-          name: "Wifi Mesh",
-          href: "/thiet-bi/wifi-mesh",
-          desc: "Thiết bị mở rộng vùng phủ sóng không góc chết",
-          icon: Smartphone,
-        },
-      ],
-    },
-    {
-      title: "Truyền hình & Giải trí",
-      icon: Tv,
-      items: [
-        {
-          name: "Xem Ngoại Hạng Anh",
-          href: "/ngoai-hang-anh",
-          desc: "Bản quyền trọn vẹn 380 trận Ngoại Hạng Anh & Cúp C1",
-          badge: "Nổi bật",
-          icon: Flame,
         },
       ],
     },
@@ -155,9 +141,9 @@ export default function HeaderNav() {
               />
             </button>
 
-            {/* MEGA MENU FLYOUT */}
+            {/* MEGA MENU FLYOUT (2 COLUMNS) */}
             {activeMenu === "san-pham" && (
-              <div className="absolute top-full -left-20 xl:left-0 w-[840px] xl:w-[920px] bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 z-50 animate-in fade-in slide-in-from-top-2 grid grid-cols-3 gap-6">
+              <div className="absolute top-full -left-12 xl:left-0 w-[740px] xl:w-[800px] bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 z-50 animate-in fade-in slide-in-from-top-2 grid grid-cols-2 gap-8">
                 {megaColumns.map((col, idx) => (
                   <div key={idx} className="flex flex-col">
                     {/* Column Header */}
@@ -207,7 +193,7 @@ export default function HeaderNav() {
                 ))}
 
                 {/* BOTTOM HIGHLIGHT STRIP IN MEGA MENU */}
-                <div className="col-span-3 bg-gradient-to-r from-blue-50 to-orange-50 rounded-xl p-3 px-4 flex items-center justify-between border border-blue-100/50 mt-1">
+                <div className="col-span-2 bg-gradient-to-r from-blue-50 to-orange-50 rounded-xl p-3 px-4 flex items-center justify-between border border-blue-100/50 mt-1">
                   <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
                     <Sparkles className="size-4 text-[#f57020]" />
                     <span>

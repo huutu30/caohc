@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useRegion } from "@/context/RegionContext";
 import { FPT_PACKAGES } from "@/data/fptPackages";
 import FptProductCard, { FptProductCardItem } from "@/components/fpt/FptProductCard";
@@ -10,6 +10,7 @@ import FptProductCard, { FptProductCardItem } from "@/components/fpt/FptProductC
 export default function ExploreProductsTabs() {
   const { activeProvince } = useRegion();
   const [activeTab, setActiveTab] = useState<string>("ca_nhan");
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const tabs = [
     { id: "ca_nhan", label: "Internet cá nhân" },
@@ -49,6 +50,19 @@ export default function ExploreProductsTabs() {
         : "/internet/ca-nhan",
   }));
 
+  // Reset scroll to start when active tab changes
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    }
+  }, [activeTab]);
+
+  const handleScroll = (direction: "left" | "right") => {
+    if (!scrollContainerRef.current) return;
+    const scrollAmount = direction === "left" ? -scrollContainerRef.current.clientWidth / 2 : scrollContainerRef.current.clientWidth / 2;
+    scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
+
   // Determine "View All" link based on current tab
   const getViewAllLink = () => {
     switch (activeTab) {
@@ -70,7 +84,7 @@ export default function ExploreProductsTabs() {
   const viewAll = getViewAllLink();
 
   return (
-    <section className="container mx-auto mt-4 mb-8 w-[1440px] max-w-[calc(100%-32px)] md:mt-6 md:mb-10 md:rounded-2xl md:bg-white md:py-8 shadow-xs border border-slate-100">
+    <section className="container mx-auto mt-4 mb-8 w-[1440px] max-w-[calc(100%-32px)] md:mt-6 md:mb-10 md:rounded-2xl md:bg-white md:py-8 shadow-xs border border-slate-100 relative">
       {/* SECTION TITLE WITH DYNAMIC PROVINCE */}
       <h2 className="text-[20px] sm:text-[28px] leading-10 font-bold px-4 text-center text-slate-900 tracking-tight">
         Xem ngay khuyến mãi gói cước FPT Telecom tại{" "}
@@ -96,11 +110,40 @@ export default function ExploreProductsTabs() {
         ))}
       </div>
 
-      {/* PACKAGES GRID USING STANDARDIZED FPT PRODUCT CARDS */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 sm:p-6 pt-2 items-stretch">
-        {cardItems.map((item) => (
-          <FptProductCard key={item.id} item={item} className="h-full" />
-        ))}
+      {/* HORIZONTAL SLIDER CAROUSEL (IDENTICAL TO SECTION 1) */}
+      <div className="relative mt-2 px-2 sm:px-6">
+        {/* PREV BUTTON */}
+        <button
+          onClick={() => handleScroll("left")}
+          aria-label="Previous slide"
+          className="hidden md:flex absolute -left-2 top-1/2 -translate-y-1/2 z-20 size-10 rounded-full bg-white border border-slate-200 shadow-md items-center justify-center text-slate-700 hover:text-[#004a9c] hover:border-[#004a9c] transition-all cursor-pointer"
+        >
+          <ChevronLeft className="size-5" />
+        </button>
+
+        {/* SCROLL CONTAINER */}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth no-scrollbar py-3 px-1 snap-x snap-mandatory items-stretch"
+        >
+          {cardItems.map((item) => (
+            <div
+              key={item.id}
+              className="w-[280px] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] shrink-0 snap-start h-full"
+            >
+              <FptProductCard item={item} className="h-full" />
+            </div>
+          ))}
+        </div>
+
+        {/* NEXT BUTTON */}
+        <button
+          onClick={() => handleScroll("right")}
+          aria-label="Next slide"
+          className="hidden md:flex absolute -right-2 top-1/2 -translate-y-1/2 z-20 size-10 rounded-full bg-white border border-slate-200 shadow-md items-center justify-center text-slate-700 hover:text-[#004a9c] hover:border-[#004a9c] transition-all cursor-pointer"
+        >
+          <ChevronRight className="size-5" />
+        </button>
       </div>
 
       {/* VIEW ALL LINK */}
