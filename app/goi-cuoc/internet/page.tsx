@@ -1,102 +1,108 @@
 "use client";
 
 import * as React from "react";
-import { Wifi } from "lucide-react";
-import PricingCard from "@/components/PricingCard";
-import ComparisonTable from "@/components/ComparisonTable";
+import Link from "next/link";
+import { Wifi, ChevronRight, Gift, MapPin } from "lucide-react";
+import FptProductCard from "@/components/fpt/FptProductCard";
+import { FPT_PACKAGES } from "@/data/fptPackages";
+import { useRegion } from "@/context/RegionContext";
 import FaqAccordion from "@/components/FaqAccordion";
-import { INTERNET_PACKAGES } from "@/lib/packages";
 
 export default function InternetPackagesPage() {
-  const [billingCycle, setBillingCycle] = React.useState<"monthly" | "6months" | "12months">("6months");
+  const { activeProvince } = useRegion();
   const [selectedCategory, setSelectedCategory] = React.useState<string>("all");
 
   const categories = [
     { id: "all", label: "Tất cả gói cước" },
-    { id: "personal", label: "Cá nhân" },
-    { id: "family", label: "Gia đình" },
-    { id: "gaming", label: "Gaming / Streamer" },
-    { id: "enterprise", label: "Doanh nghiệp" },
+    { id: "ca_nhan", label: "Internet cá nhân" },
+    { id: "gia_dinh", label: "Internet gia đình" },
+    { id: "game_thu", label: "Internet game thủ" },
+    { id: "doanh_nghiep", label: "Internet doanh nghiệp" },
   ];
 
   const filteredPackages =
     selectedCategory === "all"
-      ? INTERNET_PACKAGES
-      : INTERNET_PACKAGES.filter((p) => p.category === selectedCategory);
+      ? FPT_PACKAGES
+      : FPT_PACKAGES.filter((p) => p.category === selectedCategory);
 
   return (
-    <div className="w-full bg-slate-50 min-h-screen">
-      {/* HERO BANNER FOR INTERNET PAGE */}
-      <section className="bg-gradient-to-r from-brand-blue to-blue-950 text-white py-16 sm:py-20 relative overflow-hidden">
-        <div className="absolute right-0 top-0 translate-x-1/3 -translate-y-1/3 w-96 h-96 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none" />
+    <div className="w-full bg-[#F8FAFC] min-h-screen">
+      {/* BREADCRUMB */}
+      <div className="bg-white border-b border-slate-200">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-3">
+          <nav className="flex items-center space-x-2 text-xs text-slate-500">
+            <Link href="/" className="hover:text-[#F26F21] transition-colors">
+              Trang chủ
+            </Link>
+            <ChevronRight className="size-3 text-slate-400" />
+            <span className="font-semibold text-slate-800">Gói cước Internet FPT</span>
+          </nav>
+        </div>
+      </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4 border border-white/20">
-            <Wifi className="h-4 w-4" />
+      {/* SUBPAGE HEADER (CLEAN FPT STYLE) */}
+      <section className="bg-white border-b border-slate-200/80 py-8 sm:py-12">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#004a9c] text-xs font-bold uppercase tracking-wider mb-3">
+            <Wifi className="size-3.5" />
             <span>Hạ Tầng Cáp Quang FPT Telecom</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
-            Bảng Giá Gói Cước Internet Cáp Quang WiFi 6
+          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-[#101828]">
+            Bảng Giá Gói Cước Internet Cáp Quang Wi-Fi 6
           </h1>
-          <p className="mt-4 text-blue-100 text-sm sm:text-lg max-w-3xl mx-auto leading-relaxed">
-            Tốc độ siêu tốc từ 150 Mbps đến 1 Gbps. Miễn phí thiết bị Modem WiFi 6 chuẩn AX tân tiến nhất, tặng thêm đến 2 tháng cước sử dụng khi trả trước.
+          <p className="mt-3 text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Trang bị miễn phí Modem Wi-Fi 6 thế hệ mới chuẩn AX siêu tốc. Tốc độ từ 150 Mbps đến 1 Gbps không giới hạn băng thông.
           </p>
 
-          {/* BILLING CYCLE SELECTOR */}
-          <div className="mt-10 inline-flex p-1.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
-            <button
-              onClick={() => setBillingCycle("monthly")}
-              className={`px-5 sm:px-7 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                billingCycle === "monthly"
-                  ? "bg-white text-brand-blue shadow-lg scale-105"
-                  : "text-white/80 hover:text-white"
-              }`}
-            >
-              Trả theo tháng
-            </button>
-            <button
-              onClick={() => setBillingCycle("6months")}
-              className={`relative px-5 sm:px-7 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                billingCycle === "6months"
-                  ? "bg-brand-orange text-white shadow-cta scale-105"
-                  : "text-white/80 hover:text-white"
-              }`}
-            >
-              <span>Đóng 6 tháng</span>
-              <span className="absolute -top-3 -right-2 bg-amber-400 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">
-                TẶNG 1 THÁNG
-              </span>
-            </button>
-            <button
-              onClick={() => setBillingCycle("12months")}
-              className={`relative px-5 sm:px-7 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                billingCycle === "12months"
-                  ? "bg-brand-orange text-white shadow-cta scale-105"
-                  : "text-white/80 hover:text-white"
-              }`}
-            >
-              <span>Đóng 12 tháng</span>
-              <span className="absolute -top-3 -right-2 bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">
-                TẶNG 2 THÁNG
-              </span>
-            </button>
+          {/* ACTIVE LOCATION PILL */}
+          <div className="mt-4 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700">
+            <MapPin className="size-3.5 text-[#F26F21]" />
+            <span>Khu vực áp dụng: </span>
+            <span className="text-[#004a9c] font-bold">{activeProvince.name}</span>
           </div>
         </div>
       </section>
 
-      {/* FILTER BUTTONS & PACKAGES GRID */}
-      <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6">
-        {/* CATEGORY FILTER PILLS */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
+      {/* ADVANCE PAYMENT PROMOTION BANNER */}
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 mt-6 sm:mt-8">
+        <div className="bg-gradient-to-r from-orange-500 to-[#F26F21] text-white rounded-2xl p-4 sm:p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="size-12 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center shrink-0">
+              <Gift className="size-6 text-amber-200" />
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-black leading-snug">
+                Ưu Đãi Đặc Quyền Khi Thanh Toán Trước Cước
+              </h3>
+              <p className="text-xs sm:text-sm text-orange-100 mt-0.5">
+                Trả trước 6 tháng tặng 01 tháng cước. Trả trước 12 tháng tặng thêm 02 tháng cước sử dụng miễn phí.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="bg-white/20 px-3 py-1.5 rounded-lg text-xs font-bold">
+              Miễn phí hòa mạng
+            </span>
+            <span className="bg-white/20 px-3 py-1.5 rounded-lg text-xs font-bold">
+              Trang bị Wi-Fi 6
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* FILTER TABS & PACKAGES GRID */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-8 py-8 sm:py-12">
+        {/* CATEGORY TABS (FPT.VN PILL STYLE) */}
+        <div className="flex items-center justify-start sm:justify-center overflow-x-auto gap-2.5 pb-4 mb-8 no-scrollbar">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 ${
+              className={`whitespace-nowrap px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer border ${
                 selectedCategory === cat.id
-                  ? "bg-brand-blue text-white shadow-md scale-105"
-                  : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
+                  ? "border-[#004a9c] text-[#004a9c] bg-blue-50 font-bold shadow-xs"
+                  : "border-slate-200 bg-white text-slate-600 hover:border-[#004a9c] hover:text-[#004a9c]"
               }`}
             >
               {cat.label}
@@ -104,35 +110,73 @@ export default function InternetPackagesPage() {
           ))}
         </div>
 
-        {/* PACKAGES GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* PRODUCT CARDS GRID */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredPackages.map((pkg) => (
-            <PricingCard
+            <FptProductCard
               key={pkg.id}
-              item={pkg}
-              billingCycle={billingCycle}
+              item={{
+                id: pkg.id,
+                name: pkg.name,
+                category: pkg.category,
+                badge: pkg.badge,
+                isPopular: pkg.isHot,
+                image: pkg.image,
+                price: pkg.price,
+                speed: pkg.downloadSpeed,
+                uploadSpeed: pkg.uploadSpeed,
+                equipment: pkg.modem,
+                recommendedDevices: pkg.recommendedDevices,
+                description: pkg.description,
+                features: pkg.features,
+              }}
             />
           ))}
         </div>
       </section>
 
-      {/* DETAILED COMPARISON TABLE */}
-      <section className="py-16 bg-white border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              Bảng So Sánh Thông Số Kỹ Thuật Chi Tiết
-            </h2>
-            <p className="mt-2 text-slate-600 text-sm">
-              Xem rõ thông số băng thông quốc tế, loại thiết bị và khả năng đáp ứng
-            </p>
+      {/* TECHNICAL COMPARISON TABLE */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-8 pb-12">
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+          <h2 className="text-xl sm:text-2xl font-black text-[#101828] mb-6 text-center">
+            Bảng So Sánh Thông Số Kỹ Thuật Gói Cước Internet
+          </h2>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50 text-slate-700 font-bold">
+                  <th className="py-3 px-4">Gói cước</th>
+                  <th className="py-3 px-4">Tốc độ Download</th>
+                  <th className="py-3 px-4">Tốc độ Upload</th>
+                  <th className="py-3 px-4">Thiết bị trang bị</th>
+                  <th className="py-3 px-4">Số thiết bị khuyến nghị</th>
+                  <th className="py-3 px-4 text-right">Giá cước niêm yết</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 text-slate-600">
+                {FPT_PACKAGES.map((p) => (
+                  <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
+                    <td className="py-3.5 px-4 font-bold text-slate-900">{p.name}</td>
+                    <td className="py-3.5 px-4 font-semibold text-[#004a9c]">{p.downloadSpeed}</td>
+                    <td className="py-3.5 px-4">{p.uploadSpeed}</td>
+                    <td className="py-3.5 px-4 text-slate-700">{p.modem}</td>
+                    <td className="py-3.5 px-4">{p.recommendedDevices}</td>
+                    <td className="py-3.5 px-4 text-right font-black text-[#F26F21]">
+                      {p.price.toLocaleString("vi-VN")} đ
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <ComparisonTable />
         </div>
       </section>
 
       {/* FAQ SECTION */}
-      <FaqAccordion />
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 pb-16">
+        <FaqAccordion />
+      </div>
     </div>
   );
 }

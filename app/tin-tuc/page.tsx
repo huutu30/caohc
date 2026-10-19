@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar, Clock, User, ArrowRight, Newspaper } from "lucide-react";
+import { Calendar, ChevronRight, Newspaper, ArrowRight } from "lucide-react";
 import { NEWS_LIST } from "@/lib/packages";
 
 export default function NewsPage() {
@@ -11,11 +11,10 @@ export default function NewsPage() {
 
   const categories = [
     { id: "all", label: "Tất cả bài viết" },
-    { id: "Công nghệ", label: "Công nghệ WiFi 6" },
     { id: "Khuyến mãi", label: "Khuyến mãi HOT" },
-    { id: "Hướng dẫn", label: "Hướng dẫn mạng" },
-    { id: "Doanh nghiệp", label: "Giải pháp B2B" },
-    { id: "Mẹo công nghệ", label: "Mẹo sử dụng" },
+    { id: "Công nghệ", label: "Công nghệ Wi-Fi 6" },
+    { id: "Doanh nghiệp", label: "Giải pháp Doanh nghiệp" },
+    { id: "Mẹo công nghệ", label: "Đời sống số" },
   ];
 
   const filteredNews =
@@ -24,101 +23,102 @@ export default function NewsPage() {
       : NEWS_LIST.filter((n) => n.category === selectedCategory);
 
   return (
-    <div className="w-full bg-slate-50 min-h-screen">
-      {/* HEADER */}
-      <section className="bg-gradient-to-r from-brand-blue to-blue-950 text-white py-16 sm:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4 border border-white/20">
-            <Newspaper className="h-4 w-4" />
-            <span>Thông Tin & Khuyến Mãi FPT</span>
+    <div className="w-full bg-[#F8FAFC] min-h-screen">
+      {/* BREADCRUMB */}
+      <div className="bg-white border-b border-slate-200">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-3">
+          <nav className="flex items-center space-x-2 text-xs text-slate-500">
+            <Link href="/" className="hover:text-[#F26F21] transition-colors">
+              Trang chủ
+            </Link>
+            <ChevronRight className="size-3 text-slate-400" />
+            <span className="font-semibold text-slate-800">Tin tức & Sự kiện</span>
+          </nav>
+        </div>
+      </div>
+
+      {/* SUBPAGE HEADER (CLEAN FPT STYLE) */}
+      <section className="bg-white border-b border-slate-200/80 py-8 sm:py-12">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-[#004a9c] text-xs font-bold uppercase tracking-wider mb-3">
+            <Newspaper className="size-3.5" />
+            <span>Thông Tin & Khuyến Mại FPT Telecom</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+
+          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-[#101828]">
             Tin Tức & Sự Kiện FPT Telecom
           </h1>
-          <p className="mt-4 text-blue-100 text-sm sm:text-base max-w-2xl mx-auto">
-            Cập nhật các chương trình ưu đãi hòa mạng mới nhất, kiến thức công nghệ mạng WiFi 6 và xu hướng giải trí số.
+          <p className="mt-3 text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Cập nhật các chương trình ưu đãi hòa mạng mới nhất, công nghệ Wi-Fi 6 và xu hướng giải trí thể thao đa phương tiện.
           </p>
         </div>
       </section>
 
-      {/* CATEGORY FILTER */}
-      <section className="py-8 max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+      {/* CATEGORY FILTER & NEWS GRID */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-8 py-8 sm:py-12">
+        {/* TABS (FPT.VN PILL STYLE) */}
+        <div className="flex items-center justify-start sm:justify-center overflow-x-auto gap-2.5 pb-4 mb-8 no-scrollbar">
           {categories.map((c) => (
             <button
               key={c.id}
               onClick={() => setSelectedCategory(c.id)}
-              className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold transition-all ${
+              className={`whitespace-nowrap px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer border ${
                 selectedCategory === c.id
-                  ? "bg-brand-blue text-white shadow-md"
-                  : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
+                  ? "border-[#004a9c] text-[#004a9c] bg-blue-50 font-bold shadow-xs"
+                  : "border-slate-200 bg-white text-slate-600 hover:border-[#004a9c] hover:text-[#004a9c]"
               }`}
             >
               {c.label}
             </button>
           ))}
         </div>
-      </section>
 
-      {/* NEWS GRID */}
-      <section className="pb-20 max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* NEWS GRID (ASPECT 704/419 MATCHING FPT.VN) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredNews.map((news) => (
-            <article
+            <Link
               key={news.id}
-              className="group flex flex-col rounded-3xl bg-white overflow-hidden border border-slate-200/90 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1.5"
+              href={`/tin-tuc/${news.slug}`}
+              className="group flex flex-col rounded-2xl bg-white overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >
-              <Link href={`/tin-tuc/${news.slug}`} className="relative h-52 w-full overflow-hidden bg-slate-100 block">
+              {/* THUMBNAIL (704/419 RATIO) */}
+              <div className="relative aspect-[704/419] w-full overflow-hidden bg-slate-100">
                 <Image
                   src={news.image}
                   alt={news.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="absolute top-3 left-3 bg-brand-blue/90 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">
-                  {news.category}
-                </div>
-              </Link>
+              </div>
 
-              <div className="p-6 flex-1 flex flex-col justify-between">
+              {/* BODY */}
+              <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center text-slate-400 text-xs mb-3 space-x-3">
-                    <span className="flex items-center">
-                      <Calendar className="h-3.5 w-3.5 mr-1" />
-                      {news.date}
+                  <div className="flex items-center justify-between text-xs text-slate-400 mb-2.5">
+                    <span className="font-bold text-[#004a9c] bg-blue-50 px-2.5 py-0.5 rounded-full text-[11px]">
+                      {news.category}
                     </span>
-                    <span>•</span>
-                    <span className="flex items-center">
-                      <Clock className="h-3.5 w-3.5 mr-1" />
-                      {news.readTime}
+                    <span className="flex items-center gap-1">
+                      <Calendar className="size-3 text-slate-400" />
+                      <span>{news.date}</span>
                     </span>
                   </div>
 
-                  <Link href={`/tin-tuc/${news.slug}`}>
-                    <h2 className="text-lg font-bold text-slate-900 group-hover:text-brand-blue transition-colors line-clamp-2 leading-snug">
-                      {news.title}
-                    </h2>
-                  </Link>
-                  <p className="mt-2.5 text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed">
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#004a9c] transition-colors leading-snug line-clamp-2">
+                    {news.title}
+                  </h2>
+                  <p className="mt-2 text-xs text-slate-500 line-clamp-3 leading-relaxed">
                     {news.excerpt}
                   </p>
                 </div>
 
-                <div className="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-semibold text-slate-500 flex items-center">
-                    <User className="h-3.5 w-3.5 mr-1 text-slate-400" />
-                    {news.author}
-                  </span>
-                  <Link
-                    href={`/tin-tuc/${news.slug}`}
-                    className="inline-flex items-center text-xs font-bold text-brand-blue group-hover:text-brand-orange transition-colors"
-                  >
-                    <span>Chi tiết</span>
-                    <ArrowRight className="h-3.5 w-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-[#004a9c] group-hover:text-[#F26F21] transition-colors">
+                  <span>Đọc tiếp</span>
+                  <ArrowRight className="size-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>

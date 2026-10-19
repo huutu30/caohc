@@ -2,261 +2,209 @@
 
 import * as React from "react";
 import Link from "next/link";
-import {
-  Tv,
-  Wifi,
-  Sparkles,
-  CheckCircle2,
-  Gift,
-  Film,
-  Trophy,
-  ArrowRight,
-} from "lucide-react";
-import { COMBO_PACKAGES } from "@/lib/packages";
-import { formatCurrency } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Tv, ChevronRight, Gift, Trophy, Film, MapPin } from "lucide-react";
+import FptProductCard from "@/components/fpt/FptProductCard";
+import { useRegion } from "@/context/RegionContext";
 import FaqAccordion from "@/components/FaqAccordion";
 
 export default function ComboPackagesPage() {
-  const [billingCycle, setBillingCycle] = React.useState<"monthly" | "6months" | "12months">("6months");
+  const { activeProvince } = useRegion();
+
+  const sportsCombos = [
+    {
+      id: "combo-sky-vvip-lite",
+      name: "Combo Internet Sky V.VIP",
+      badge: "BÁN CHẠY NHẤT",
+      isPopular: true,
+      image: "/images/c-the-thao-sky.webp",
+      price: 239000,
+      originalPrice: 280000,
+      speed: "1 Gbps",
+      uploadSpeed: "150 Mbps",
+      equipment: "Modem Wi-Fi 6 AX1800 + Box Voice 4K",
+      description: "Xem trọn vẹn 380 trận Ngoại Hạng Anh & Cúp C1 UEFA, kho giải trí 170+ kênh đặc sắc.",
+      features: [
+        "Bản quyền 380 trận Ngoại Hạng Anh & Cúp C1 UEFA",
+        "Trang bị 01 Box TV điều khiển giọng nói 4K",
+        "Modem Wi-Fi 6 AX1800 băng tần kép thế hệ mới",
+        "Đăng nhập đồng thời trên 3 thiết bị xem mượt mà",
+      ],
+    },
+    {
+      id: "combo-giga-vvip",
+      name: "Combo Internet Giga V.VIP",
+      badge: "TIẾT KIỆM",
+      isPopular: false,
+      image: "/images/combo-giga.webp",
+      price: 220000,
+      originalPrice: 250000,
+      speed: "150 Mbps",
+      uploadSpeed: "150 Mbps",
+      equipment: "Modem Wi-Fi 6 AX1800 + FPT Play",
+      description: "Phù hợp gia đình nhỏ lướt web tốc độ cao và xem truyền hình thể thao chất lượng HD.",
+      features: [
+        "Xem trực tiếp Ngoại Hạng Anh, FA Cup",
+        "Gần 170 kênh truyền hình trong & ngoài nước",
+        "Trang bị Modem Wi-Fi 6 chuẩn AX tân tiến",
+        "Bàn giao thiết bị tận nhà trong vòng 24 giờ",
+      ],
+    },
+    {
+      id: "combo-meta-vvip",
+      name: "Combo Internet Meta V.VIP",
+      badge: "1GBPS ĐỐI XỨNG",
+      isPopular: false,
+      image: "/images/c-the-thao-meta.webp",
+      price: 345000,
+      originalPrice: 390000,
+      speed: "1 Gbps",
+      uploadSpeed: "1 Gbps",
+      equipment: "Modem Wi-Fi 6 AX3000 + Box Voice",
+      description: "Tốc độ đối xứng cực đại 1Gbps / 1Gbps, xem phim điện ảnh 4K không quảng cáo.",
+      features: [
+        "Tốc độ đối xứng cực đại 1Gbps / 1Gbps",
+        "Kho phim điện ảnh chiếu rạp không quảng cáo",
+        "Xem mượt mà đồng thời trên 5 thiết bị",
+        "Đặc quyền chăm sóc và phục vụ ưu tiên",
+      ],
+    },
+    {
+      id: "combo-sky-f1-vvip",
+      name: "Combo Sky F1 (Kèm Mesh)",
+      badge: "NHÀ NHIỀU TẦNG",
+      isPopular: false,
+      image: "/images/c-the-thao-sky-f1.webp",
+      price: 269000,
+      originalPrice: 310000,
+      speed: "1 Gbps",
+      uploadSpeed: "150 Mbps",
+      equipment: "01 Modem Wi-Fi 6 + 01 Mesh Wi-Fi 6",
+      description: "Phủ sóng xuyên tường toàn bộ căn hộ, nhà phố; trọn vẹn bản quyền Ngoại Hạng Anh 4K.",
+      features: [
+        "Phủ sóng xuyên tường toàn bộ căn hộ, nhà phố",
+        "Trọn vẹn bản quyền Ngoại Hạng Anh 4K",
+        "Tích hợp FPT Play Box điều khiển giọng nói",
+        "Tặng thêm tới 2 tháng cước sử dụng",
+      ],
+    },
+  ];
 
   return (
-    <div className="w-full bg-slate-50 min-h-screen">
-      {/* HERO BANNER FOR COMBO PAGE */}
-      <section className="bg-gradient-to-r from-blue-950 via-brand-blue to-blue-900 text-white py-16 sm:py-20 relative overflow-hidden">
-        <div className="absolute right-0 top-0 translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-brand-orange/30 rounded-full blur-3xl pointer-events-none" />
+    <div className="w-full bg-[#F8FAFC] min-h-screen">
+      {/* BREADCRUMB */}
+      <div className="bg-white border-b border-slate-200">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-3">
+          <nav className="flex items-center space-x-2 text-xs text-slate-500">
+            <Link href="/" className="hover:text-[#F26F21] transition-colors">
+              Trang chủ
+            </Link>
+            <ChevronRight className="size-3 text-slate-400" />
+            <span className="font-semibold text-slate-800">Combo Internet + Truyền hình FPT Play</span>
+          </nav>
+        </div>
+      </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4 border border-white/20">
-            <Tv className="h-4 w-4" />
-            <span>FPT Play Đỉnh Cao Giải Trí</span>
+      {/* SUBPAGE HEADER (CLEAN FPT STYLE) */}
+      <section className="bg-white border-b border-slate-200/80 py-8 sm:py-12">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-[#F26F21] text-xs font-bold uppercase tracking-wider mb-3">
+            <Trophy className="size-3.5" />
+            <span>Bản Quyền Ngoại Hạng Anh 2026</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
-            Combo Internet Cáp Quang + Truyền Hình FPT Play
+          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-[#101828]">
+            Combo Internet Wi-Fi 6 + Truyền Hình FPT Play
           </h1>
-          <p className="mt-4 text-blue-100 text-sm sm:text-lg max-w-3xl mx-auto leading-relaxed">
-            Tiết kiệm tới 35% chi phí khi đăng ký trọn gói Internet WiFi 6 siêu tốc và kho giải trí FPT Play 170+ kênh, bản quyền Ngoại Hạng Anh & Cúp C1 châu Âu.
+          <p className="mt-3 text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Tiết kiệm tới 35% chi phí khi đăng ký trọn gói Internet Wi-Fi 6 siêu tốc và gói FPT Play VVIP xem trọn vẹn 380 trận Ngoại Hạng Anh, Cúp C1 UEFA cùng 170+ kênh truyền hình.
           </p>
 
-          {/* BILLING CYCLE SELECTOR */}
-          <div className="mt-10 inline-flex p-1.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
-            <button
-              onClick={() => setBillingCycle("monthly")}
-              className={`px-5 sm:px-7 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                billingCycle === "monthly"
-                  ? "bg-white text-brand-blue shadow-lg scale-105"
-                  : "text-white/80 hover:text-white"
-              }`}
-            >
-              Trả theo tháng
-            </button>
-            <button
-              onClick={() => setBillingCycle("6months")}
-              className={`relative px-5 sm:px-7 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                billingCycle === "6months"
-                  ? "bg-brand-orange text-white shadow-cta scale-105"
-                  : "text-white/80 hover:text-white"
-              }`}
-            >
-              <span>Đóng 6 tháng</span>
-              <span className="absolute -top-3 -right-2 bg-amber-400 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">
-                TẶNG 1 THÁNG
-              </span>
-            </button>
-            <button
-              onClick={() => setBillingCycle("12months")}
-              className={`relative px-5 sm:px-7 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                billingCycle === "12months"
-                  ? "bg-brand-orange text-white shadow-cta scale-105"
-                  : "text-white/80 hover:text-white"
-              }`}
-            >
-              <span>Đóng 12 tháng</span>
-              <span className="absolute -top-3 -right-2 bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">
-                TẶNG 2 THÁNG
-              </span>
-            </button>
+          {/* ACTIVE LOCATION PILL */}
+          <div className="mt-4 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-700">
+            <MapPin className="size-3.5 text-[#F26F21]" />
+            <span>Khu vực áp dụng: </span>
+            <span className="text-[#004a9c] font-bold">{activeProvince.name}</span>
           </div>
         </div>
       </section>
 
-      {/* 4 COMBO PACKAGES GRID */}
-      <section className="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          {COMBO_PACKAGES.map((combo) => {
-            let displayPrice = combo.priceMonthly;
-            let giftText = "";
-            let billingNote = "Thanh toán từng tháng";
+      {/* ADVANCE PAYMENT PROMOTION BANNER */}
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 mt-6 sm:mt-8">
+        <div className="bg-gradient-to-r from-orange-500 to-[#F26F21] text-white rounded-2xl p-4 sm:p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="size-12 rounded-xl bg-white/20 backdrop-blur-xs flex items-center justify-center shrink-0">
+              <Gift className="size-6 text-amber-200" />
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-black leading-snug">
+                Ưu Đãi Đặc Biệt Cho Gói Combo FPT Play
+              </h3>
+              <p className="text-xs sm:text-sm text-orange-100 mt-0.5">
+                Trang bị miễn phí Đầu thu giọng nói 4K + Modem Wi-Fi 6. Tặng thêm đến 2 tháng cước khi thanh toán trước.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="bg-white/20 px-3 py-1.5 rounded-lg text-xs font-bold">
+              Box 4K giọng nói
+            </span>
+            <span className="bg-white/20 px-3 py-1.5 rounded-lg text-xs font-bold">
+              Ngoại Hạng Anh 4K
+            </span>
+          </div>
+        </div>
+      </div>
 
-            if (billingCycle === "6months") {
-              displayPrice = Math.round(combo.price6Months / 7);
-              giftText = combo.gift6Months;
-              billingNote = `Tổng ${formatCurrency(combo.price6Months)} / 7 tháng`;
-            } else if (billingCycle === "12months") {
-              displayPrice = Math.round(combo.price12Months / 14);
-              giftText = combo.gift12Months;
-              billingNote = `Tổng ${formatCurrency(combo.price12Months)} / 14 tháng`;
-            }
-
-            return (
-              <div
-                key={combo.id}
-                className={`relative rounded-3xl bg-white border p-7 sm:p-8 shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between ${
-                  combo.isPopular
-                    ? "border-2 border-brand-orange shadow-xl hover:-translate-y-1"
-                    : "border-slate-200/90 hover:-translate-y-1"
-                }`}
-              >
-                {combo.isPopular && (
-                  <div className="absolute -top-3.5 left-8 z-20">
-                    <span className="inline-flex items-center px-4 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-gradient-to-r from-brand-orange to-amber-500 text-white shadow-cta">
-                      <Sparkles className="w-3.5 h-3.5 mr-1" />
-                      {combo.badge || "Gói Đề Xuất Cho Gia Đình"}
-                    </span>
-                  </div>
-                )}
-
-                <div>
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
-                    <div>
-                      <span className="text-xs font-bold uppercase tracking-wider text-brand-blue bg-blue-50 px-3 py-1 rounded-full">
-                        {combo.categoryLabel}
-                      </span>
-                      <h3 className="text-2xl font-black text-slate-900 mt-2">
-                        {combo.name}
-                      </h3>
-                    </div>
-                    <div className="text-left sm:text-right">
-                      <div className="flex items-baseline sm:justify-end space-x-1">
-                        <span className="text-3xl sm:text-4xl font-black text-brand-orange">
-                          {formatCurrency(displayPrice)}
-                        </span>
-                        <span className="text-xs font-semibold text-slate-500">
-                          / tháng
-                        </span>
-                      </div>
-                      <p className="text-xs text-slate-400 mt-0.5">
-                        {billingNote}
-                      </p>
-                    </div>
-                  </div>
-
-                  <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                    {combo.description}
-                  </p>
-
-                  {/* HIGHLIGHT SPECS */}
-                  <div className="grid grid-cols-2 gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100 mb-6">
-                    <div className="flex items-center space-x-2.5">
-                      <div className="h-8 w-8 rounded-lg bg-blue-100 text-brand-blue flex items-center justify-center shrink-0">
-                        <Wifi className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] text-slate-500 uppercase font-semibold">
-                          Tốc độ mạng
-                        </p>
-                        <p className="text-sm font-bold text-slate-900">
-                          {combo.speed}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2.5">
-                      <div className="h-8 w-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center shrink-0">
-                        <Tv className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] text-slate-500 uppercase font-semibold">
-                          Truyền hình
-                        </p>
-                        <p className="text-sm font-bold text-slate-900 truncate">
-                          170+ Kênh 4K
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* FEATURES LIST */}
-                  <ul className="space-y-3 mb-6">
-                    {combo.features.map((f, i) => (
-                      <li key={i} className="flex items-start text-xs sm:text-sm text-slate-700">
-                        <CheckCircle2 className="h-4 w-4 text-emerald-600 mr-2.5 shrink-0 mt-0.5" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {giftText && (
-                    <div className="mb-6 flex items-center space-x-2 text-xs font-bold text-emerald-700 bg-emerald-50 px-3.5 py-2 rounded-xl border border-emerald-200">
-                      <Gift className="h-4 w-4 text-emerald-600 shrink-0" />
-                      <span>{giftText}</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="pt-4 border-t border-slate-100">
-                  <Link href={`/dang-ky?package=${combo.id}&cycle=${billingCycle}`}>
-                    <Button
-                      variant={combo.isPopular ? "default" : "primary"}
-                      className="w-full h-12 rounded-xl font-bold text-sm shadow-md hover:scale-[1.01]"
-                    >
-                      Đăng ký gói Combo này
-                      <ArrowRight className="h-4 w-4 ml-2" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
+      {/* COMBO PACKAGES GRID */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {sportsCombos.map((pkg) => (
+            <FptProductCard key={pkg.id} item={pkg} />
+          ))}
         </div>
       </section>
 
-      {/* WHY COMBO HIGHLIGHTS */}
-      <section className="py-16 bg-white border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
-              Đặc Quyền Giải Trí Cùng FPT Play
-            </h2>
-            <p className="text-slate-600 text-sm mt-2">
-              Kho nội dung bản quyền phong phú đáp ứng sở thích của mọi thành viên
-            </p>
-          </div>
+      {/* ENTERTAINMENT HIGHLIGHTS */}
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-8 pb-12">
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+          <h2 className="text-xl sm:text-2xl font-black text-[#101828] mb-8 text-center">
+            Đặc Quyền Giải Trí Đỉnh Cao Trên FPT Play
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 text-center">
-              <div className="h-14 w-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto mb-4">
-                <Trophy className="h-7 w-7" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center">
+              <div className="size-12 rounded-full bg-blue-100 text-[#004a9c] flex items-center justify-center mb-4">
+                <Trophy className="size-6" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                Trọn Vẹn Thể Thao Đỉnh Cao
+              <h3 className="text-base font-bold text-slate-900 mb-1">
+                Thể Thao Độc Quyền
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Độc quyền trực tiếp toàn bộ 380 trận đấu giải Ngoại Hạng Anh, UEFA Champions League, Cúp C2, FA Cup và các giải golf PGA danh giá.
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Trọn vẹn 380 trận Ngoại Hạng Anh, Cúp C1 UEFA, Cúp C2, Emirates FA Cup, V.League, VBA, UFC phát sóng trực tiếp.
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 text-center">
-              <div className="h-14 w-14 rounded-2xl bg-blue-100 text-brand-blue flex items-center justify-center mx-auto mb-4">
-                <Film className="h-7 w-7" />
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center">
+              <div className="size-12 rounded-full bg-orange-100 text-[#F26F21] flex items-center justify-center mb-4">
+                <Film className="size-6" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                Kho Phim Chiếu Rạp 4K
+              <h3 className="text-base font-bold text-slate-900 mb-1">
+                Kho Phim Điện Ảnh 4K
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Hàng ngàn giờ phim bom tấn Hollywood, phim bộ Hàn Quốc, Trung Quốc phát song song cùng ngày với đài truyền hình quốc tế.
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Hơn 10.000 giờ phim chiếu rạp bom tấn Hollywood, Châu Á, anime Nhật Bản cập nhật mới liên tục mỗi ngày không quảng cáo.
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 text-center">
-              <div className="h-14 w-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-4">
-                <Tv className="h-7 w-7" />
+            <div className="p-5 rounded-xl bg-slate-50 border border-slate-100 flex flex-col items-center text-center">
+              <div className="size-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mb-4">
+                <Tv className="size-6" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">
-                Điều Khiển Bằng Giọng Nói
+              <h3 className="text-base font-bold text-slate-900 mb-1">
+                170+ Kênh Truyền Hình
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Đầu thu thế hệ mới tích hợp điều khiển giọng nói tiếng Việt chuẩn xác mọi vùng miền, dễ dàng tìm kiếm video cho trẻ em và người cao tuổi.
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Gần 170 kênh truyền hình trong nước và quốc tế đặc sắc như VTV, HTV, HBO, Cinemax, Cartoon Network, Discovery.
               </p>
             </div>
           </div>
@@ -264,7 +212,9 @@ export default function ComboPackagesPage() {
       </section>
 
       {/* FAQ SECTION */}
-      <FaqAccordion />
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 pb-16">
+        <FaqAccordion />
+      </div>
     </div>
   );
 }

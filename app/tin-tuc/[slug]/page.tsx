@@ -136,7 +136,7 @@ export default function NewsDetailPage({ params }: Props) {
           <div className="mt-10 rounded-2xl bg-gradient-to-r from-brand-blue to-blue-900 p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
             <div>
               <h3 className="text-xl font-bold text-white">
-                Đăng ký lắp mạng FPT ngay hôm nay!
+                Đăng ký hòa mạng FPT ngay hôm nay!
               </h3>
               <p className="text-blue-100 text-xs sm:text-sm mt-1">
                 Tặng modem WiFi 6 + Tặng thêm đến 2 tháng cước sử dụng

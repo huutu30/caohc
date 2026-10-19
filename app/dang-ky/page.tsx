@@ -1,62 +1,74 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Sparkles } from "lucide-react";
+import { ChevronRight, Sparkles } from "lucide-react";
 import RegistrationForm from "@/components/RegistrationForm";
 
 function RegisterContent() {
   const searchParams = useSearchParams();
-  const packageParam = searchParams.get("package") || "sky-300";
+  const packageParam = searchParams.get("goi") || "";
 
   return (
-    <div className="w-full bg-slate-50 min-h-screen">
-      {/* HEADER HERO */}
-      <section className="bg-gradient-to-r from-brand-blue to-blue-950 text-white py-16 sm:py-20 relative overflow-hidden">
-        <div className="absolute right-0 top-0 translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none" />
+    <div className="w-full bg-[#F8FAFC] min-h-screen">
+      {/* BREADCRUMB */}
+      <div className="bg-white border-b border-slate-200">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-3">
+          <nav className="flex items-center space-x-2 text-xs text-slate-500">
+            <Link href="/" className="hover:text-[#F26F21] transition-colors">
+              Trang chủ
+            </Link>
+            <ChevronRight className="size-3 text-slate-400" />
+            <span className="font-semibold text-slate-800">Đăng ký hòa mạng trực tuyến</span>
+          </nav>
+        </div>
+      </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/10 text-amber-300 text-xs font-bold uppercase tracking-wider mb-4 border border-white/20">
-            <Sparkles className="h-4 w-4" />
+      {/* SUBPAGE HEADER (CLEAN FPT STYLE) */}
+      <section className="bg-white border-b border-slate-200/80 py-8 sm:py-12">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-[#F26F21] text-xs font-bold uppercase tracking-wider mb-3">
+            <Sparkles className="size-3.5" />
             <span>Tiếp Nhận Đăng Ký Trực Tuyến Nhanh Chóng</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
-            Đăng Ký Hòa Mạng Internet FPT Telecom
+          <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-[#101828]">
+            Đăng Ký Hòa Mạng Dịch Vụ FPT Telecom
           </h1>
-          <p className="mt-4 text-blue-100 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Quy trình hòa mạng nhanh chóng trong 3 bước đơn giản. Miễn phí Modem WiFi 6 và tặng thêm đến 2 tháng cước sử dụng.
+          <p className="mt-3 text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Quy trình tiếp nhận đăng ký đơn giản chỉ mất 2 phút. Đội ngũ triển khai dịch vụ sẽ khảo sát và bàn giao thiết bị tận nhà trong vòng 24 giờ.
           </p>
 
-          {/* 3 STEPS PROGRESS */}
-          <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 text-left flex items-start space-x-3">
-              <div className="h-8 w-8 rounded-full bg-brand-orange text-white font-black text-sm flex items-center justify-center shrink-0">
+          {/* 3 STEPS PROGRESS CARDS */}
+          <div className="mt-8 max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+              <div className="size-8 rounded-full bg-[#F26F21] text-white font-black text-sm flex items-center justify-center shrink-0">
                 1
               </div>
               <div>
-                <p className="font-bold text-sm text-white">Chọn gói cước</p>
-                <p className="text-xs text-blue-100 mt-0.5">Chọn Internet hoặc Combo phù hợp</p>
+                <p className="font-bold text-sm text-slate-900">Chọn gói cước</p>
+                <p className="text-xs text-slate-500 mt-0.5">Internet WiFi 6 hoặc Combo FPT Play</p>
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 text-left flex items-start space-x-3">
-              <div className="h-8 w-8 rounded-full bg-brand-orange text-white font-black text-sm flex items-center justify-center shrink-0">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+              <div className="size-8 rounded-full bg-[#004a9c] text-white font-black text-sm flex items-center justify-center shrink-0">
                 2
               </div>
               <div>
-                <p className="font-bold text-sm text-white">Điền thông tin</p>
-                <p className="text-xs text-blue-100 mt-0.5">Họ tên, SĐT và địa chỉ triển khai</p>
+                <p className="font-bold text-sm text-slate-900">Điền thông tin</p>
+                <p className="text-xs text-slate-500 mt-0.5">Họ tên, SĐT và địa chỉ triển khai</p>
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 text-left flex items-start space-x-3">
-              <div className="h-8 w-8 rounded-full bg-brand-orange text-white font-black text-sm flex items-center justify-center shrink-0">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+              <div className="size-8 rounded-full bg-emerald-600 text-white font-black text-sm flex items-center justify-center shrink-0">
                 3
               </div>
               <div>
-                <p className="font-bold text-sm text-white">Bàn giao thiết bị</p>
-                <p className="text-xs text-blue-100 mt-0.5">Kỹ thuật viên bàn giao trong 24h</p>
+                <p className="font-bold text-sm text-slate-900">Bàn giao thiết bị</p>
+                <p className="text-xs text-slate-500 mt-0.5">Đội ngũ bàn giao thiết bị trong 24h</p>
               </div>
             </div>
           </div>
@@ -64,14 +76,22 @@ function RegisterContent() {
       </section>
 
       {/* FORM SECTION */}
-      <RegistrationForm initialPackageId={packageParam} className="py-12 sm:py-16" />
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 py-8 sm:py-12">
+        <RegistrationForm initialPackageId={packageParam} className="py-0" />
+      </div>
     </div>
   );
 }
 
 export default function RegisterPage() {
   return (
-    <React.Suspense fallback={<div className="min-h-screen bg-slate-50 flex items-center justify-center">Đang tải...</div>}>
+    <React.Suspense
+      fallback={
+        <div className="min-h-screen bg-slate-50 flex items-center justify-center text-sm font-semibold text-slate-600">
+          Đang tải trang đăng ký...
+        </div>
+      }
+    >
       <RegisterContent />
     </React.Suspense>
   );
