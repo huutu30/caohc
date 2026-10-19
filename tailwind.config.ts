@@ -38,10 +38,15 @@ const config: Config = {
           "0%, 100%": { opacity: "1", transform: "scale(1)" },
           "50%": { opacity: "0.8", transform: "scale(1.05)" },
         },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         shake: "shake 1.5s ease-in-out infinite",
         "pulse-glow": "pulseGlow 2s ease-in-out infinite",
+        marquee: "marquee 35s linear infinite",
       },
     },
   },
