@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import React, { useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import FptProductCard, { FptProductCardItem } from "@/components/fpt/FptProductCard";
-import { useRegion } from "@/context/RegionContext";
 
 const EPL_SLIDER_PACKAGES: FptProductCardItem[] = [
   {
@@ -119,56 +118,7 @@ const EPL_SLIDER_PACKAGES: FptProductCardItem[] = [
 ];
 
 export default function EplPackagesSlider() {
-  const { region, activeProvince, setActiveProvince } = useRegion();
-  const [activeArea, setActiveArea] = useState<"noi-thanh" | "ngoai-thanh">(
-    region === "hcm" ? "noi-thanh" : "ngoai-thanh"
-  );
-  const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const targetArea = region === "hcm" ? "noi-thanh" : "ngoai-thanh";
-    if (targetArea !== activeArea) {
-      setIsLoading(true);
-      setActiveArea(targetArea);
-      const timer = setTimeout(() => setIsLoading(false), 200);
-      return () => clearTimeout(timer);
-    }
-  }, [region, activeArea]);
-
-  const handleAreaChange = (newArea: "noi-thanh" | "ngoai-thanh") => {
-    if (newArea === activeArea) return;
-    setIsLoading(true);
-    setActiveArea(newArea);
-
-    if (newArea === "noi-thanh") {
-      if (activeProvince.id === "hcm-ngoai-thanh") {
-        setActiveProvince("hcm");
-      } else if (activeProvince.id === "ha-noi-ngoai-thanh") {
-        setActiveProvince("ha-noi");
-      } else if (region !== "hcm") {
-        setActiveProvince("hcm");
-      }
-    } else {
-      if (activeProvince.id === "hcm") {
-        setActiveProvince("hcm-ngoai-thanh");
-      } else if (activeProvince.id === "ha-noi") {
-        setActiveProvince("ha-noi-ngoai-thanh");
-      } else if (region === "hcm") {
-        setActiveProvince("toan-quoc");
-      }
-    }
-
-    setTimeout(() => setIsLoading(false), 200);
-  };
-
-  const isNoiThanh = activeArea === "noi-thanh";
-  const displayedCombos = EPL_SLIDER_PACKAGES.filter((item) => {
-    if (isNoiThanh) {
-      return item.id !== "combo-giga-vvip";
-    }
-    return true;
-  });
 
   const handleScroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -188,42 +138,6 @@ export default function EplPackagesSlider() {
           <p className="mt-3 text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Xem Ngoại Hạng Anh 2026-27 trọn vẹn với Combo V.VIP Lite. Internet tốc độ cao, trải nghiệm xem Ngoại Hạng Anh sắc nét đến 4K trên FPT Play, kết hợp gần 120 kênh truyền hình cho cả gia đình.
           </p>
-
-          {/* AREA SELECTOR TABS */}
-          <div className="flex flex-col items-center justify-center mt-6 gap-2">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-blue-400 uppercase tracking-wider">
-              <MapPin className="size-3.5 text-[#ef4444]" />
-              <span>Vui lòng chọn khu vực áp dụng:</span>
-              <span className="text-slate-400 font-semibold normal-case">
-                ({activeProvince.name})
-              </span>
-            </div>
-
-            <div className="inline-flex p-1 bg-white/10 border border-white/15 rounded-xl shadow-xs gap-1">
-              <button
-                type="button"
-                onClick={() => handleAreaChange("noi-thanh")}
-                className={`px-5 py-2 text-xs sm:text-sm font-bold rounded-lg transition-all cursor-pointer ${
-                  activeArea === "noi-thanh"
-                    ? "bg-gradient-to-r from-[#e86010] to-[#ff8030] text-white shadow-md shadow-orange-500/25"
-                    : "text-slate-300 hover:text-white"
-                }`}
-              >
-                Nội thành
-              </button>
-              <button
-                type="button"
-                onClick={() => handleAreaChange("ngoai-thanh")}
-                className={`px-5 py-2 text-xs sm:text-sm font-bold rounded-lg transition-all cursor-pointer ${
-                  activeArea === "ngoai-thanh"
-                    ? "bg-gradient-to-r from-[#e86010] to-[#ff8030] text-white shadow-md shadow-orange-500/25"
-                    : "text-slate-300 hover:text-white"
-                }`}
-              >
-                Ngoại thành / Tỉnh
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* CAROUSEL WRAPPER WITH NAVIGATION ARROWS */}
@@ -238,11 +152,9 @@ export default function EplPackagesSlider() {
 
           <div
             ref={scrollRef}
-            className={`flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth no-scrollbar py-3 px-1 snap-x snap-mandatory transition-opacity duration-200 ${
-              isLoading ? "opacity-50" : "opacity-100"
-            }`}
+            className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth no-scrollbar py-3 px-1 snap-x snap-mandatory"
           >
-            {displayedCombos.map((combo) => (
+            {EPL_SLIDER_PACKAGES.map((combo) => (
               <div
                 key={combo.id}
                 className="w-[280px] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)] shrink-0 snap-start"
