@@ -506,7 +506,7 @@ export const CAMERA_FAQS: FaqItem[] = [
   },
   {
     question: "Quy trình đăng ký trang bị Camera FPT diễn ra như thế nào?",
-    answer: "Quý khách chỉ cần để lại thông tin hoặc liên hệ Hotline đăng ký 0902.184.284. Chuyên viên tư vấn FPT sẽ liên hệ giải đáp chi tiết, tiếp nhận yêu cầu và đội ngũ triển khai thiết bị ban đầu sẽ bàn giao, kết nối và hướng dẫn quý khách cài đặt ứng dụng tận nơi chu đáo.",
+    answer: "Quý khách chỉ cần để lại thông tin hoặc liên hệ Hotline đăng ký 0775 780 962. Chuyên viên tư vấn FPT sẽ liên hệ giải đáp chi tiết, tiếp nhận yêu cầu và đội ngũ triển khai thiết bị ban đầu sẽ bàn giao, kết nối và hướng dẫn quý khách cài đặt ứng dụng tận nơi chu đáo.",
   },
   {
     question: "Chính sách bảo hành thiết bị Camera FPT ra sao?",

@@ -47,7 +47,7 @@ export default function FloatingContact() {
 
       {/* NÚT ZALO CHAT */}
       <a
-        href="https://zalo.me/0902184284"
+        href="https://zalo.me/0775780962"
         target="_blank"
         rel="noopener noreferrer"
         className="group relative flex items-center justify-center h-13 w-13 rounded-full bg-[#0068FF] text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 border-2 border-white"
@@ -62,12 +62,12 @@ export default function FloatingContact() {
 
       {/* NÚT GỌI HOTLINE */}
       <a
-        href="tel:0902184284"
+        href="tel:0775780962"
         className="group relative flex items-center justify-center h-14 w-14 rounded-full bg-brand-orange text-white shadow-cta hover:shadow-orange-500/50 transition-all duration-300 hover:scale-110 border-2 border-white animate-shake"
         aria-label="Gọi hotline tư vấn"
       >
         <span className="absolute -left-32 bg-slate-900 text-white text-xs font-semibold px-2.5 py-1.5 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity shadow-md whitespace-nowrap hidden sm:block">
-          Gọi Ngay 0902.184.284
+          Gọi Ngay 0775 780 962
         </span>
         <Phone className="h-6 w-6 animate-pulse" />
         <span className="absolute inset-0 rounded-full bg-brand-orange animate-ping opacity-30 pointer-events-none" />

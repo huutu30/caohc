@@ -232,11 +232,11 @@ export default function TopBar() {
 
           {/* ĐĂNG NHẬP / HOTLINE */}
           <a
-            href="tel:0902184284"
+            href="tel:0775780962"
             className="flex items-center gap-1.5 hover:opacity-90 transition-opacity text-slate-200 hover:text-white"
           >
             <User className="size-4 text-[#DDE4FC]" />
-            <span className="text-sm leading-6">Đăng ký: 0902.184.284</span>
+            <span className="text-sm leading-6">Đăng ký: 0775 780 962</span>
           </a>
         </div>
       </div>

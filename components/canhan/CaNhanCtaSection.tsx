@@ -52,11 +52,11 @@ export default function CaNhanCtaSection() {
               Đăng ký hòa mạng ngay
             </button>
             <a
-              href="tel:0902184284"
+              href="tel:0775780962"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 border border-white/20 text-white font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2"
             >
               <PhoneCall className="w-4 h-4 text-amber-400" />
-              <span>Hotline: 0902.184.284</span>
+              <span>Hotline: 0775 780 962</span>
             </a>
           </div>
         </div>

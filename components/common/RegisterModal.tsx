@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { X, CheckCircle2, ShieldCheck, Sparkles, Phone, User, MapPin } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { X, CheckCircle2, ShieldCheck, Sparkles, Phone, User, MapPin, ChevronDown, Check } from "lucide-react";
 import { useRegister } from "@/context/RegisterContext";
 import { useRegion, PROVINCES } from "@/context/RegionContext";
 import { FPT_PACKAGES } from "@/data/fptPackages";
@@ -72,6 +72,8 @@ export default function RegisterModal() {
   const [provinceId, setProvinceId] = useState(activeProvince.id);
   const [billingCycle, setBillingCycle] = useState<"1M" | "6M" | "12M">("6M");
   const [chosenPkgId, setChosenPkgId] = useState(selectedPackage?.id || "combo-sky-vvip");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -84,6 +86,16 @@ export default function RegisterModal() {
   useEffect(() => {
     setProvinceId(activeProvince.id);
   }, [activeProvince]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   if (!isRegisterModalOpen) return null;
 
@@ -121,6 +133,7 @@ export default function RegisterModal() {
 
   const handleResetAndClose = () => {
     setIsSuccess(false);
+    setIsDropdownOpen(false);
     setFullName("");
     setPhoneNumber("");
     setAddress("");
@@ -179,38 +192,151 @@ export default function RegisterModal() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* CHỌN GÓI CƯỚC */}
-              <div>
+              {/* CHỌN GÓI CƯỚC - CUSTOM POPUP DROPDOWN (WIDTH 80% FORM, HEIGHT 70% FORM, SCROLLBAR) */}
+              <div className="relative" ref={dropdownRef}>
                 <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">
                   Gói cước đã chọn
                 </label>
-                <select
-                  value={chosenPkgId}
-                  onChange={(e) => setChosenPkgId(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 text-sm font-bold text-slate-900 rounded-xl px-3.5 py-2.5 outline-none focus:border-[#004a9c] focus:bg-white transition-all cursor-pointer"
+                <button
+                  type="button"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-300 text-left text-sm font-bold text-slate-900 rounded-xl px-3.5 py-2.5 outline-none focus:border-[#004a9c] focus:bg-white transition-all flex items-center justify-between cursor-pointer"
                 >
-                  <optgroup label="⭐ COMBO THỂ THAO V.VIP (NGOẠI HẠNG ANH)">
-                    {SECTION_1_DROPDOWN_PACKAGES.map((pkg) => (
-                      <option key={pkg.id} value={pkg.id}>
-                        {pkg.name} - {pkg.speed} ({(getPrice(pkg) || (typeof pkg.price === "number" ? pkg.price : pkg.price.tinh)).toLocaleString("vi-VN")} đ/tháng)
-                      </option>
-                    ))}
-                  </optgroup>
-                  <optgroup label="🌐 GÓI INTERNET CÁ NHÂN & WI-FI 6 / WI-FI 7">
-                    {FPT_PACKAGES.map((pkg) => (
-                      <option key={pkg.id} value={pkg.id}>
-                        {pkg.name} - {pkg.downloadSpeed} ({(getPrice(pkg) || (typeof pkg.price === "number" ? pkg.price : pkg.price.tinh)).toLocaleString("vi-VN")} đ/tháng)
-                      </option>
-                    ))}
-                  </optgroup>
-                  <optgroup label="⚽ TRUYỀN HÌNH FPT PLAY V.VIP">
-                    {FPT_PLAY_DROPDOWN_PACKAGES.map((pkg) => (
-                      <option key={pkg.id} value={pkg.id}>
-                        {pkg.name} - {pkg.speed} ({(getPrice(pkg) || pkg.price).toLocaleString("vi-VN")} đ/tháng)
-                      </option>
-                    ))}
-                  </optgroup>
-                </select>
+                  <div className="truncate pr-2">
+                    <span className="text-slate-900">{currentPkg.name}</span>
+                    <span className="text-slate-500 font-normal text-xs ml-1.5">• {currentPkg.speed}</span>
+                    <span className="text-[#f57020] font-bold text-xs ml-1.5">
+                      ({pkgPrice.toLocaleString("vi-VN")} đ/tháng)
+                    </span>
+                  </div>
+                  <ChevronDown
+                    className={`size-4 text-slate-500 shrink-0 transition-transform duration-200 ${
+                      isDropdownOpen ? "rotate-180 text-[#004a9c]" : ""
+                    }`}
+                  />
+                </button>
+
+                {/* DROPDOWN MENU: CHIỀU DÀI 70% FORM, CHIỀU NGANG 80% FORM CÓ THANH CUỘN */}
+                {isDropdownOpen && (
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1.5 w-[88%] sm:w-[80%] z-50 bg-white rounded-2xl shadow-2xl border border-slate-200 max-h-[290px] sm:max-h-[320px] overflow-y-auto p-2 space-y-2.5 animate-in fade-in slide-in-from-top-2 duration-150">
+                    {/* NHÓM 1: COMBO V.VIP THỂ THAO */}
+                    <div>
+                      <div className="px-2 py-1 text-[11px] font-black uppercase tracking-wider text-amber-700 bg-amber-50 rounded-lg mb-1 flex items-center gap-1.5">
+                        <span>⭐ Combo Thể Thao V.VIP (Ngoại Hạng Anh)</span>
+                      </div>
+                      <div className="space-y-1">
+                        {SECTION_1_DROPDOWN_PACKAGES.map((pkg) => {
+                          const pPrice = getPrice(pkg) || (typeof pkg.price === "number" ? pkg.price : pkg.price.tinh);
+                          const isSelected = chosenPkgId === pkg.id;
+                          return (
+                            <button
+                              key={pkg.id}
+                              type="button"
+                              onClick={() => {
+                                setChosenPkgId(pkg.id);
+                                setIsDropdownOpen(false);
+                              }}
+                              className={`w-full text-left p-2 rounded-xl text-xs transition-colors flex items-center justify-between cursor-pointer ${
+                                isSelected
+                                  ? "bg-blue-50 text-[#004a9c] font-bold border border-blue-200"
+                                  : "hover:bg-slate-50 text-slate-800"
+                              }`}
+                            >
+                              <div className="truncate pr-2">
+                                <div className="font-bold flex items-center gap-1">
+                                  <span>{pkg.name}</span>
+                                  <span className="text-[10px] text-slate-500 font-normal">({pkg.speed})</span>
+                                </div>
+                                <div className="text-[11px] text-[#f57020] font-bold">
+                                  {pPrice.toLocaleString("vi-VN")} đ/tháng
+                                </div>
+                              </div>
+                              {isSelected && <Check className="size-4 text-[#004a9c] shrink-0" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* NHÓM 2: INTERNET CÁ NHÂN & WI-FI 6 / WI-FI 7 */}
+                    <div className="border-t border-slate-100 pt-2">
+                      <div className="px-2 py-1 text-[11px] font-black uppercase tracking-wider text-blue-700 bg-blue-50 rounded-lg mb-1 flex items-center gap-1.5">
+                        <span>🌐 Gói Internet Wi-Fi 6 & Wi-Fi 7</span>
+                      </div>
+                      <div className="space-y-1">
+                        {FPT_PACKAGES.map((pkg) => {
+                          const pPrice = getPrice(pkg) || (typeof pkg.price === "number" ? pkg.price : pkg.price.tinh);
+                          const isSelected = chosenPkgId === pkg.id;
+                          return (
+                            <button
+                              key={pkg.id}
+                              type="button"
+                              onClick={() => {
+                                setChosenPkgId(pkg.id);
+                                setIsDropdownOpen(false);
+                              }}
+                              className={`w-full text-left p-2 rounded-xl text-xs transition-colors flex items-center justify-between cursor-pointer ${
+                                isSelected
+                                  ? "bg-blue-50 text-[#004a9c] font-bold border border-blue-200"
+                                  : "hover:bg-slate-50 text-slate-800"
+                              }`}
+                            >
+                              <div className="truncate pr-2">
+                                <div className="font-bold flex items-center gap-1">
+                                  <span>{pkg.name}</span>
+                                  <span className="text-[10px] text-slate-500 font-normal">({pkg.downloadSpeed})</span>
+                                </div>
+                                <div className="text-[11px] text-[#f57020] font-bold">
+                                  {pPrice.toLocaleString("vi-VN")} đ/tháng
+                                </div>
+                              </div>
+                              {isSelected && <Check className="size-4 text-[#004a9c] shrink-0" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* NHÓM 3: TRUYỀN HÌNH FPT PLAY */}
+                    <div className="border-t border-slate-100 pt-2">
+                      <div className="px-2 py-1 text-[11px] font-black uppercase tracking-wider text-purple-700 bg-purple-50 rounded-lg mb-1 flex items-center gap-1.5">
+                        <span>⚽ Truyền hình FPT Play V.VIP</span>
+                      </div>
+                      <div className="space-y-1">
+                        {FPT_PLAY_DROPDOWN_PACKAGES.map((pkg) => {
+                          const pPrice = getPrice(pkg) || pkg.price;
+                          const isSelected = chosenPkgId === pkg.id;
+                          return (
+                            <button
+                              key={pkg.id}
+                              type="button"
+                              onClick={() => {
+                                setChosenPkgId(pkg.id);
+                                setIsDropdownOpen(false);
+                              }}
+                              className={`w-full text-left p-2 rounded-xl text-xs transition-colors flex items-center justify-between cursor-pointer ${
+                                isSelected
+                                  ? "bg-blue-50 text-[#004a9c] font-bold border border-blue-200"
+                                  : "hover:bg-slate-50 text-slate-800"
+                              }`}
+                            >
+                              <div className="truncate pr-2">
+                                <div className="font-bold flex items-center gap-1">
+                                  <span>{pkg.name}</span>
+                                  <span className="text-[10px] text-slate-500 font-normal">({pkg.speed})</span>
+                                </div>
+                                <div className="text-[11px] text-[#f57020] font-bold">
+                                  {pPrice.toLocaleString("vi-VN")} đ/tháng
+                                </div>
+                              </div>
+                              {isSelected && <Check className="size-4 text-[#004a9c] shrink-0" />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* HÌNH THỨC THANH TOÁN / CHU KỲ */}

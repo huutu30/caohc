@@ -84,7 +84,7 @@ export default function FaqAccordion({ items }: FaqAccordionProps = {}) {
             </div>
           ) : (
             <div className="text-center py-8 text-slate-500">
-              Không tìm thấy câu hỏi phù hợp với từ khóa &ldquo;{searchTerm}&rdquo;. Quý khách vui lòng liên hệ Hotline đăng ký thuê bao 0902.184.284 để được tư vấn gói cước nhanh chóng.
+              Không tìm thấy câu hỏi phù hợp với từ khóa &ldquo;{searchTerm}&rdquo;. Quý khách vui lòng liên hệ Hotline đăng ký thuê bao 0775 780 962 để được tư vấn gói cước nhanh chóng.
             </div>
           )}
         </div>

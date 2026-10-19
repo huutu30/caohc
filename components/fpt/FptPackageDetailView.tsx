@@ -464,7 +464,7 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="0902 xxx xxx"
+                      placeholder="0775 xxx xxx"
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#F26F21] focus:border-transparent"
                     />
                   </div>
@@ -497,11 +497,11 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
               <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
                 <span>Cần tư vấn trực tiếp ngay?</span>
                 <a
-                  href="tel:0902184284"
+                  href="tel:0775780962"
                   className="font-black text-[#F26F21] hover:underline flex items-center gap-1 text-sm"
                 >
                   <PhoneCall className="size-3.5" />
-                  0902.184.284
+                  0775 780 962
                 </a>
               </div>
             </div>
