@@ -34,10 +34,13 @@ export default function RegisterModal() {
   const currentPkg = FPT_PACKAGES.find((p) => p.id === chosenPkgId) || FPT_PACKAGES[1];
   const selectedPrice = selectedPackage
     ? "price" in selectedPackage
-      ? selectedPackage.price
+      ? typeof selectedPackage.price === "number"
+        ? selectedPackage.price
+        : selectedPackage.price?.tinh || 0
       : selectedPackage.priceNgoaiThanh
     : 0;
-  const pkgPrice = selectedPrice || getPrice(currentPkg) || currentPkg.price;
+  const rawPrice = selectedPrice || getPrice(currentPkg) || (typeof currentPkg.price === "number" ? currentPkg.price : currentPkg.price?.tinh || 0);
+  const pkgPrice: number = typeof rawPrice === "number" ? rawPrice : 0;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

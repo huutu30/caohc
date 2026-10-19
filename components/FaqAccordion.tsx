@@ -5,11 +5,32 @@ import { HelpCircle, Search } from "lucide-react";
 import { FAQS } from "@/lib/packages";
 import { AccordionItem } from "@/components/ui/accordion";
 
-export default function FaqAccordion() {
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [openId, setOpenId] = React.useState<string | null>(FAQS[0]?.id || null);
+export interface FaqItem {
+  id?: string;
+  q?: string;
+  a?: string;
+  question?: string;
+  answer?: string;
+}
 
-  const filteredFaqs = FAQS.filter(
+interface FaqAccordionProps {
+  items?: FaqItem[];
+}
+
+export default function FaqAccordion({ items }: FaqAccordionProps = {}) {
+  const [searchTerm, setSearchTerm] = React.useState("");
+  
+  const rawList = items
+    ? items.map((it, idx) => ({
+        id: it.id || `faq-${idx}`,
+        question: it.question || it.q || "",
+        answer: it.answer || it.a || "",
+      }))
+    : FAQS;
+
+  const [openId, setOpenId] = React.useState<string | null>(rawList[0]?.id || null);
+
+  const filteredFaqs = rawList.filter(
     (faq) =>
       faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
       faq.answer.toLowerCase().includes(searchTerm.toLowerCase())

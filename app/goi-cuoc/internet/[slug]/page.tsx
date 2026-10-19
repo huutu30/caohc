@@ -27,9 +27,10 @@ export function generateMetadata({ params }: PageProps): Metadata {
     };
   }
   const pkg = result.data;
+  const numPrice = typeof pkg.price === "number" ? pkg.price : pkg.price.tinh;
   return {
     title: `${pkg.name} - Gói cước Internet WiFi 6 FPT | FPT Telecom`,
-    description: `${pkg.description} Tốc độ ${pkg.downloadSpeed}, cước chỉ từ ${new Intl.NumberFormat("vi-VN").format(pkg.price)}đ/tháng.`
+    description: `${pkg.description} Tốc độ ${pkg.downloadSpeed}, cước chỉ từ ${new Intl.NumberFormat("vi-VN").format(numPrice)}đ/tháng.`
   };
 }
 

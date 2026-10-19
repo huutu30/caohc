@@ -26,7 +26,7 @@ export interface PackageDetailData {
   category: "internet" | "combo";
   categoryName: string;
   badge?: string;
-  price: number;
+  price: number | { hcm: number; tinh: number };
   originalPrice?: number;
   downloadSpeed: string;
   uploadSpeed: string;
@@ -50,7 +50,9 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const currentPrice = getPrice(data) || data.price;
+  const currentPrice =
+    getPrice(data) ||
+    (typeof data.price === "number" ? data.price : data.price?.tinh || 0);
   const formattedPrice = new Intl.NumberFormat("vi-VN").format(currentPrice);
   
   // Calculate price based on cycle
