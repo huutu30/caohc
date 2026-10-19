@@ -67,7 +67,7 @@ export const FPT_PACKAGES: FptPackage[] = [
     categoryName: "Cá nhân",
     downloadSpeed: "300 Mbps",
     uploadSpeed: "300 Mbps",
-    price: { hcm: 220000, tinh: 195000 },
+    price: { hcm: 235000, tinh: 195000 },
     pricePrepaid6M: 1170000,
     pricePrepaid12M: 2340000,
     gift6M: "Tặng 01 tháng cước thứ 7",
@@ -93,7 +93,7 @@ export const FPT_PACKAGES: FptPackage[] = [
     isHot: true,
     downloadSpeed: "1 Gbps",
     uploadSpeed: "300 Mbps",
-    price: { hcm: 225000, tinh: 195000 },
+    price: { hcm: 245000, tinh: 205000 },
     pricePrepaid6M: 1290000,
     pricePrepaid12M: 2580000,
     gift6M: "Tặng 01 tháng cước + Bàn giao thiết bị miễn phí",
@@ -144,7 +144,7 @@ export const FPT_PACKAGES: FptPackage[] = [
     categoryName: "Gia đình",
     downloadSpeed: "300 Mbps",
     uploadSpeed: "300 Mbps",
-    price: { hcm: 255000, tinh: 205000 },
+    price: { hcm: 255000, tinh: 215000 },
     pricePrepaid6M: 1230000,
     pricePrepaid12M: 2460000,
     gift6M: "Tặng 01 tháng cước",
@@ -170,7 +170,7 @@ export const FPT_PACKAGES: FptPackage[] = [
     isHot: true,
     downloadSpeed: "1 Gbps",
     uploadSpeed: "300 Mbps",
-    price: { hcm: 265000, tinh: 210000 },
+    price: { hcm: 265000, tinh: 225000 },
     pricePrepaid6M: 1260000,
     pricePrepaid12M: 2520000,
     gift6M: "Tặng 01 tháng cước + Bàn giao thiết bị miễn phí",
@@ -195,7 +195,7 @@ export const FPT_PACKAGES: FptPackage[] = [
     badge: "Nhà 3 - 4 Tầng",
     downloadSpeed: "1 Gbps",
     uploadSpeed: "300 Mbps",
-    price: { hcm: 285000, tinh: 230000 },
+    price: { hcm: 285000, tinh: 245000 },
     pricePrepaid6M: 1380000,
     pricePrepaid12M: 2760000,
     gift6M: "Tặng 01 tháng cước + 2 Thiết bị Mesh",
@@ -248,7 +248,7 @@ export const FPT_PACKAGES: FptPackage[] = [
     isHot: true,
     downloadSpeed: "1 Gbps",
     uploadSpeed: "300 Mbps",
-    price: { hcm: 295000, tinh: 225000 },
+    price: { hcm: 295000, tinh: 265000 },
     pricePrepaid6M: 1350000,
     pricePrepaid12M: 2700000,
     gift6M: "Tặng 01 tháng + Code Game độc quyền",
@@ -273,7 +273,7 @@ export const FPT_PACKAGES: FptPackage[] = [
     badge: "Phòng Game Tại Gia",
     downloadSpeed: "1 Gbps",
     uploadSpeed: "300 Mbps",
-    price: { hcm: 330000, tinh: 255000 },
+    price: { hcm: 315000, tinh: 285000 },
     pricePrepaid6M: 1530000,
     pricePrepaid12M: 3060000,
     gift6M: "Tặng 01 tháng + 01 Mesh Gaming",
@@ -406,7 +406,7 @@ export const FPT_PACKAGES: FptPackage[] = [
     badge: "Siêu Phẩm VVIP",
     downloadSpeed: "10 Gbps",
     uploadSpeed: "10 Gbps",
-    price: 1690000,
+    price: 1699000,
     image: "/images/speedx10-pro.webp",
     modem: "Modem Wi-Fi 7 10G Gateway + Box FPT Play VIP",
     recommendedDevices: "Đến 200 thiết bị",
@@ -523,7 +523,7 @@ export const FPT_PACKAGES: FptPackage[] = [
       "Cam kết băng thông quốc tế cao",
       "Miễn phí 01 IP Tĩnh cố định chuẩn doanh nghiệp",
       "Thiết bị Gateway định tuyến cao cấp chuyên nghiệp",
-      "Đội ngũ kỹ thuật hỗ trợ riêng 24/7"
+      "Đội ngũ kỹ thuật hỗ trợ riêng chu đáo và tận tâm"
     ]
   },
   {
@@ -623,9 +623,9 @@ export const FPT_PACKAGES: FptPackage[] = [
     badge: "Wi-Fi 6 Cao Cấp Nhất",
     downloadSpeed: "800 Mbps",
     uploadSpeed: "800 Mbps",
-    price: 1030000,
-    pricePrepaid6M: 6180000,
-    pricePrepaid12M: 12360000,
+    price: 1000000,
+    pricePrepaid6M: 6000000,
+    pricePrepaid12M: 12000000,
     gift6M: "Tặng 01 tháng + 01 IP Tĩnh + 01 Mesh Wi-Fi 6",
     gift12M: "Tặng 02 tháng + 01 IP Tĩnh + 01 Mesh Wi-Fi 6",
     image: "/images/lux800.webp",
@@ -903,6 +903,7 @@ export const VVIP_SPORTS_PACKAGES: FptVvipSportsCombo[] = [
 ];
 
 export const FPT_VVIP_COMBOS = VVIP_SPORTS_PACKAGES;
+export const FPT_VVIP_SPORTS_COMBOS = VVIP_SPORTS_PACKAGES;
 
 // =========================================================================
 // 3. GÓI DỊCH VỤ TRUYỀN HÌNH FPT PLAY ĐƠN LẺ
@@ -970,7 +971,7 @@ export const FPT_ADDONS: FptAddonService[] = [
       "Hệ thống AI tự động chọn tuyến cáp quốc tế tối ưu nhất",
       "Giảm độ trễ Ping xuống tới 16ms, triệt tiêu Packet Loss",
       "Tương thích 100% PC, Mobile, PlayStation, Xbox, Nintendo Switch",
-      "Không cần lắp đặt thêm thiết bị hay cài đặt phức tạp",
+      "Không cần kết nối thêm thiết bị rườm rà hay cài đặt phức tạp",
       "Kích hoạt và quản lý trực tiếp qua ứng dụng Hi FPT"
     ]
   },

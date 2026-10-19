@@ -203,7 +203,7 @@ export const GIA_DINH_MESH_PACKAGES: GiaDinhPackage[] = [
       "Tốc độ Đối Xứng 1 Gbps cả 2 chiều Upload & Download",
       "1 Modem chính + 1 Access Point Mesh Wi-Fi 6",
       "Phù hợp gia đình làm việc từ xa, họp trực tuyến, tải file nặng",
-      "Đường truyền ổn định, thông suốt 24/7",
+      "Đường truyền ổn định, thông suốt mọi lúc mọi nơi",
     ],
   },
 ];

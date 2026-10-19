@@ -244,19 +244,19 @@ export const DOANH_NGHIEP_FEATURES: DoanhNghiepFeature[] = [
   {
     title: "Hạ Tầng Cáp Quang Rộng Khắp & Tuyến Quốc Tế Đa Hướng",
     desc: "Hệ thống cáp quang phủ khắp 63 tỉnh thành cùng các tuyến cáp quang biển quốc tế dự phòng đa hướng độc lập (APG, AAG, IA, SMW3), bảo đảm đường truyền luôn thông suốt ngay cả khi có biến động trên cáp quang biển.",
-    image: "/images/doanh-nghiep/feature_1.webp",
+    image: "/images/doanh-nghiep/feature_1.jpg",
     tag: "Hạ tầng vững chắc",
   },
   {
     title: "Thiết Bị Cân Bằng Tải Chịu Tải Cực Cao",
     desc: "Trang bị phần cứng chuyên nghiệp từ các thương hiệu dẫn đầu ngành mạng như DrayTek, MikroTik, Wi-Fi 6 Router. Hỗ trợ phân bổ băng thông thông minh (QoS), phân luồng VLAN và khả năng gộp nhiều đường truyền cùng lúc.",
-    image: "/images/doanh-nghiep/feature_2.webp",
+    image: "/images/doanh-nghiep/feature_2.jpg",
     tag: "Phần cứng đẳng cấp",
   },
   {
     title: "Giải Pháp IP Tĩnh Vận Hành Máy Chủ & Hệ Thống",
     desc: "Cung cấp dải địa chỉ IP Tĩnh cố định độc quyền, giúp doanh nghiệp dễ dàng cấu hình VPN làm việc từ xa, xây dựng Mail Server, Web Server nội bộ và quản trị hệ thống camera độ phân giải cao tập trung.",
-    image: "/images/doanh-nghiep/feature_3.webp",
+    image: "/images/doanh-nghiep/feature_3.jpg",
     tag: "Bảo mật & Định tuyến",
   },
 ];

@@ -78,7 +78,7 @@ export const ACCESS_POINT_PRODUCTS: AccessPointProduct[] = [
     speed: "Chuẩn Wi-Fi 6 AX1800",
     price: 750000,
     originalPrice: 950000,
-    image: "/images/access-point/ax3000cv2.png",
+    image: "/images/sky-f1.webp",
     desc: "Bộ mở rộng sóng chuẩn Wi-Fi 6 băng tần kép AX1800, tối ưu cho căn hộ 2-3 phòng ngủ cần mở rộng sóng không dây liền mạch.",
     specs: [
       { label: "Chuẩn Wi-Fi", value: "IEEE 802.11 a/b/g/n/ac/ax" },
@@ -101,7 +101,7 @@ export const ACCESS_POINT_PRODUCTS: AccessPointProduct[] = [
     speed: "Chuẩn Wi-Fi 5 AC1200",
     price: 550000,
     originalPrice: 700000,
-    image: "/images/access-point/ax3000cv2.png",
+    image: "/images/giga-f1.webp",
     desc: "Giải pháp mở rộng sóng cơ bản chuẩn AC1200 băng tần kép cho phòng ngủ xa modem hoặc tầng lầu.",
     specs: [
       { label: "Chuẩn Wi-Fi", value: "IEEE 802.11 a/b/g/n/ac" },
