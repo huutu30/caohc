@@ -35,7 +35,7 @@ export default function Wifi7PackagesSection() {
       badge: comboWifi7.badge || "BÁN CHẠY NHẤT",
       isPopular: true,
       image: comboWifi7.image,
-      price: { hcm: comboWifi7.priceNoiThanh, tinh: comboWifi7.priceNgoaiThanh },
+      price: { hcm: comboWifi7.priceNoiThanh ?? comboWifi7.priceNgoaiThanh, tinh: comboWifi7.priceNgoaiThanh },
       speed: comboWifi7.downloadSpeed,
       uploadSpeed: comboWifi7.uploadSpeed,
       equipment: "Modem Wi-Fi 7 + FPT Play V.VIP",

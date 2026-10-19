@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { useRegion } from "@/context/RegionContext";
-import { FPT_PACKAGES, VVIP_SPORTS_PACKAGES } from "@/data/fptPackages";
+import { FPT_PACKAGES } from "@/data/fptPackages";
 import FptProductCard, { FptProductCardItem } from "@/components/fpt/FptProductCard";
 
 export default function ExploreProductsTabs() {
@@ -15,61 +15,39 @@ export default function ExploreProductsTabs() {
     { id: "ca_nhan", label: "Internet cá nhân" },
     { id: "gia_dinh", label: "Internet gia đình" },
     { id: "game_thu", label: "Internet game thủ" },
-    { id: "combo_vvip", label: "Combo Thể Thao V.VIP" },
     { id: "wifi_7", label: "Wi-Fi 7 Tốc độ cao" },
     { id: "doanh_nghiep", label: "Internet doanh nghiệp" },
   ];
 
   // Derive card items based on active tab
-  let cardItems: FptProductCardItem[] = [];
-
-  if (activeTab === "combo_vvip") {
-    const isNoiThanh = activeProvince.region === "hcm";
-    const availableCombos = isNoiThanh
-      ? VVIP_SPORTS_PACKAGES.filter((c) => c.id !== "combo-giga-vvip")
-      : VVIP_SPORTS_PACKAGES;
-    cardItems = availableCombos.map((c) => ({
-      id: c.id,
-      name: c.name,
-      category: "combo",
-      badge: c.badge,
-      isPopular: c.isPopular,
-      image: c.image,
-      price: {
-        hcm: c.priceNoiThanh,
-        tinh: c.priceNgoaiThanh,
-      },
-      speed: c.downloadSpeed,
-      uploadSpeed: c.uploadSpeed,
-      equipment: "Modem Wi-Fi 6 + Box FPT Play Voice 4K",
-      features: c.features,
-      description: c.description,
-      recommendedDevices: "Xem cùng lúc 3 - 5 thiết bị",
-      detailUrl: `/ngoai-hang-anh`,
-    }));
-  } else {
-    const packages = FPT_PACKAGES.filter((p) => p.category === activeTab);
-    cardItems = packages.map((pkg) => ({
-      id: pkg.id,
-      name: pkg.name,
-      category: pkg.category,
-      badge: pkg.badge,
-      isPopular: pkg.isHot,
-      image: pkg.image,
-      price: pkg.price,
-      speed: pkg.downloadSpeed,
-      uploadSpeed: pkg.uploadSpeed,
-      equipment: pkg.modem,
-      recommendedDevices: pkg.recommendedDevices,
-      description: pkg.description,
-      features: pkg.features,
-      detailUrl: pkg.category === "wifi_7" 
-        ? "/internet/wifi-7" 
+  const packages = FPT_PACKAGES.filter((p) => p.category === activeTab);
+  const cardItems: FptProductCardItem[] = packages.map((pkg) => ({
+    id: pkg.id,
+    name: pkg.name,
+    category: pkg.category,
+    badge: pkg.badge,
+    isPopular: pkg.isHot,
+    image: pkg.image,
+    price: pkg.price,
+    speed: pkg.downloadSpeed,
+    uploadSpeed: pkg.uploadSpeed,
+    equipment: pkg.modem,
+    recommendedDevices: pkg.recommendedDevices,
+    description: pkg.description,
+    features: pkg.features,
+    detailUrl:
+      pkg.category === "ca_nhan"
+        ? "/internet/ca-nhan"
+        : pkg.category === "gia_dinh"
+        ? "/internet/gia-dinh"
+        : pkg.category === "game_thu"
+        ? "/internet/game-thu"
+        : pkg.category === "wifi_7"
+        ? "/internet-wifi-7-xgspon"
         : pkg.category === "doanh_nghiep"
         ? "/internet/doanh-nghiep"
-        : `/goi-cuoc/internet/${pkg.id}`,
-    }));
-  }
+        : "/internet/ca-nhan",
+  }));
 
   // Determine "View All" link based on current tab
   const getViewAllLink = () => {
@@ -80,14 +58,12 @@ export default function ExploreProductsTabs() {
         return { href: "/internet/gia-dinh", label: "Xem tất cả gói Internet gia đình" };
       case "game_thu":
         return { href: "/internet/game-thu", label: "Xem chi tiết gói cước Game thủ" };
-      case "combo_vvip":
-        return { href: "/ngoai-hang-anh", label: "Xem tất cả Combo Ngoại Hạng Anh V.VIP" };
       case "wifi_7":
-        return { href: "/internet/wifi-7", label: "Khám phá công nghệ Wi-Fi 7 & XGS-PON" };
+        return { href: "/internet-wifi-7-xgspon", label: "Khám phá công nghệ Wi-Fi 7 & XGS-PON" };
       case "doanh_nghiep":
         return { href: "/internet/doanh-nghiep", label: "Xem toàn bộ gói Internet Doanh nghiệp" };
       default:
-        return { href: "/goi-cuoc/internet", label: "Xem tất cả gói cước Internet FPT" };
+        return { href: "/internet/ca-nhan", label: "Xem tất cả gói cước Internet FPT" };
     }
   };
 

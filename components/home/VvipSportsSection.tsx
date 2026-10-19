@@ -78,8 +78,9 @@ export default function VvipSportsSection() {
 
         {/* 3 COMBO CARDS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          {VVIP_SPORTS_PACKAGES.map((combo) => {
+          {VVIP_SPORTS_PACKAGES.filter((c) => (isNoiThanh ? c.priceNoiThanh !== null : true)).map((combo) => {
             const price = isNoiThanh ? combo.priceNoiThanh : combo.priceNgoaiThanh;
+            if (!price) return null;
             return (
               <div
                 key={combo.id}

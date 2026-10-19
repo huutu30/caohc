@@ -9,32 +9,27 @@ export default function ProductCategories() {
     {
       title: "Internet Cá Nhân",
       image: "/images/product-internet-personal.png",
-      href: "/goi-cuoc/internet",
+      href: "/internet/ca-nhan",
     },
     {
       title: "Internet Gia Đình",
       image: "/images/product-internet-family.png",
-      href: "/goi-cuoc/internet",
+      href: "/internet/gia-dinh",
     },
     {
-      title: "Internet Doanh Nghiệp",
+      title: "Internet Game Thủ",
       image: "/images/product-internet-gamethu.png",
-      href: "/goi-cuoc/internet",
+      href: "/internet/game-thu",
     },
     {
-      title: "Truyền Hình FPT Play",
+      title: "Giải Trí Ngoại Hạng Anh",
       image: "/images/product-tv-entertainment.png",
-      href: "/goi-cuoc/combo",
+      href: "/ngoai-hang-anh",
     },
     {
       title: "FPT Camera",
       image: "/images/product-camera.png",
       href: "/camera",
-    },
-    {
-      title: "Dịch Vụ Số",
-      image: "/images/product-digital-services.png",
-      href: "/#smart-home",
     },
   ];
 
@@ -44,7 +39,7 @@ export default function ProductCategories() {
         Danh mục sản phẩm đa dạng
       </h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 p-4 sm:p-6 pt-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 p-4 sm:p-6 pt-6">
         {categories.map((cat, idx) => (
           <Link
             key={idx}
