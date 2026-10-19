@@ -24,7 +24,7 @@ export interface FptVvipSportsCombo {
   name: string;
   image: string;
   priceNgoaiThanh: number;
-  priceNoiThanh: number;
+  priceNoiThanh: number | null;
   downloadSpeed: string;
   uploadSpeed: string;
   features: string[];
@@ -670,7 +670,7 @@ export const VVIP_SPORTS_PACKAGES: FptVvipSportsCombo[] = [
     name: "Combo Giga - V.VIP",
     image: "/images/giga-vvip.webp",
     priceNgoaiThanh: 220000,
-    priceNoiThanh: 240000,
+    priceNoiThanh: null, // Không bán tại khu vực nội thành (HCM/HN)
     downloadSpeed: "300 Mbps",
     uploadSpeed: "300 Mbps",
     badge: "Xem Ngoại Hạng Anh",

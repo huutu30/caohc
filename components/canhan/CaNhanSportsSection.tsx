@@ -4,15 +4,25 @@ import React from "react";
 import { Trophy } from "lucide-react";
 import FptProductCard, { FptProductCardItem } from "@/components/fpt/FptProductCard";
 import { FPT_VVIP_SPORTS_COMBOS } from "@/data/fptPackages";
+import { useRegion } from "@/context/RegionContext";
 
 export default function CaNhanSportsSection() {
+  const { region } = useRegion();
+
   const targetIds = [
     "combo-giga-vvip",
     "combo-sky-vvip",
     "combo-meta-vvip",
   ];
 
-  const combos = FPT_VVIP_SPORTS_COMBOS.filter((c) => targetIds.includes(c.id));
+  // Nội thành (region === "hcm") không áp dụng bán gói Combo Giga V.VIP
+  const combos = FPT_VVIP_SPORTS_COMBOS.filter((c) => {
+    if (!targetIds.includes(c.id)) return false;
+    if (region === "hcm" && (c.id === "combo-giga-vvip" || c.priceNoiThanh === null)) {
+      return false;
+    }
+    return true;
+  });
 
   const cardItems: FptProductCardItem[] = combos.map((c) => ({
     id: c.id,
@@ -21,7 +31,7 @@ export default function CaNhanSportsSection() {
     badge: c.badge || "NGOẠI HẠNG ANH",
     isPopular: c.isPopular,
     image: c.image,
-    price: { hcm: c.priceNoiThanh, tinh: c.priceNgoaiThanh },
+    price: { hcm: c.priceNoiThanh || c.priceNgoaiThanh, tinh: c.priceNgoaiThanh },
     speed: c.downloadSpeed,
     uploadSpeed: c.uploadSpeed,
     equipment: "Modem Wi-Fi 6 + FPT Play V.VIP",
@@ -47,8 +57,12 @@ export default function CaNhanSportsSection() {
           </p>
         </div>
 
-        {/* 3 Cards Grid using standard FptProductCard */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {/* Cards Grid using standard FptProductCard */}
+        <div
+          className={`grid gap-6 max-w-5xl mx-auto ${
+            combos.length === 2 ? "grid-cols-1 md:grid-cols-2 max-w-3xl" : "grid-cols-1 md:grid-cols-3"
+          }`}
+        >
           {cardItems.map((item) => (
             <FptProductCard key={item.id} item={item} />
           ))}

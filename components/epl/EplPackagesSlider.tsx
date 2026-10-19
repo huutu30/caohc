@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import FptProductCard, { FptProductCardItem } from "@/components/fpt/FptProductCard";
+import { useRegion } from "@/context/RegionContext";
 
 const EPL_SLIDER_PACKAGES: FptProductCardItem[] = [
   {
@@ -118,7 +119,15 @@ const EPL_SLIDER_PACKAGES: FptProductCardItem[] = [
 ];
 
 export default function EplPackagesSlider() {
+  const { region } = useRegion();
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const displayedPackages = EPL_SLIDER_PACKAGES.filter((combo) => {
+    if (region === "hcm" && combo.id === "combo-giga-vvip") {
+      return false;
+    }
+    return true;
+  });
 
   const handleScroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -154,7 +163,7 @@ export default function EplPackagesSlider() {
             ref={scrollRef}
             className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth no-scrollbar py-3 px-1 snap-x snap-mandatory"
           >
-            {EPL_SLIDER_PACKAGES.map((combo) => (
+            {displayedPackages.map((combo) => (
               <div
                 key={combo.id}
                 className="w-[280px] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)] shrink-0 snap-start"

@@ -4,8 +4,11 @@ import React from "react";
 import { Flame } from "lucide-react";
 import FptProductCard, { FptProductCardItem } from "@/components/fpt/FptProductCard";
 import { FPT_VVIP_SPORTS_COMBOS } from "@/data/fptPackages";
+import { useRegion } from "@/context/RegionContext";
 
 export default function GiaDinhVvipSection() {
+  const { region } = useRegion();
+
   // Select top family VVIP sports combos
   const targetIds = [
     "combo-giga-vvip",
@@ -15,7 +18,14 @@ export default function GiaDinhVvipSection() {
     "combo-speedx1-vvip",
   ];
 
-  const combos = FPT_VVIP_SPORTS_COMBOS.filter((c) => targetIds.includes(c.id));
+  // Nội thành (region === "hcm") không áp dụng bán gói Combo Giga V.VIP
+  const combos = FPT_VVIP_SPORTS_COMBOS.filter((c) => {
+    if (!targetIds.includes(c.id)) return false;
+    if (region === "hcm" && (c.id === "combo-giga-vvip" || c.priceNoiThanh === null)) {
+      return false;
+    }
+    return true;
+  });
 
   const cardItems: FptProductCardItem[] = combos.map((c) => ({
     id: c.id,
@@ -24,7 +34,7 @@ export default function GiaDinhVvipSection() {
     badge: c.badge || "V.VIP THỂ THAO",
     isPopular: c.isPopular,
     image: c.image,
-    price: { hcm: c.priceNoiThanh, tinh: c.priceNgoaiThanh },
+    price: { hcm: c.priceNoiThanh || c.priceNgoaiThanh, tinh: c.priceNgoaiThanh },
     speed: c.downloadSpeed,
     uploadSpeed: c.uploadSpeed,
     equipment: "Modem Wi-Fi 6 + FPT Play V.VIP",
@@ -51,7 +61,11 @@ export default function GiaDinhVvipSection() {
         </div>
 
         {/* Product Cards Grid using standard FptProductCard */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ${
+            combos.length === 4 ? "xl:grid-cols-4 max-w-6xl mx-auto" : "xl:grid-cols-5"
+          }`}
+        >
           {cardItems.map((item) => (
             <FptProductCard key={item.id} item={item} />
           ))}
