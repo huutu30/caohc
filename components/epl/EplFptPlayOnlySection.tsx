@@ -14,7 +14,7 @@ export default function EplFptPlayOnlySection() {
     {
       id: "goi-vvip1",
       name: "Gói V.VIP 1",
-      price: 130000,
+      price: 120000,
       image: "/images/fpt_vvip_1.webp",
       features: [
         "Kho giải trí đa dạng, đặc biệt bóng đá Anh và bóng đá Việt",
@@ -29,7 +29,7 @@ export default function EplFptPlayOnlySection() {
     {
       id: "goi-vvip2",
       name: "Gói V.VIP 2",
-      price: 160000,
+      price: 140000,
       image: "/images/fpt_vvip_2.webp",
       features: [
         "Kho giải trí đa dạng, đặc biệt bóng đá Anh và bóng đá Việt",
