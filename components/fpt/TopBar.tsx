@@ -10,7 +10,7 @@ export default function TopBar() {
   const [searchQuery, setSearchQuery] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Grouped location structure matching fptwebsite
+  // Grouped location structure
   const hcmProvinces = PROVINCES.filter(
     (p) => p.id === "hcm" || p.id === "hcm-ngoai-thanh"
   );
@@ -127,7 +127,7 @@ export default function TopBar() {
                       )}
                     </div>
                   ) : (
-                    // STRUCTURED GROUPS MATCHING FPTWEBSITE
+                    // STRUCTURED LOCATION GROUPS
                     <>
                       {/* 1. TOÀN QUỐC */}
                       {toanQuocProv && (

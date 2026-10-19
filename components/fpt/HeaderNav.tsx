@@ -243,12 +243,12 @@ export default function HeaderNav() {
             )}
           </div>
 
-          {/* 3. THANH TOÁN & HỖ TRỢ */}
+          {/* 3. LIÊN HỆ */}
           <Link
             href="/lien-he"
             className="px-3 py-2 text-sm xl:text-base font-semibold text-slate-800 hover:text-[#f57020] transition-colors block"
           >
-            Thanh toán & hỗ trợ
+            Liên hệ
           </Link>
         </nav>
 
@@ -319,7 +319,7 @@ export default function HeaderNav() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="font-bold text-sm text-slate-900 block py-1"
               >
-                Thanh toán & Hướng dẫn
+                Liên hệ
               </Link>
             </div>
           </div>

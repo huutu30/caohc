@@ -6,6 +6,62 @@ import { useRegister } from "@/context/RegisterContext";
 import { useRegion, PROVINCES } from "@/context/RegionContext";
 import { FPT_PACKAGES } from "@/data/fptPackages";
 
+// DANH SÁCH GÓI SECTION 1 COMBO THỂ THAO V.VIP
+const SECTION_1_DROPDOWN_PACKAGES = [
+  {
+    id: "combo-giga-vvip",
+    name: "Combo Giga - V.VIP",
+    speed: "300 Mbps",
+    price: { hcm: 220000, tinh: 220000 },
+  },
+  {
+    id: "combo-sky-vvip",
+    name: "Combo Sky - V.VIP",
+    speed: "1 Gbps",
+    price: { hcm: 269000, tinh: 239000 },
+  },
+  {
+    id: "combo-meta-vvip",
+    name: "Combo Meta - V.VIP",
+    speed: "1 Gbps",
+    price: { hcm: 369000, tinh: 339000 },
+  },
+  {
+    id: "combo-speedx1-vvip",
+    name: "Combo Speedx1 - V.VIP",
+    speed: "1 Gbps (Wi-Fi 7)",
+    price: 369000,
+  },
+  {
+    id: "combo-lux500-vvip",
+    name: "Combo Lux 500 - V.VIP",
+    speed: "500 Mbps",
+    price: 830000,
+  },
+  {
+    id: "combo-lux800-vvip",
+    name: "Combo Lux 800 - V.VIP",
+    speed: "800 Mbps",
+    price: 1030000,
+  },
+];
+
+// GÓI FPT PLAY
+const FPT_PLAY_DROPDOWN_PACKAGES = [
+  {
+    id: "vvip1",
+    name: "Gói V.VIP 1 (FPT Play)",
+    speed: "1 Thiết bị NHA",
+    price: 130000,
+  },
+  {
+    id: "vvip2",
+    name: "Gói V.VIP 2 (FPT Play)",
+    speed: "2 Thiết bị NHA",
+    price: 160000,
+  },
+];
+
 export default function RegisterModal() {
   const { isRegisterModalOpen, closeRegisterModal, selectedPackage } = useRegister();
   const { activeProvince, getPrice } = useRegion();
@@ -15,7 +71,7 @@ export default function RegisterModal() {
   const [address, setAddress] = useState("");
   const [provinceId, setProvinceId] = useState(activeProvince.id);
   const [billingCycle, setBillingCycle] = useState<"1M" | "6M" | "12M">("6M");
-  const [chosenPkgId, setChosenPkgId] = useState(selectedPackage?.id || "sky");
+  const [chosenPkgId, setChosenPkgId] = useState(selectedPackage?.id || "combo-sky-vvip");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -31,15 +87,24 @@ export default function RegisterModal() {
 
   if (!isRegisterModalOpen) return null;
 
-  const currentPkg = FPT_PACKAGES.find((p) => p.id === chosenPkgId) || FPT_PACKAGES[1];
-  const selectedPrice = selectedPackage
-    ? "price" in selectedPackage
-      ? typeof selectedPackage.price === "number"
-        ? selectedPackage.price
-        : selectedPackage.price?.tinh || 0
-      : selectedPackage.priceNgoaiThanh
-    : 0;
-  const rawPrice = selectedPrice || getPrice(currentPkg) || (typeof currentPkg.price === "number" ? currentPkg.price : currentPkg.price?.tinh || 0);
+  // TỔNG HỢP TOÀN BỘ GÓI CƯỚC ĐỂ TÍNH GIÁ CHUẨN XÁC
+  const allAvailablePackages = [
+    ...SECTION_1_DROPDOWN_PACKAGES,
+    ...FPT_PACKAGES.map((p) => ({
+      id: p.id,
+      name: p.name,
+      speed: p.downloadSpeed,
+      price: p.price,
+    })),
+    ...FPT_PLAY_DROPDOWN_PACKAGES,
+  ];
+
+  const currentPkg =
+    allAvailablePackages.find((p) => p.id === chosenPkgId) ||
+    allAvailablePackages[0];
+
+  // Tính giá cước theo tỉnh/vùng miền
+  const rawPrice = getPrice(currentPkg);
   const pkgPrice: number = typeof rawPrice === "number" ? rawPrice : 0;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -63,9 +128,9 @@ export default function RegisterModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100 animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* MODAL HEADER */}
@@ -122,13 +187,29 @@ export default function RegisterModal() {
                 <select
                   value={chosenPkgId}
                   onChange={(e) => setChosenPkgId(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 text-sm font-bold text-slate-900 rounded-xl px-3.5 py-2.5 outline-none focus:border-[#004a9c] focus:bg-white transition-all"
+                  className="w-full bg-slate-50 border border-slate-300 text-sm font-bold text-slate-900 rounded-xl px-3.5 py-2.5 outline-none focus:border-[#004a9c] focus:bg-white transition-all cursor-pointer"
                 >
-                  {FPT_PACKAGES.map((pkg) => (
-                    <option key={pkg.id} value={pkg.id}>
-                      {pkg.name} - {pkg.downloadSpeed} ({(getPrice(pkg) || pkg.price).toLocaleString("vi-VN")} đ/tháng)
-                    </option>
-                  ))}
+                  <optgroup label="⭐ COMBO THỂ THAO V.VIP (NGOẠI HẠNG ANH)">
+                    {SECTION_1_DROPDOWN_PACKAGES.map((pkg) => (
+                      <option key={pkg.id} value={pkg.id}>
+                        {pkg.name} - {pkg.speed} ({(getPrice(pkg) || (typeof pkg.price === "number" ? pkg.price : pkg.price.tinh)).toLocaleString("vi-VN")} đ/tháng)
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="🌐 GÓI INTERNET CÁ NHÂN & WI-FI 6 / WI-FI 7">
+                    {FPT_PACKAGES.map((pkg) => (
+                      <option key={pkg.id} value={pkg.id}>
+                        {pkg.name} - {pkg.downloadSpeed} ({(getPrice(pkg) || (typeof pkg.price === "number" ? pkg.price : pkg.price.tinh)).toLocaleString("vi-VN")} đ/tháng)
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="⚽ TRUYỀN HÌNH FPT PLAY V.VIP">
+                    {FPT_PLAY_DROPDOWN_PACKAGES.map((pkg) => (
+                      <option key={pkg.id} value={pkg.id}>
+                        {pkg.name} - {pkg.speed} ({(getPrice(pkg) || pkg.price).toLocaleString("vi-VN")} đ/tháng)
+                      </option>
+                    ))}
+                  </optgroup>
                 </select>
               </div>
 
@@ -141,7 +222,7 @@ export default function RegisterModal() {
                   <button
                     type="button"
                     onClick={() => setBillingCycle("1M")}
-                    className={`py-2 px-2 text-xs font-bold rounded-xl border transition-all text-center ${
+                    className={`py-2 px-2 text-xs font-bold rounded-xl border transition-all text-center cursor-pointer ${
                       billingCycle === "1M"
                         ? "border-[#004a9c] bg-blue-50 text-[#004a9c]"
                         : "border-slate-200 text-slate-600 hover:border-slate-300"
@@ -152,29 +233,26 @@ export default function RegisterModal() {
                   <button
                     type="button"
                     onClick={() => setBillingCycle("6M")}
-                    className={`relative py-2 px-2 text-xs font-bold rounded-xl border transition-all text-center ${
+                    className={`relative py-2.5 px-2 text-xs font-bold rounded-xl border transition-all text-center cursor-pointer ${
                       billingCycle === "6M"
                         ? "border-[#f57020] bg-orange-50 text-[#f57020]"
                         : "border-slate-200 text-slate-600 hover:border-slate-300"
                     }`}
                   >
                     <span>Đóng 6 tháng</span>
-                    <span className="block text-[10px] text-emerald-600 font-extrabold">
-                      +1 Tháng
-                    </span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setBillingCycle("12M")}
-                    className={`relative py-2 px-2 text-xs font-bold rounded-xl border transition-all text-center ${
+                    className={`relative py-2 px-2 text-xs font-bold rounded-xl border transition-all text-center cursor-pointer ${
                       billingCycle === "12M"
                         ? "border-[#f57020] bg-orange-50 text-[#f57020]"
                         : "border-slate-200 text-slate-600 hover:border-slate-300"
                     }`}
                   >
                     <span>Đóng 12 tháng</span>
-                    <span className="block text-[10px] text-red-500 font-extrabold">
-                      +2 Tháng
+                    <span className="block text-[10px] text-emerald-600 font-extrabold">
+                      +1 Tháng
                     </span>
                   </button>
                 </div>

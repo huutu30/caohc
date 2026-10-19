@@ -384,7 +384,6 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
                     }`}
                   >
                     <span>6 Tháng</span>
-                    <span className="block text-[10px] text-emerald-600 font-extrabold">+1 Tháng</span>
                   </button>
                   <button
                     type="button"
@@ -396,7 +395,7 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
                     }`}
                   >
                     <span>12 Tháng</span>
-                    <span className="block text-[10px] text-emerald-600 font-extrabold">+2 Tháng</span>
+                    <span className="block text-[10px] text-emerald-600 font-extrabold">+1 Tháng</span>
                   </button>
                 </div>
               </div>
@@ -415,10 +414,10 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
                   <span className="text-slate-500">Ưu đãi kèm theo:</span>
                   <span className="font-bold text-emerald-600">
                     {billingCycle === "1M"
-                      ? "Modem Wi-Fi 6"
+                      ? "Trang bị Modem Wi-Fi 6"
                       : billingCycle === "6M"
-                      ? "Tặng 01 tháng cước + Modem"
-                      : "Tặng 02 tháng cước + Quà FPT"}
+                      ? "Trang bị Modem Wi-Fi 6 miễn phí"
+                      : "Tặng 01 tháng cước + Quà FPT"}
                   </span>
                 </div>
                 <div className="pt-2 border-t border-slate-200 flex items-baseline justify-between">

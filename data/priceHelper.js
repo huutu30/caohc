@@ -2,7 +2,6 @@ import { PROVINCE_PRICES } from './provincePrices.js';
 
 /**
  * Lấy giá sản phẩm theo tỉnh/thành đang được chọn.
- * Sao chép chuẩn 100% logic từ dự án fptwebsite.
  *
  * Logic:
  * 1. Nếu item.price là số (camera, V.VIP, premium...) → dùng luôn, giá cố định toàn quốc

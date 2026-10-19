@@ -42,96 +42,94 @@ export default function FptPlayBannerSlider() {
         FPT Play - Gói xem truyền hình, giải trí, thể thao đa phương tiện
       </h2>
 
-      <div className="flex flex-col lg:flex-row items-stretch gap-6 p-4 sm:p-6 pt-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch p-4 sm:p-6 pt-6">
         {/* LEFT POSTER BANNER */}
-        <div className="w-full lg:w-[320px] shrink-0 flex flex-col">
+        <div className="flex flex-col h-full">
           <Link
             href="/ngoai-hang-anh"
-            className="relative aspect-[318/421] w-full rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group block flex-1 bg-slate-900"
+            className="relative w-full h-full min-h-[380px] sm:min-h-[460px] rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group block flex-1 bg-slate-900"
           >
             <Image
               src="/images/fpt_play_only_banner.jpg"
               alt="Đã mê Ngoại Hạng phải chọn FPT"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
-              sizes="(max-width: 1024px) 100vw, 320px"
+              sizes="(max-width: 1024px) 100vw, 420px"
               priority
             />
           </Link>
         </div>
 
-        {/* RIGHT 2 PACKAGE CARDS MATCHING FPT.VN */}
-        <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch">
-          {packages.map((pkg) => (
-            <div
-              key={pkg.id}
-              className="rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-lg transition-all flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
-            >
-              {/* TOP BANNER IMAGE (OFFICIAL VVIP1 / VVIP2 FROM FPT.VN) */}
-              <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-900">
-                <Image
-                  src={pkg.image}
-                  alt={pkg.name}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 640px) 100vw, 450px"
-                />
-              </div>
+        {/* 2 PACKAGE CARDS MATCHING FPT.VN */}
+        {packages.map((pkg) => (
+          <div
+            key={pkg.id}
+            className="rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-lg transition-all flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
+          >
+            {/* TOP BANNER IMAGE (OFFICIAL VVIP1 / VVIP2 FROM FPT.VN) */}
+            <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900">
+              <Image
+                src={pkg.image}
+                alt={pkg.name}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 640px) 100vw, 420px"
+              />
+            </div>
 
-              {/* CARD BODY */}
-              <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
-                <div>
-                  <h4 className="text-xl font-bold text-slate-900 group-hover:text-[#2f54eb] transition-colors">
-                    {pkg.name}
-                  </h4>
+            {/* CARD BODY */}
+            <div className="p-4 sm:p-5 flex flex-col flex-grow justify-between">
+              <div>
+                <h4 className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-[#2f54eb] transition-colors">
+                  {pkg.name}
+                </h4>
 
-                  <div className="mt-2 flex items-baseline gap-1">
-                    <span className="text-2xl sm:text-3xl font-bold text-[#2f54eb]">
-                      {pkg.price.toLocaleString("vi-VN")}đ
-                    </span>
-                    <span className="text-xs text-slate-500 font-medium">/tháng</span>
-                  </div>
-
-                  <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
-                    <span>(Đã bao gồm VAT)</span>
-                    <Info className="size-3.5 text-slate-400" />
-                  </p>
-
-                  <ul className="mt-4 space-y-2.5 text-xs text-slate-600">
-                    {pkg.features.map((feat, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <Check className="size-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
-                        <span className="leading-snug">{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div className="mt-1.5 flex items-baseline gap-1">
+                  <span className="text-2xl sm:text-3xl font-bold text-[#2f54eb]">
+                    {pkg.price.toLocaleString("vi-VN")}đ
+                  </span>
+                  <span className="text-xs text-slate-500 font-medium">/tháng</span>
                 </div>
 
-                <button
-                  onClick={() =>
-                    openRegisterModal({
-                      id: pkg.id,
-                      name: pkg.name,
-                      price: pkg.price,
-                      category: "giai_tri",
-                      categoryName: "FPT Play V.VIP",
-                      downloadSpeed: "Đa nền tảng",
-                      uploadSpeed: "Đa nền tảng",
-                      image: pkg.image,
-                      modem: "Tài khoản FPT Play bản quyền",
-                      recommendedDevices: "1 - 2 thiết bị",
-                      features: pkg.features,
-                      description: pkg.description,
-                    })
-                  }
-                  className="mt-6 w-full bg-[#2f54eb] hover:bg-[#1d39c4] text-white py-2.5 rounded-xl font-bold text-sm shadow-sm transition-all active:scale-95 cursor-pointer"
-                >
-                  Mua ngay
-                </button>
+                <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                  <span>(Đã bao gồm VAT)</span>
+                  <Info className="size-3.5 text-slate-400" />
+                </p>
+
+                <ul className="mt-3.5 space-y-2 text-xs text-slate-600">
+                  {pkg.features.map((feat, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <Check className="size-4 text-emerald-600 shrink-0 mt-0.5 stroke-[2.5]" />
+                      <span className="leading-snug">{feat}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
+
+              <button
+                onClick={() =>
+                  openRegisterModal({
+                    id: pkg.id,
+                    name: pkg.name,
+                    price: pkg.price,
+                    category: "giai_tri",
+                    categoryName: "FPT Play V.VIP",
+                    downloadSpeed: "Đa nền tảng",
+                    uploadSpeed: "Đa nền tảng",
+                    image: pkg.image,
+                    modem: "Tài khoản FPT Play bản quyền",
+                    recommendedDevices: "1 - 2 thiết bị",
+                    features: pkg.features,
+                    description: pkg.description,
+                  })
+                }
+                className="mt-5 w-full bg-[#2f54eb] hover:bg-[#1d39c4] text-white py-2.5 rounded-xl font-bold text-sm shadow-sm transition-all active:scale-95 cursor-pointer"
+              >
+                Mua ngay
+              </button>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
       {/* VIEW ALL LINK */}
