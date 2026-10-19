@@ -62,12 +62,12 @@ export default function GiaDinhVvipSection() {
 
         {/* Product Cards Grid using standard FptProductCard */}
         <div
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ${
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch ${
             combos.length === 4 ? "xl:grid-cols-4 max-w-6xl mx-auto" : "xl:grid-cols-5"
           }`}
         >
           {cardItems.map((item) => (
-            <FptProductCard key={item.id} item={item} />
+            <FptProductCard key={item.id} item={item} className="h-full" />
           ))}
         </div>
       </div>

@@ -25,11 +25,11 @@ export default function AccessPointCatalogSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           {ACCESS_POINT_PRODUCTS.map((prod: AccessPointProduct) => (
             <div
               key={prod.id}
-              className={`rounded-3xl border p-6 flex flex-col justify-between transition-all duration-300 ${
+              className={`rounded-3xl border p-6 flex flex-col justify-between h-full transition-all duration-300 ${
                 prod.highlight
                   ? "border-orange-500 shadow-xl ring-2 ring-orange-500/10 bg-white"
                   : "border-slate-200 shadow-sm hover:shadow-lg bg-white"

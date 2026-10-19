@@ -94,24 +94,6 @@ export default function HeaderNav() {
           badge: "Nổi bật",
           icon: Flame,
         },
-        {
-          name: "Combo Internet truyền hình",
-          href: "/truyen-hinh-fpt-play",
-          desc: "Trọn bộ Internet Wi-Fi 6 + FPT Play Box 4K Voice",
-          icon: Tv,
-        },
-        {
-          name: "Nâng cấp Combo",
-          href: "/goi-cuoc/combo",
-          desc: "Thêm truyền hình vào đường truyền Internet sẵn có",
-          icon: Zap,
-        },
-        {
-          name: "Smart Tivi",
-          href: "/thiet-bi/fpt-play-box",
-          desc: "Đầu thu FPT Play Box 4K điều khiển bằng giọng nói",
-          icon: Smartphone,
-        },
       ],
     },
     {
@@ -126,16 +108,10 @@ export default function HeaderNav() {
           icon: Camera,
         },
         {
-          name: "Smart Home FPT",
-          href: "/#kham-pha-fpt",
-          desc: "Hệ sinh thái nhà thông minh điều khiển tự động qua App",
-          icon: Shield,
-        },
-        {
-          name: "Dịch vụ số F-Safe & Ultra Fast",
-          href: "/lien-he",
-          desc: "Bảo vệ mạng Internet gia đình và tối ưu đường truyền",
-          icon: Zap,
+          name: "Thiết bị Access Point",
+          href: "/thiet-bi-thong-minh/access-point",
+          desc: "Mở rộng vùng phủ sóng Wi-Fi 6 AX3000 liền mạch không góc chết",
+          icon: Wifi,
         },
       ],
     },
@@ -281,28 +257,12 @@ export default function HeaderNav() {
             )}
           </div>
 
-          {/* 3. ĐẶC QUYỀN HỘI VIÊN */}
-          <Link
-            href="/#dac-quyen"
-            className="px-3 py-2 text-sm xl:text-base font-semibold text-slate-800 hover:text-[#f57020] transition-colors block"
-          >
-            Đặc quyền hội viên
-          </Link>
-
-          {/* 4. THANH TOÁN & HỖ TRỢ */}
+          {/* 3. THANH TOÁN & HỖ TRỢ */}
           <Link
             href="/lien-he"
             className="px-3 py-2 text-sm xl:text-base font-semibold text-slate-800 hover:text-[#f57020] transition-colors block"
           >
             Thanh toán & hỗ trợ
-          </Link>
-
-          {/* 5. VỀ FPT TELECOM */}
-          <Link
-            href="/lien-he"
-            className="px-3 py-2 text-sm xl:text-base font-semibold text-slate-800 hover:text-[#f57020] transition-colors block"
-          >
-            Về FPT Telecom
           </Link>
         </nav>
 
@@ -365,15 +325,6 @@ export default function HeaderNav() {
                 className="font-bold text-sm text-slate-900 block py-1"
               >
                 Tin tức & Khuyến mại
-              </Link>
-            </div>
-            <div className="border-b border-slate-100 pb-2">
-              <Link
-                href="/#dac-quyen"
-                onClick={() => setMobileMenuOpen(false)}
-                className="font-bold text-sm text-slate-900 block py-1"
-              >
-                Đặc quyền hội viên
               </Link>
             </div>
             <div className="border-b border-slate-100 pb-2">

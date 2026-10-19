@@ -121,9 +121,9 @@ export default function ExploreProductsTabs() {
       </div>
 
       {/* PACKAGES GRID USING STANDARDIZED FPT PRODUCT CARDS */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 sm:p-6 pt-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 sm:p-6 pt-2 items-stretch">
         {cardItems.map((item) => (
-          <FptProductCard key={item.id} item={item} />
+          <FptProductCard key={item.id} item={item} className="h-full" />
         ))}
       </div>
 

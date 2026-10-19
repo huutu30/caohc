@@ -82,14 +82,14 @@ export default function DoanhNghiepPackagesSection() {
 
         {/* Packages Grid using standard FptProductCard */}
         <div
-          className={`grid gap-6 ${
+          className={`grid gap-6 items-stretch ${
             activeTab === "wifi6"
               ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
               : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto"
           }`}
         >
           {cardItems.map((item) => (
-            <FptProductCard key={item.id} item={item} />
+            <FptProductCard key={item.id} item={item} className="h-full" />
           ))}
         </div>
       </div>

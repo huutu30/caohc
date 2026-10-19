@@ -59,12 +59,12 @@ export default function CaNhanSportsSection() {
 
         {/* Cards Grid using standard FptProductCard */}
         <div
-          className={`grid gap-6 max-w-5xl mx-auto ${
+          className={`grid gap-6 max-w-5xl mx-auto items-stretch ${
             combos.length === 2 ? "grid-cols-1 md:grid-cols-2 max-w-3xl" : "grid-cols-1 md:grid-cols-3"
           }`}
         >
           {cardItems.map((item) => (
-            <FptProductCard key={item.id} item={item} />
+            <FptProductCard key={item.id} item={item} className="h-full" />
           ))}
         </div>
       </div>

@@ -43,9 +43,9 @@ export default function GiaDinhMeshSection() {
         </div>
 
         {/* 4 Cards Grid using standard FptProductCard */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {cardItems.map((item) => (
-            <FptProductCard key={item.id} item={item} />
+            <FptProductCard key={item.id} item={item} className="h-full" />
           ))}
         </div>
       </div>

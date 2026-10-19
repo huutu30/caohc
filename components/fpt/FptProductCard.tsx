@@ -51,7 +51,7 @@ export default function FptProductCard({ item, className = "" }: FptProductCardP
 
   return (
     <div
-      className={`group relative flex flex-col rounded-2xl bg-white border border-[#EAECF0] hover:border-[#004a9c]/50 transition-all duration-300 shadow-xs hover:shadow-xl hover:-translate-y-1 overflow-hidden ${
+      className={`group relative flex flex-col h-full rounded-2xl bg-white border border-[#EAECF0] hover:border-[#004a9c]/50 transition-all duration-300 shadow-xs hover:shadow-xl hover:-translate-y-1 overflow-hidden ${
         item.isPopular ? "ring-2 ring-[#004a9c]/70" : ""
       } ${className}`}
     >
@@ -73,7 +73,7 @@ export default function FptProductCard({ item, className = "" }: FptProductCardP
       {/* TOP IMAGE CONTAINER (16/11 ASPECT RATIO MATCHING FPT.VN) */}
       <Link
         href={detailHref}
-        className="block relative aspect-[16/11] w-full bg-[#F8F9FA] flex items-center justify-center p-3 overflow-hidden border-b border-[#EAECF0]/60 cursor-pointer"
+        className="block relative aspect-[16/11] w-full shrink-0 bg-[#F8F9FA] flex items-center justify-center p-3 overflow-hidden border-b border-[#EAECF0]/60 cursor-pointer"
         title={`Xem chi tiết ${item.name}`}
       >
         <Image
@@ -86,84 +86,86 @@ export default function FptProductCard({ item, className = "" }: FptProductCardP
       </Link>
 
       {/* BODY CONTENT */}
-      <div className="flex flex-1 flex-col p-4 md:p-5">
-        {/* TITLE */}
-        <div className="mb-2">
-          <Link href={detailHref} className="block group-hover:text-[#004a9c] transition-colors">
-            <h3 className="text-base md:text-lg font-bold text-[#101828] group-hover:text-[#004a9c] transition-colors line-clamp-1 leading-snug">
-              {item.name}
-            </h3>
-          </Link>
-        </div>
-
-        {/* PRICE BLOCK (BLUE COLOR LIKE FPT.VN WITH INFO TOOLTIP) */}
-        <div className="flex items-center gap-1.5 mb-3 relative">
-          <span className="text-xl md:text-2xl font-bold text-[#004a9c] tracking-tight">
-            {formattedPrice}đ
-          </span>
-          <span className="text-xs text-slate-500 font-medium self-end mb-0.5">
-            /tháng
-          </span>
-          
-          {/* Info Tooltip */}
-          <div 
-            className="relative inline-flex items-center self-end mb-1 cursor-pointer"
-            onMouseEnter={() => setShowTooltip(true)}
-            onMouseLeave={() => setShowTooltip(false)}
-            onClick={() => setShowTooltip(!showTooltip)}
-          >
-            <Info className="size-3.5 text-slate-400 hover:text-slate-600 transition-colors" />
-            {showTooltip && (
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 p-2 bg-slate-900 text-white text-[10px] rounded-lg shadow-xl z-30 pointer-events-none text-center leading-normal">
-                Mức giá đã bao gồm VAT và có thể thay đổi tùy thuộc theo từng khu vực tỉnh/thành.
-              </div>
-            )}
+      <div className="flex flex-1 flex-col p-4 md:p-5 justify-between">
+        <div>
+          {/* TITLE */}
+          <div className="mb-2 h-7 flex items-center">
+            <Link href={detailHref} className="block group-hover:text-[#004a9c] transition-colors w-full">
+              <h3 className="text-base md:text-lg font-bold text-[#101828] group-hover:text-[#004a9c] transition-colors line-clamp-1 leading-snug">
+                {item.name}
+              </h3>
+            </Link>
           </div>
-        </div>
 
-        {/* SPEED & GAUGE BOX (STANDARDIZED FPT.VN STYLE) */}
-        <div className="bg-[#F8F9FA] rounded-xl p-3 border border-slate-200/70 mb-3.5 flex items-center justify-between">
-          <div className="flex-1">
-            <span className="text-[11px] text-slate-500 font-medium block mb-1">
-              Tốc độ (Download/ Upload)
+          {/* PRICE BLOCK (BLUE COLOR LIKE FPT.VN WITH INFO TOOLTIP) */}
+          <div className="flex items-center gap-1.5 mb-3 h-8 relative">
+            <span className="text-xl md:text-2xl font-bold text-[#004a9c] tracking-tight">
+              {formattedPrice}đ
             </span>
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1 font-bold text-xs md:text-sm text-slate-800">
-                <ArrowDown className="size-3.5 text-slate-500 stroke-[2.5]" />
-                <span>{downloadSpeed}</span>
-              </div>
-              <div className="flex items-center gap-1 font-bold text-xs md:text-sm text-slate-800">
-                <ArrowUp className="size-3.5 text-slate-500 stroke-[2.5]" />
-                <span>{uploadSpeed}</span>
-              </div>
+            <span className="text-xs text-slate-500 font-medium self-end mb-1">
+              /tháng
+            </span>
+            
+            {/* Info Tooltip */}
+            <div 
+              className="relative inline-flex items-center self-end mb-1 cursor-pointer"
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+              onClick={() => setShowTooltip(!showTooltip)}
+            >
+              <Info className="size-3.5 text-slate-400 hover:text-slate-600 transition-colors" />
+              {showTooltip && (
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-56 p-2 bg-slate-900 text-white text-[10px] rounded-lg shadow-xl z-30 pointer-events-none text-center leading-normal">
+                  Mức giá đã bao gồm VAT và có thể thay đổi tùy thuộc theo từng khu vực tỉnh/thành.
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Speedometer Arc Gauge Icon */}
-          <div className="size-11 shrink-0 flex items-center justify-center">
-            <svg className="size-10 text-[#F26F21]" viewBox="0 0 48 36" fill="none">
-              <path d="M6 30 A 18 18 0 0 1 42 30" stroke="#E2E8F0" strokeWidth="4" strokeLinecap="round" />
-              <path d="M6 30 A 18 18 0 0 1 36 14" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-              <circle cx="24" cy="30" r="3" fill="#004a9c" />
-              <line x1="24" y1="30" x2="33" y2="18" stroke="#004a9c" strokeWidth="2.5" strokeLinecap="round" />
-            </svg>
-          </div>
-        </div>
-
-        {/* FEATURES CHECKLIST */}
-        <div className="space-y-2 mb-4 flex-1">
-          {item.features.slice(0, 3).map((feat, idx) => (
-            <div key={idx} className="flex items-start gap-2 text-xs text-slate-600">
-              <div className="size-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
-                <Check className="size-3" strokeWidth={3} />
+          {/* SPEED & GAUGE BOX (STANDARDIZED FPT.VN STYLE) */}
+          <div className="bg-[#F8F9FA] rounded-xl p-3 border border-slate-200/70 mb-3.5 flex items-center justify-between min-h-[72px] shrink-0">
+            <div className="flex-1">
+              <span className="text-[11px] text-slate-500 font-medium block mb-1">
+                Tốc độ (Download/ Upload)
+              </span>
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1 font-bold text-xs md:text-sm text-slate-800">
+                  <ArrowDown className="size-3.5 text-slate-500 stroke-[2.5]" />
+                  <span>{downloadSpeed}</span>
+                </div>
+                <div className="flex items-center gap-1 font-bold text-xs md:text-sm text-slate-800">
+                  <ArrowUp className="size-3.5 text-slate-500 stroke-[2.5]" />
+                  <span>{uploadSpeed}</span>
+                </div>
               </div>
-              <span className="leading-snug line-clamp-2">{feat}</span>
             </div>
-          ))}
+
+            {/* Speedometer Arc Gauge Icon */}
+            <div className="size-11 shrink-0 flex items-center justify-center">
+              <svg className="size-10 text-[#F26F21]" viewBox="0 0 48 36" fill="none">
+                <path d="M6 30 A 18 18 0 0 1 42 30" stroke="#E2E8F0" strokeWidth="4" strokeLinecap="round" />
+                <path d="M6 30 A 18 18 0 0 1 36 14" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                <circle cx="24" cy="30" r="3" fill="#004a9c" />
+                <line x1="24" y1="30" x2="33" y2="18" stroke="#004a9c" strokeWidth="2.5" strokeLinecap="round" />
+              </svg>
+            </div>
+          </div>
+
+          {/* FEATURES CHECKLIST */}
+          <div className="space-y-2 mb-4 flex-1 flex flex-col justify-start min-h-[114px]">
+            {item.features.slice(0, 3).map((feat, idx) => (
+              <div key={idx} className="flex items-start gap-2 text-xs text-slate-600 min-h-[34px]">
+                <div className="size-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="size-3" strokeWidth={3} />
+                </div>
+                <span className="leading-snug line-clamp-2">{feat}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* ACTION BUTTONS (BLUE PRIMARY BUTTON MATCHING FPT.VN) */}
-        <div className="space-y-2 mt-auto">
+        <div className="space-y-2 mt-auto shrink-0 pt-2">
           {/* PRIMARY BUTTON: ĐĂNG KÝ NGAY */}
           <button
             onClick={() =>
