@@ -1,0 +1,146 @@
+"use client";
+
+import React from "react";
+import { Wifi, Check, ArrowDown, ArrowUp, Zap, Shield } from "lucide-react";
+import { CA_NHAN_PACKAGES, CaNhanPackage } from "@/data/caNhanData";
+import { useRegisterModal } from "@/context/RegisterContext";
+
+export default function CaNhanPackagesSection() {
+  const { openModal } = useRegisterModal();
+
+  const handleRegister = (pkg: CaNhanPackage) => {
+    openModal({
+      id: pkg.id,
+      name: pkg.name,
+      price: pkg.price,
+      title: `Đăng ký ${pkg.name}`,
+      category: "internet_ca_nhan",
+    });
+  };
+
+  return (
+    <section className="py-12 md:py-20 bg-slate-50/70 border-b border-slate-200/80" id="goi-cuoc-ca-nhan">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold mb-3 border border-blue-200">
+            <Wifi className="w-3.5 h-3.5 text-blue-600" />
+            <span>Mạng Cáp Quang Wi-Fi 6 Đơn Lẻ</span>
+          </div>
+          <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Các gói cước Internet cá nhân FPT – Linh hoạt nhu cầu, dễ chọn theo mức sử dụng
+          </h2>
+          <p className="mt-2 text-sm md:text-base text-slate-600">
+            Trang bị miễn phí Modem Wi-Fi 6 thế hệ mới chuẩn AX, đường truyền tốc độ cao ổn định và mượt mà
+          </p>
+        </div>
+
+        {/* 4 Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {CA_NHAN_PACKAGES.map((pkg) => {
+            const isHighlight = pkg.highlight;
+            const isDiscounted = pkg.originalPrice && pkg.originalPrice > pkg.price;
+            return (
+              <div
+                key={pkg.id}
+                className={`relative rounded-2xl bg-white transition-all duration-300 flex flex-col justify-between overflow-hidden ${
+                  isHighlight
+                    ? "border-2 border-blue-600 shadow-xl shadow-blue-500/10 scale-102 lg:-translate-y-2 ring-2 ring-blue-600/20"
+                    : "border border-slate-200/90 shadow-sm hover:shadow-lg hover:-translate-y-1"
+                }`}
+              >
+                {/* Ribbon badge */}
+                {pkg.badge && (
+                  <div className={`py-1 px-3 text-center text-xs font-bold uppercase tracking-wider ${
+                    isHighlight
+                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white"
+                      : "bg-slate-100 text-slate-700 border-b border-slate-200"
+                  }`}>
+                    {pkg.badge}
+                  </div>
+                )}
+
+                <div className="p-6 flex-1 flex flex-col">
+                  {/* Title & Icon */}
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="text-lg font-bold text-slate-900 line-clamp-1">{pkg.name}</h3>
+                    <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                      <Zap className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Price */}
+                  <div className="mt-3 mb-5">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-3xl font-black text-blue-600">
+                        {pkg.price.toLocaleString("vi-VN")}đ
+                      </span>
+                      <span className="text-xs text-slate-500 font-medium">/tháng</span>
+                    </div>
+                    {isDiscounted && (
+                      <span className="text-xs text-slate-400 line-through">
+                        {pkg.originalPrice?.toLocaleString("vi-VN")}đ
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Speed Dial Box */}
+                  <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-100 mb-5">
+                    <div className="text-[11px] text-slate-500 mb-1 font-medium">Tốc độ (Download/Upload)</div>
+                    <div className="flex items-center justify-between text-xs font-bold text-slate-800">
+                      <div className="flex items-center gap-1 text-emerald-600">
+                        <ArrowDown className="w-3.5 h-3.5" />
+                        <span className="line-clamp-1">{pkg.speedDownload}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-blue-600">
+                        <ArrowUp className="w-3.5 h-3.5" />
+                        <span className="line-clamp-1">{pkg.speedUpload}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Devices & Features list */}
+                  <div className="space-y-2.5 text-xs text-slate-600 flex-1">
+                    <div className="font-semibold text-slate-800 text-[11px] uppercase tracking-wider">
+                      Trang bị modem:
+                    </div>
+                    {pkg.devices.map((dev, idx) => (
+                      <div key={idx} className="flex items-start gap-1.5 font-medium text-slate-800">
+                        <Shield className="w-3.5 h-3.5 text-blue-600 shrink-0 mt-0.5" />
+                        <span>{dev}</span>
+                      </div>
+                    ))}
+
+                    <div className="pt-3 border-t border-slate-100 space-y-2">
+                      {pkg.features.map((feat, idx) => (
+                        <div key={idx} className="flex items-start gap-1.5 text-slate-500">
+                          <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                          <span className="leading-relaxed">{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Register Button */}
+                <div className="p-6 pt-0">
+                  <button
+                    type="button"
+                    onClick={() => handleRegister(pkg)}
+                    className={`w-full py-2.5 px-4 rounded-xl text-xs md:text-sm font-bold transition-all ${
+                      isHighlight
+                        ? "bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-500/20 active:scale-95"
+                        : "bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 border border-slate-200"
+                    }`}
+                  >
+                    Đăng ký ngay
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
