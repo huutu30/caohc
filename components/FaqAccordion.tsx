@@ -1,0 +1,73 @@
+"use client";
+
+import * as React from "react";
+import { HelpCircle, Search } from "lucide-react";
+import { FAQS } from "@/lib/packages";
+import { AccordionItem } from "@/components/ui/accordion";
+
+export default function FaqAccordion() {
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [openId, setOpenId] = React.useState<string | null>(FAQS[0]?.id || null);
+
+  const filteredFaqs = FAQS.filter(
+    (faq) =>
+      faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <section id="cau-hoi-thuong-gap" className="py-16 sm:py-24 bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        {/* HEADER */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-brand-blue text-xs font-bold uppercase tracking-wider mb-3">
+            <HelpCircle className="h-4 w-4" />
+            <span>Giải Đáp Thắc Mắc</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+            Câu Hỏi Thường Gặp
+          </h2>
+          <p className="mt-2 text-slate-600 text-sm sm:text-base">
+            Mọi thông tin về thủ tục, thiết bị, gói cước và quy trình hòa mạng FPT Telecom
+          </p>
+
+          {/* SEARCH BOX */}
+          <div className="mt-6 max-w-md mx-auto relative">
+            <input
+              type="text"
+              placeholder="Tìm kiếm câu hỏi (VD: thủ tục, thanh toán, modem...)"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full h-12 rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-sm text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-blue shadow-sm transition-all"
+            />
+            <Search className="absolute left-4 top-3.5 h-5 w-5 text-slate-400" />
+          </div>
+        </div>
+
+        {/* ACCORDION LIST */}
+        <div className="rounded-3xl bg-slate-50/60 p-6 sm:p-8 border border-slate-200/80 shadow-card">
+          {filteredFaqs.length > 0 ? (
+            <div className="divide-y divide-slate-200">
+              {filteredFaqs.map((faq) => (
+                <AccordionItem
+                  key={faq.id}
+                  title={faq.question}
+                  isOpen={openId === faq.id}
+                  onToggle={() => setOpenId(openId === faq.id ? null : faq.id)}
+                >
+                  <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
+                    {faq.answer}
+                  </p>
+                </AccordionItem>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8 text-slate-500">
+              Không tìm thấy câu hỏi phù hợp với từ khóa &ldquo;{searchTerm}&rdquo;. Vui lòng gọi trực tiếp Hotline 1900 6600 để được giải đáp tức thì.
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
