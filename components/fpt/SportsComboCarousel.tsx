@@ -8,6 +8,7 @@ import FptProductCard, { FptProductCardItem } from "@/components/fpt/FptProductC
 // =========================================================================
 // 6 GÓI COMBO THỂ THAO CHÍNH THỨC TRÊN SECTION 1 CỦA FPT.VN
 // ORDER: GIGA -> SKY -> META -> SPEEDX1 -> LUX 500 -> LUX 800
+// GIÁ CƯỚC TỰ ĐỘNG LỌC THEO TỈNH THÀNH (HCM NỘI THÀNH, NGOẠI THÀNH, TOÀN QUỐC, TỈNH)
 // =========================================================================
 const SECTION_1_COMBOS: FptProductCardItem[] = [
   {
@@ -16,7 +17,7 @@ const SECTION_1_COMBOS: FptProductCardItem[] = [
     badge: "BÁN CHẠY NHẤT",
     isPopular: true,
     image: "/images/giga-vvip.webp",
-    price: 220000,
+    price: { hcm: 240000, tinh: 220000 },
     speed: "300 Mbps",
     uploadSpeed: "300 Mbps",
     equipment: "Modem Wi-Fi 6 AX1800",
@@ -35,7 +36,7 @@ const SECTION_1_COMBOS: FptProductCardItem[] = [
     badge: "XEM NHIỀU NHẤT",
     isPopular: true,
     image: "/images/sky-vvip.webp",
-    price: 239000,
+    price: { hcm: 269000, tinh: 239000 },
     speed: "1 Gbps",
     uploadSpeed: "300 Mbps",
     equipment: "Modem Wi-Fi 6 Chuẩn AX",
@@ -53,7 +54,7 @@ const SECTION_1_COMBOS: FptProductCardItem[] = [
     name: "Combo Meta - V.VIP",
     badge: "1GBPS ĐỐI XỨNG",
     image: "/images/meta-vvip.webp",
-    price: 339000,
+    price: { hcm: 369000, tinh: 339000 },
     speed: "1 Gbps",
     uploadSpeed: "1 Gbps",
     equipment: "Modem Wi-Fi 6 AX3000",
@@ -89,7 +90,7 @@ const SECTION_1_COMBOS: FptProductCardItem[] = [
     name: "Combo Lux 500 - V.VIP",
     badge: "QUÁN CAFE / NHÀ HÀNG",
     image: "/images/lux500-vvip.webp",
-    price: 830000,
+    price: { hcm: 885000, tinh: 830000 },
     speed: "500 Mbps",
     uploadSpeed: "500 Mbps",
     equipment: "Router Wi-Fi 6 Doanh Nghiệp",
@@ -107,7 +108,7 @@ const SECTION_1_COMBOS: FptProductCardItem[] = [
     name: "Combo Lux 800 - V.VIP",
     badge: "DOANH NGHIỆP VVIP",
     image: "/images/lux800-vvip.webp",
-    price: 1030000,
+    price: { hcm: 1085000, tinh: 1030000 },
     speed: "800 Mbps",
     uploadSpeed: "800 Mbps",
     equipment: "Router Wi-Fi 6 Doanh Nghiệp",
