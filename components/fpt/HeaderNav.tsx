@@ -148,7 +148,7 @@ export default function HeaderNav() {
   ];
 
   return (
-    <header className="sticky top-0 right-0 left-0 z-40 bg-white border-b border-gray-200 shadow-xs">
+    <div className="w-full bg-white border-b border-gray-200 shadow-xs">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between px-4 sm:px-8 py-3.5">
         {/* LOGO FPT TELECOM */}
         <Link href="/" className="flex items-center shrink-0">
@@ -399,7 +399,7 @@ export default function HeaderNav() {
           </button>
         </div>
       )}
-    </header>
+    </div>
   );
 }
 

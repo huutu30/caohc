@@ -8,8 +8,10 @@ import AnnouncementBar from "@/components/fpt/AnnouncementBar";
 export default function Navbar() {
   return (
     <>
-      <TopBar />
-      <HeaderNav />
+      <header className="sticky top-0 z-50 w-full shadow-xs">
+        <TopBar />
+        <HeaderNav />
+      </header>
       <AnnouncementBar />
     </>
   );

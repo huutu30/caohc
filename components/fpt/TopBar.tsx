@@ -5,8 +5,7 @@ import { MapPin, User, ChevronDown, Check, Building } from "lucide-react";
 import { useRegion, PROVINCES, Province } from "@/context/RegionContext";
 
 export default function TopBar() {
-  const { activeProvince, setActiveProvince, customerType, setCustomerType } =
-    useRegion();
+  const { activeProvince, setActiveProvince } = useRegion();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -56,32 +55,14 @@ export default function TopBar() {
   return (
     <div className="bg-[#0B1A3D] text-white text-xs border-b border-blue-950">
       <div className="max-w-[1440px] mx-auto flex items-center justify-between px-4 sm:px-8 py-2">
-        {/* LEFT: PHÂN ĐOÀN KHÁCH HÀNG */}
-        <div className="flex items-center gap-6">
-          <button
-            onClick={() => setCustomerType("personal")}
-            className={`text-sm leading-6 font-semibold transition-colors cursor-pointer ${
-              customerType === "personal"
-                ? "underline [text-underline-position:from-font] text-white"
-                : "opacity-80 hover:opacity-100 text-slate-200"
-            }`}
-          >
-            Khách hàng cá nhân
-          </button>
-          <button
-            onClick={() => setCustomerType("business")}
-            className={`text-sm leading-6 font-semibold transition-colors cursor-pointer ${
-              customerType === "business"
-                ? "underline [text-underline-position:from-font] text-white"
-                : "opacity-80 hover:opacity-100 text-slate-200"
-            }`}
-          >
-            Khách hàng doanh nghiệp
-          </button>
+        {/* LEFT: SLOGAN THÔNG TIN */}
+        <div className="hidden sm:flex items-center gap-2 text-xs text-slate-300 font-medium">
+          <span className="size-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+          <span>Website đăng ký dịch vụ trực tuyến chính hãng FPT Telecom</span>
         </div>
 
         {/* RIGHT: CHỌN VỊ TRÍ & ĐĂNG NHẬP / HOTLINE */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto">
           {/* LOCATION SELECTOR */}
           <div className="relative" ref={dropdownRef}>
             <button
