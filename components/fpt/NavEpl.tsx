@@ -2,27 +2,28 @@
 
 import React from "react";
 import Image from "next/image";
-import { useRegister } from "@/context/RegisterContext";
+
 
 export default function NavEpl() {
-  const { openRegisterModal } = useRegister();
+  const saleLink = "https://fpt.vn/sale/nguyenddb3";
 
   return (
     <div className="w-[1440px] max-w-[calc(100%-20px)] sm:max-w-[calc(100%-32px)] mx-auto -mt-3 sm:-mt-6 mb-5 sm:mb-8 relative z-30">
       <div className="flex flex-row justify-center items-stretch gap-2.5 sm:gap-6">
         {/* CARD 1: ĐĂNG KÝ NGAY - BẠN CHƯA CÓ INTERNET FPT */}
-        <button
-          onClick={() => openRegisterModal()}
+        <a
+          href={saleLink}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex-1 max-w-[480px] bg-white rounded-xl sm:rounded-2xl p-2.5 sm:py-6 sm:px-10 flex items-center sm:flex-col justify-center gap-2 sm:gap-2 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100 cursor-pointer group text-left sm:text-center active:scale-98"
         >
-          <div className="size-8 sm:size-14 relative shrink-0">
+          <div className="size-8 sm:size-14 relative shrink-0 flex items-center justify-center">
             <Image
-              src="/images/icon-wifi.gif"
-              alt="Đăng ký ngay"
+              src="/images/logo-fpt-icon.svg"
+              alt="Logo FPT - Đăng ký ngay"
               width={56}
               height={56}
-              className="object-contain size-full"
-              unoptimized
+              className="object-contain size-full group-hover:scale-105 transition-transform"
             />
           </div>
           <div className="min-w-0">
@@ -33,20 +34,22 @@ export default function NavEpl() {
               Bạn chưa có Internet FPT
             </span>
           </div>
-        </button>
+        </a>
 
         {/* CARD 2: NÂNG CẤP NGAY - BẠN ĐÃ CÓ INTERNET FPT */}
-        <button
-          onClick={() => openRegisterModal()}
+        <a
+          href={saleLink}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex-1 max-w-[480px] bg-white rounded-xl sm:rounded-2xl p-2.5 sm:py-6 sm:px-10 flex items-center sm:flex-col justify-center gap-2 sm:gap-2 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100 cursor-pointer group text-left sm:text-center active:scale-98"
         >
-          <div className="size-8 sm:size-14 relative shrink-0">
+          <div className="size-8 sm:size-14 relative shrink-0 flex items-center justify-center">
             <Image
               src="/images/icon-upgrade.svg"
               alt="Nâng cấp ngay"
               width={56}
               height={56}
-              className="object-contain size-full"
+              className="object-contain size-full group-hover:scale-105 transition-transform"
             />
           </div>
           <div className="min-w-0">
@@ -57,7 +60,7 @@ export default function NavEpl() {
               Bạn đã có Internet FPT
             </span>
           </div>
-        </button>
+        </a>
       </div>
     </div>
   );
