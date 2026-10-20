@@ -11,6 +11,7 @@ export default function TopBar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [mounted, setMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -41,16 +42,25 @@ export default function TopBar() {
 
   // Close desktop dropdown on outside click
   useEffect(() => {
-    const handleOutside = (e: MouseEvent) => {
+    const handleOutside = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as Node;
+      // Bỏ qua nếu chạm / click bên trong modal trên mobile (tránh làm mất sự kiện chọn tỉnh)
+      if (modalRef.current && modalRef.current.contains(target)) {
+        return;
+      }
       if (
         dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
+        !dropdownRef.current.contains(target)
       ) {
         setDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleOutside);
-    return () => document.removeEventListener("mousedown", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+    };
   }, []);
 
   // Lock body scroll gently when modal is open
@@ -77,11 +87,12 @@ export default function TopBar() {
           {filteredProvinces.map((prov) => (
             <button
               key={prov.id}
+              type="button"
               onClick={() => selectProvince(prov)}
               className={`w-full text-left px-3 py-2.5 text-xs sm:text-xs rounded-xl transition-colors flex items-center justify-between cursor-pointer ${
                 activeProvince.id === prov.id
                   ? "bg-blue-50 text-[#004a9c] font-bold"
-                  : "hover:bg-slate-50 text-slate-700"
+                  : "hover:bg-slate-50 text-slate-700 active:bg-blue-50"
               }`}
             >
               <span>{prov.name}</span>
@@ -105,11 +116,12 @@ export default function TopBar() {
         {toanQuocProv && (
           <div className="border-b border-slate-100 pb-1.5">
             <button
+              type="button"
               onClick={() => selectProvince(toanQuocProv)}
               className={`w-full text-left px-3 py-2 text-xs rounded-xl transition-colors flex items-center justify-between cursor-pointer ${
                 activeProvince.id === toanQuocProv.id
                   ? "bg-blue-50 text-[#004a9c] font-bold"
-                  : "hover:bg-slate-50 text-slate-800 font-semibold"
+                  : "hover:bg-slate-50 text-slate-800 font-semibold active:bg-blue-50"
               }`}
             >
               <span className="flex items-center gap-1.5">
@@ -133,11 +145,12 @@ export default function TopBar() {
             {hcmProvinces.map((prov) => (
               <button
                 key={prov.id}
+                type="button"
                 onClick={() => selectProvince(prov)}
                 className={`text-left px-2.5 py-2 text-xs rounded-xl border transition-all cursor-pointer ${
                   activeProvince.id === prov.id
                     ? "border-[#004a9c] bg-blue-50 text-[#004a9c] font-bold shadow-xs"
-                    : "border-slate-100 bg-white hover:border-slate-200 text-slate-700"
+                    : "border-slate-100 bg-white hover:border-slate-200 text-slate-700 active:bg-blue-50"
                 }`}
               >
                 <div className="font-semibold">
@@ -159,11 +172,12 @@ export default function TopBar() {
             {hanoiiProvinces.map((prov) => (
               <button
                 key={prov.id}
+                type="button"
                 onClick={() => selectProvince(prov)}
                 className={`text-left px-2.5 py-2 text-xs rounded-xl border transition-all cursor-pointer ${
                   activeProvince.id === prov.id
                     ? "border-[#004a9c] bg-blue-50 text-[#004a9c] font-bold shadow-xs"
-                    : "border-slate-100 bg-white hover:border-slate-200 text-slate-700"
+                    : "border-slate-100 bg-white hover:border-slate-200 text-slate-700 active:bg-blue-50"
                 }`}
               >
                 <div className="font-semibold">
@@ -184,11 +198,12 @@ export default function TopBar() {
             {otherProvinces.map((prov) => (
               <button
                 key={prov.id}
+                type="button"
                 onClick={() => selectProvince(prov)}
                 className={`w-full text-left px-3 py-2 text-xs rounded-xl transition-colors flex items-center justify-between cursor-pointer ${
                   activeProvince.id === prov.id
                     ? "bg-blue-50 text-[#004a9c] font-bold"
-                    : "hover:bg-slate-50 text-slate-700"
+                    : "hover:bg-slate-50 text-slate-700 active:bg-blue-50"
                 }`}
               >
                 <span>{prov.name}</span>
@@ -217,8 +232,9 @@ export default function TopBar() {
           {/* LOCATION SELECTOR TRIGGER */}
           <div className="relative" ref={dropdownRef}>
             <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1.5 hover:opacity-90 transition-opacity cursor-pointer text-slate-200 hover:text-white"
+              type="button"
+              onClick={() => setDropdownOpen((prev) => !prev)}
+              className="flex items-center gap-1.5 py-1 hover:opacity-90 transition-opacity cursor-pointer text-slate-200 hover:text-white"
               aria-label="Chọn vị trí xem giá"
             >
               <MapPin className="size-4 text-[#ef4444]" />
@@ -288,6 +304,7 @@ export default function TopBar() {
 
             {/* Modal Dialog Content Card */}
             <div
+              ref={modalRef}
               className="relative z-10 w-full max-w-[360px] max-h-[82vh] flex flex-col bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
@@ -302,6 +319,7 @@ export default function TopBar() {
                   </p>
                 </div>
                 <button
+                  type="button"
                   onClick={() => setDropdownOpen(false)}
                   className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
                   aria-label="Đóng chọn vị trí"
@@ -325,7 +343,10 @@ export default function TopBar() {
               </div>
 
               {/* Scrollable list */}
-              <div className="p-3 overflow-y-auto overscroll-contain flex-1 max-h-[52vh]">
+              <div
+                className="p-3 overflow-y-auto overscroll-contain flex-1 max-h-[52vh] touch-pan-y"
+                style={{ WebkitOverflowScrolling: "touch" }}
+              >
                 {renderListContent()}
               </div>
             </div>
