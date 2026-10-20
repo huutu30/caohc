@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import Providers from "@/components/Providers";
+import SopLiveChat from "@/components/common/SopLiveChat";
 
 const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin", "vietnamese"],
@@ -105,6 +106,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <FloatingContact />
           <Footer />
+          <SopLiveChat />
         </Providers>
       </body>
     </html>
