@@ -27,20 +27,19 @@ export default function FloatingContact() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="size-10 rounded-full bg-white text-slate-700 shadow-md border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:text-[#004a9c] transition-all cursor-pointer"
+          className="w-10 h-10 rounded-full bg-white text-slate-700 shadow-md border border-slate-200 flex items-center justify-center hover:bg-slate-50 hover:text-[#004a9c] transition-all cursor-pointer mb-1"
           aria-label="Cuộn lên đầu trang"
         >
-          <ArrowUp className="size-4" />
+          <ArrowUp className="w-4 h-4" />
         </button>
       )}
 
-
-      {/* NÚT ZALO CHAT */}
+      {/* NÚT ZALO CHAT - KÍCH THƯỚC CHUẨN 48px MOBILE, 56px DESKTOP */}
       <a
         href="https://zalo.me/0784930338"
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center justify-center size-12 sm:size-13 rounded-full bg-gradient-to-tr from-[#0055d4] via-[#0068ff] to-[#1a8cff] text-white shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 hover:scale-110 border-2 border-white cursor-pointer"
+        className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#0055d4] via-[#0068ff] to-[#1a8cff] text-white shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-white cursor-pointer"
         aria-label="Chat qua Zalo 0784 930 338"
       >
         {/* Tooltip on Desktop */}
@@ -49,20 +48,18 @@ export default function FloatingContact() {
         </span>
 
         {/* Zalo Text Icon */}
-        <div className="flex flex-col items-center justify-center">
-          <span className="font-black text-sm tracking-tighter leading-none select-none">
-            Zalo
-          </span>
-        </div>
+        <span className="font-black text-xs sm:text-sm tracking-tight leading-none select-none">
+          Zalo
+        </span>
 
         {/* Pulsing ring */}
-        <span className="absolute inset-0 rounded-full bg-[#0068FF] animate-ping opacity-30 pointer-events-none" />
+        <span className="absolute inset-0 rounded-full bg-[#0068FF] animate-ping opacity-25 pointer-events-none" />
       </a>
 
-      {/* NÚT GỌI HOTLINE */}
+      {/* NÚT GỌI HOTLINE - ĐỒNG BỘ CHÍNH XÁC 48px MOBILE, 56px DESKTOP */}
       <a
         href="tel:0784930338"
-        className="group relative flex items-center justify-center size-13 sm:size-14 rounded-full bg-gradient-to-tr from-[#e05408] via-[#f57020] to-[#ff8c38] text-white shadow-xl shadow-orange-500/40 hover:shadow-orange-500/60 transition-all duration-300 hover:scale-110 border-2 border-white cursor-pointer"
+        className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-[#e05408] via-[#f57020] to-[#ff8c38] text-white shadow-xl shadow-orange-500/40 hover:shadow-orange-500/60 transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-white cursor-pointer"
         aria-label="Gọi hotline tư vấn 0784 930 338"
       >
         {/* Tooltip on Desktop */}
@@ -71,7 +68,7 @@ export default function FloatingContact() {
         </span>
 
         {/* Phone Icon */}
-        <Phone className="size-6 text-white transition-transform group-hover:rotate-12 animate-pulse" />
+        <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-white transition-transform group-hover:rotate-12 animate-pulse" />
 
         {/* Dual Pulsing Wave Rings */}
         <span className="absolute -inset-1 rounded-full bg-[#f57020] animate-ping opacity-25 pointer-events-none" />
