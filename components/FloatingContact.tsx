@@ -1,8 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
-import { Phone, FileText, ArrowUp } from "lucide-react";
+import { Phone, ArrowUp } from "lucide-react";
 
 export default function FloatingContact() {
   const [showScrollTop, setShowScrollTop] = React.useState(false);
@@ -35,18 +34,6 @@ export default function FloatingContact() {
         </button>
       )}
 
-      {/* NÚT ĐĂNG KÝ NHANH */}
-      <Link
-        href="/dang-ky"
-        className="group flex items-center gap-2 bg-gradient-to-r from-[#004a9c] to-[#0068FF] text-white py-2 px-3.5 sm:py-2.5 sm:px-4 rounded-full shadow-lg shadow-blue-900/20 hover:shadow-xl transition-all duration-300 hover:scale-105 border border-white/20"
-      >
-        <span className="flex size-6 sm:size-7 rounded-full bg-white/20 items-center justify-center text-white">
-          <FileText className="size-3.5 sm:size-4" />
-        </span>
-        <span className="text-xs sm:text-sm font-bold tracking-tight pr-0.5">
-          Đăng Ký Nhanh
-        </span>
-      </Link>
 
       {/* NÚT ZALO CHAT */}
       <a
