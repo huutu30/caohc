@@ -6,7 +6,6 @@ import CameraProductSlider from "@/components/camera/CameraProductSlider";
 import CameraWhyChooseSection from "@/components/camera/CameraWhyChooseSection";
 import CameraAppSection from "@/components/camera/CameraAppSection";
 import CameraTechSection from "@/components/camera/CameraTechSection";
-import CameraCloudSection from "@/components/camera/CameraCloudSection";
 import CameraAwardsSection from "@/components/camera/CameraAwardsSection";
 import CameraFaqSection from "@/components/camera/CameraFaqSection";
 import CameraCtaBanner from "@/components/camera/CameraCtaBanner";
@@ -28,9 +27,6 @@ export default function CameraClient() {
 
       {/* 5. Công nghệ nổi bật */}
       <CameraTechSection />
-
-      {/* 6. Bảng gói dịch vụ lưu trữ đám mây FPT Cloud */}
-      <CameraCloudSection />
 
       {/* 7. Vinh danh Chất lượng và Công nghệ (8 Giải thưởng) */}
       <CameraAwardsSection />
