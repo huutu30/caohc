@@ -46,6 +46,21 @@ export default function TopBar() {
     return () => document.removeEventListener("mousedown", handleOutside);
   }, []);
 
+  // Khóa cứng cuộn trang khi mở popup chọn vị trí trên mobile
+  useEffect(() => {
+    if (dropdownOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    };
+  }, [dropdownOpen]);
+
   const selectProvince = (prov: Province) => {
     setActiveProvince(prov);
     setDropdownOpen(false);
@@ -85,12 +100,12 @@ export default function TopBar() {
               <>
                 {/* BACKDROP FOR MOBILE */}
                 <div
-                  className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 sm:hidden"
+                  className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 sm:hidden"
                   onClick={() => setDropdownOpen(false)}
                 />
 
-                <div className="fixed inset-x-3 sm:inset-auto top-12 sm:top-full sm:right-0 sm:mt-2 w-auto sm:w-80 max-h-[80vh] sm:max-h-[440px] overflow-y-auto bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 p-3 z-50 animate-in fade-in slide-in-from-top-1">
-                  <div className="px-2 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 flex items-center justify-between">
+                <div className="fixed inset-x-4 top-14 sm:inset-auto sm:top-full sm:right-0 sm:mt-2 w-auto sm:w-80 max-h-[78vh] sm:max-h-[440px] flex flex-col bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 p-3 z-50 animate-in fade-in zoom-in-95 sm:zoom-in-100 duration-150">
+                  <div className="px-2 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 flex items-center justify-between shrink-0">
                     <span>Xem giá cước theo khu vực</span>
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] text-blue-600 font-bold">63 Tỉnh Thành</span>
@@ -104,19 +119,18 @@ export default function TopBar() {
                     </div>
                   </div>
 
-                {/* SEARCH INPUT */}
-                <div className="p-1.5 border-b border-slate-100 my-1">
-                  <input
-                    type="text"
-                    placeholder="Tìm nhanh tỉnh, thành phố..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#004a9c] bg-slate-50"
-                    autoFocus
-                  />
-                </div>
+                  {/* SEARCH INPUT (16px text-base on mobile to completely prevent iOS Safari auto-zoom) */}
+                  <div className="p-1.5 border-b border-slate-100 my-1 shrink-0">
+                    <input
+                      type="text"
+                      placeholder="Tìm nhanh tỉnh, thành phố..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full px-3 py-2 text-base sm:text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#004a9c] bg-slate-50"
+                    />
+                  </div>
 
-                <div className="py-1 max-h-[300px] overflow-y-auto space-y-2">
+                  <div className="py-1 max-h-[300px] overflow-y-auto space-y-2 overscroll-contain flex-1">
                   {searchQuery ? (
                     // SEARCH RESULTS
                     <div>

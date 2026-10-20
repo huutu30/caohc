@@ -97,6 +97,21 @@ export default function RegisterModal() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Khóa cứng cuộn trang khi mở modal đăng ký
+  useEffect(() => {
+    if (isRegisterModalOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    };
+  }, [isRegisterModalOpen]);
+
   if (!isRegisterModalOpen) return null;
 
   // TỔNG HỢP TOÀN BỘ GÓI CƯỚC ĐỂ TÍNH GIÁ CHUẨN XÁC
