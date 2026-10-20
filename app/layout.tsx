@@ -59,6 +59,16 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
+      { url: "/images/fpt-favicon.png", sizes: "48x48", type: "image/png" },
+    ],
+    apple: [
+      { url: "/images/fpt-favicon.png", sizes: "48x48", type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico"],
+  },
 };
 
 export default function RootLayout({

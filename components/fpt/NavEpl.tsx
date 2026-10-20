@@ -19,11 +19,12 @@ export default function NavEpl() {
         >
           <div className="size-8 sm:size-14 relative shrink-0 flex items-center justify-center">
             <Image
-              src="/images/logo-fpt-icon.svg"
-              alt="Logo FPT - Đăng ký ngay"
+              src="/images/icon-wifi.gif"
+              alt="Đăng ký ngay"
               width={56}
               height={56}
               className="object-contain size-full group-hover:scale-105 transition-transform"
+              unoptimized
             />
           </div>
           <div className="min-w-0">
