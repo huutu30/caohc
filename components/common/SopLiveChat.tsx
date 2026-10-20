@@ -15,6 +15,28 @@ export default function SopLiveChat() {
       console.warn("SOP Widget: Không thể lưu sop_id vào localStorage", e);
     }
 
+    // Tự động chuẩn hóa browser_origin thành https://foxfpt.vn (bỏ www)
+    // vì backend SOP FPT chỉ cấp phép domain gốc https://foxfpt.vn
+    if (typeof XMLHttpRequest !== "undefined") {
+      const origSend = XMLHttpRequest.prototype.send;
+      XMLHttpRequest.prototype.send = function (body) {
+        if (typeof body === "string" && body.includes("www.foxfpt.vn")) {
+          body = body.replace(/https:\/\/www\.foxfpt\.vn/g, "https://foxfpt.vn");
+        }
+        return origSend.call(this, body);
+      };
+    }
+
+    if (typeof window.fetch !== "undefined") {
+      const origFetch = window.fetch;
+      window.fetch = function (resource, init) {
+        if (init && typeof init.body === "string" && init.body.includes("www.foxfpt.vn")) {
+          init.body = init.body.replace(/https:\/\/www\.foxfpt\.vn/g, "https://foxfpt.vn");
+        }
+        return origFetch.apply(this, [resource, init]);
+      };
+    }
+
     // 1. Nạp file CSS của SOP Livechat
     const cssId = "livechat-sop-css";
     if (!document.getElementById(cssId)) {
