@@ -143,40 +143,41 @@ export default function RegisterModal() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200"
+        className="relative w-full max-w-lg max-h-[92vh] flex flex-col bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-100 overflow-hidden animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* MODAL HEADER */}
-        <div className="bg-gradient-to-r from-[#004a9c] to-[#002f6c] p-6 text-white relative">
+        {/* MODAL HEADER - COMPACT & FIXED AT TOP */}
+        <div className="bg-gradient-to-r from-[#004a9c] to-[#002f6c] p-3.5 sm:p-5 text-white relative shrink-0">
           <button
             onClick={handleResetAndClose}
-            className="absolute top-4 right-4 p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+            className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 p-1.5 text-white/90 hover:text-white hover:bg-white/20 rounded-full transition-colors cursor-pointer z-20"
+            aria-label="Đóng cửa sổ"
           >
             <X className="h-5 w-5" />
           </button>
-          <div className="flex items-center space-x-2 text-amber-300 text-xs font-bold uppercase tracking-wider mb-1">
-            <Sparkles className="h-4 w-4" />
+          <div className="flex items-center space-x-1.5 text-amber-300 text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-0.5">
+            <Sparkles className="h-3.5 w-3.5" />
             <span>Tiếp Nhận Hòa Mạng Mới 24H</span>
           </div>
-          <h3 className="text-xl font-black text-white">
+          <h3 className="text-base sm:text-xl font-black text-white pr-8">
             Đăng Ký Trực Tuyến FPT Telecom
           </h3>
-          <p className="text-xs text-blue-100 mt-1">
+          <p className="text-[11px] sm:text-xs text-blue-100 mt-0.5 line-clamp-1">
             Chuyên viên tư vấn sẽ liên hệ ngay trong 5 - 15 phút để hoàn tất thủ tục
           </p>
         </div>
 
         {/* MODAL BODY */}
-        <div className="p-6">
+        <div className="p-3.5 sm:p-5 overflow-y-auto flex-1">
           {isSuccess ? (
-            <div className="text-center py-8 space-y-4">
-              <div className="h-16 w-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-                <CheckCircle2 className="h-10 w-10" />
+            <div className="text-center py-6 space-y-3">
+              <div className="h-14 w-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                <CheckCircle2 className="h-8 w-8" />
               </div>
-              <h4 className="text-2xl font-black text-slate-900">
+              <h4 className="text-xl font-black text-slate-900">
                 Đăng Ký Thành Công!
               </h4>
-              <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto leading-relaxed">
                 Cảm ơn Quý khách <span className="font-bold text-[#004a9c]">{fullName}</span>. 
                 Hệ thống FPT Telecom đã tiếp nhận thông tin gói cước{" "}
                 <span className="font-bold text-[#f57020]">{currentPkg.name}</span>.
@@ -185,27 +186,27 @@ export default function RegisterModal() {
               </p>
               <button
                 onClick={handleResetAndClose}
-                className="mt-4 px-6 py-2.5 rounded-full bg-[#004a9c] text-white font-bold text-sm hover:bg-[#003875] transition-colors"
+                className="mt-3 px-5 py-2 rounded-full bg-[#004a9c] text-white font-bold text-xs sm:text-sm hover:bg-[#003875] transition-colors cursor-pointer"
               >
                 Đóng thông báo
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* CHỌN GÓI CƯỚC - CUSTOM POPUP DROPDOWN (WIDTH 80% FORM, HEIGHT 70% FORM, SCROLLBAR) */}
+            <form onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-3">
+              {/* CHỌN GÓI CƯỚC - CUSTOM POPUP DROPDOWN */}
               <div className="relative" ref={dropdownRef}>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+                <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-1">
                   Gói cước đã chọn
                 </label>
                 <button
                   type="button"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-300 text-left text-sm font-bold text-slate-900 rounded-xl px-3.5 py-2.5 outline-none focus:border-[#004a9c] focus:bg-white transition-all flex items-center justify-between cursor-pointer"
+                  className="w-full bg-slate-50 hover:bg-slate-100/80 border border-slate-300 text-left text-xs sm:text-sm font-bold text-slate-900 rounded-xl px-3 py-2 outline-none focus:border-[#004a9c] focus:bg-white transition-all flex items-center justify-between cursor-pointer"
                 >
                   <div className="truncate pr-2">
                     <span className="text-slate-900">{currentPkg.name}</span>
-                    <span className="text-slate-500 font-normal text-xs ml-1.5">• {currentPkg.speed}</span>
-                    <span className="text-[#f57020] font-bold text-xs ml-1.5">
+                    <span className="text-slate-500 font-normal text-xs ml-1">• {currentPkg.speed}</span>
+                    <span className="text-[#f57020] font-bold text-xs ml-1">
                       ({pkgPrice.toLocaleString("vi-VN")} đ/tháng)
                     </span>
                   </div>
@@ -341,14 +342,14 @@ export default function RegisterModal() {
 
               {/* HÌNH THỨC THANH TOÁN / CHU KỲ */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">
+                <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-1">
                   Chu kỳ thanh toán ưu đãi
                 </label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                   <button
                     type="button"
                     onClick={() => setBillingCycle("1M")}
-                    className={`py-2 px-2 text-xs font-bold rounded-xl border transition-all text-center cursor-pointer ${
+                    className={`py-1.5 sm:py-2 px-1 text-[11px] sm:text-xs font-bold rounded-xl border transition-all text-center cursor-pointer ${
                       billingCycle === "1M"
                         ? "border-[#004a9c] bg-blue-50 text-[#004a9c]"
                         : "border-slate-200 text-slate-600 hover:border-slate-300"
@@ -359,7 +360,7 @@ export default function RegisterModal() {
                   <button
                     type="button"
                     onClick={() => setBillingCycle("6M")}
-                    className={`relative py-2.5 px-2 text-xs font-bold rounded-xl border transition-all text-center cursor-pointer ${
+                    className={`relative py-1.5 sm:py-2 px-1 text-[11px] sm:text-xs font-bold rounded-xl border transition-all text-center cursor-pointer ${
                       billingCycle === "6M"
                         ? "border-[#f57020] bg-orange-50 text-[#f57020]"
                         : "border-slate-200 text-slate-600 hover:border-slate-300"
@@ -370,67 +371,67 @@ export default function RegisterModal() {
                   <button
                     type="button"
                     onClick={() => setBillingCycle("12M")}
-                    className={`relative py-2 px-2 text-xs font-bold rounded-xl border transition-all text-center cursor-pointer ${
+                    className={`relative py-1.5 sm:py-2 px-1 text-[11px] sm:text-xs font-bold rounded-xl border transition-all text-center cursor-pointer ${
                       billingCycle === "12M"
                         ? "border-[#f57020] bg-orange-50 text-[#f57020]"
                         : "border-slate-200 text-slate-600 hover:border-slate-300"
                     }`}
                   >
                     <span>Đóng 12 tháng</span>
-                    <span className="block text-[10px] text-emerald-600 font-extrabold">
+                    <span className="block text-[9px] sm:text-[10px] text-emerald-600 font-extrabold leading-none mt-0.5">
                       +1 Tháng
                     </span>
                   </button>
                 </div>
               </div>
 
-              {/* HỌ VÀ TÊN & SỐ ĐIỆN THOẠI */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* HỌ VÀ TÊN & SỐ ĐIỆN THOẠI (2 CỘT GỌN GÀNG TRÊN CẢ MOBILE VÀ DESKTOP) */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-0.5">
                     Họ và tên *
                   </label>
                   <div className="relative">
-                    <User className="h-4 w-4 text-slate-400 absolute left-3 top-3" />
+                    <User className="h-3.5 w-3.5 text-slate-400 absolute left-2.5 top-2.5 sm:top-3" />
                     <input
                       type="text"
                       required
                       placeholder="Nguyễn Văn A"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-300 text-sm font-semibold text-slate-900 rounded-xl pl-9 pr-3 py-2.5 outline-none focus:border-[#004a9c] focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-300 text-xs sm:text-sm font-semibold text-slate-900 rounded-xl pl-7 sm:pl-8 pr-2 py-1.5 sm:py-2 outline-none focus:border-[#004a9c] focus:bg-white transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-0.5">
                     Số điện thoại *
                   </label>
                   <div className="relative">
-                    <Phone className="h-4 w-4 text-slate-400 absolute left-3 top-3" />
+                    <Phone className="h-3.5 w-3.5 text-slate-400 absolute left-2.5 top-2.5 sm:top-3" />
                     <input
                       type="tel"
                       required
                       placeholder="09xx xxx xxx"
                       value={phoneNumber}
                       onChange={(e) => setPhoneNumber(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-300 text-sm font-semibold text-slate-900 rounded-xl pl-9 pr-3 py-2.5 outline-none focus:border-[#004a9c] focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-300 text-xs sm:text-sm font-semibold text-slate-900 rounded-xl pl-7 sm:pl-8 pr-2 py-1.5 sm:py-2 outline-none focus:border-[#004a9c] focus:bg-white transition-all"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* TỈNH / THÀNH & ĐỊA CHỈ HÒA MẠNG */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* TỈNH / THÀNH & ĐỊA CHỈ HÒA MẠNG (2 CỘT GỌN GÀNG TRÊN CẢ MOBILE VÀ DESKTOP) */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-0.5 truncate">
                     Tỉnh / Thành phố
                   </label>
                   <select
                     value={provinceId}
                     onChange={(e) => setProvinceId(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-300 text-sm font-semibold text-slate-900 rounded-xl px-3 py-2.5 outline-none focus:border-[#004a9c] focus:bg-white transition-all"
+                    className="w-full bg-slate-50 border border-slate-300 text-xs sm:text-sm font-semibold text-slate-900 rounded-xl px-2 py-1.5 sm:py-2 outline-none focus:border-[#004a9c] focus:bg-white transition-all"
                   >
                     {PROVINCES.map((p) => (
                       <option key={p.id} value={p.id}>
@@ -441,26 +442,26 @@ export default function RegisterModal() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                    Địa chỉ bàn giao thiết bị
+                  <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-0.5 truncate">
+                    Địa chỉ bàn giao
                   </label>
                   <div className="relative">
-                    <MapPin className="h-4 w-4 text-slate-400 absolute left-3 top-3" />
+                    <MapPin className="h-3.5 w-3.5 text-slate-400 absolute left-2.5 top-2.5 sm:top-3" />
                     <input
                       type="text"
-                      placeholder="Số nhà, tên đường, phường..."
+                      placeholder="Số nhà, đường..."
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-300 text-sm font-semibold text-slate-900 rounded-xl pl-9 pr-3 py-2.5 outline-none focus:border-[#004a9c] focus:bg-white transition-all"
+                      className="w-full bg-slate-50 border border-slate-300 text-xs sm:text-sm font-semibold text-slate-900 rounded-xl pl-7 sm:pl-8 pr-2 py-1.5 sm:py-2 outline-none focus:border-[#004a9c] focus:bg-white transition-all"
                     />
                   </div>
                 </div>
               </div>
 
               {/* TẠM TÍNH THEO TỈNH THÀNH */}
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex items-center justify-between text-xs">
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-2 sm:p-2.5 flex items-center justify-between text-[11px] sm:text-xs">
                 <span className="text-slate-600 font-medium">Giá cước tại {activeProvince.name}:</span>
-                <span className="font-black text-[#F26F21] text-sm">
+                <span className="font-black text-[#F26F21] text-xs sm:text-sm">
                   {(pkgPrice * (billingCycle === "1M" ? 1 : billingCycle === "6M" ? 6 : 12)).toLocaleString("vi-VN")} đ
                   <span className="text-[10px] font-normal text-slate-400 ml-1">
                     ({billingCycle === "1M" ? "/tháng" : billingCycle === "6M" ? "/6 tháng" : "/12 tháng"})
@@ -469,10 +470,10 @@ export default function RegisterModal() {
               </div>
 
               {/* CAM KẾT CHÍNH SÁCH */}
-              <div className="flex items-center space-x-2 text-[11px] text-slate-500 pt-1">
-                <ShieldCheck className="h-4 w-4 text-emerald-600 shrink-0" />
-                <span>
-                  Bảo mật thông tin khách hàng tuyệt đối. Triển khai dịch vụ tận nơi trong 24 giờ.
+              <div className="flex items-center space-x-1.5 text-[10px] sm:text-[11px] text-slate-500 pt-0.5">
+                <ShieldCheck className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                <span className="leading-tight">
+                  Bảo mật thông tin tuyệt đối. Triển khai dịch vụ tận nơi trong 24 giờ.
                 </span>
               </div>
 
@@ -480,7 +481,7 @@ export default function RegisterModal() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#f57020] hover:bg-[#e05e10] text-white py-3.5 rounded-2xl font-black text-base shadow-lg hover:shadow-xl transition-all active:scale-[0.98] disabled:opacity-70 mt-2"
+                className="w-full bg-[#f57020] hover:bg-[#e05e10] text-white py-2.5 sm:py-3 rounded-xl font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all active:scale-[0.98] disabled:opacity-70 mt-1 cursor-pointer"
               >
                 {isSubmitting ? "Đang gửi đăng ký..." : "Gửi Yêu Cầu Hòa Mạng Ngay"}
               </button>

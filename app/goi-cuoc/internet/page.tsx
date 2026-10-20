@@ -111,26 +111,28 @@ export default function InternetPackagesPage() {
         </div>
 
         {/* PRODUCT CARDS GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="flex overflow-x-auto gap-4 pb-4 pt-1 px-4 -mx-4 sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 items-stretch snap-x snap-mandatory no-scrollbar">
           {filteredPackages.map((pkg) => (
-            <FptProductCard
-              key={pkg.id}
-              item={{
-                id: pkg.id,
-                name: pkg.name,
-                category: pkg.category,
-                badge: pkg.badge,
-                isPopular: pkg.isHot,
-                image: pkg.image,
-                price: pkg.price,
-                speed: pkg.downloadSpeed,
-                uploadSpeed: pkg.uploadSpeed,
-                equipment: pkg.modem,
-                recommendedDevices: pkg.recommendedDevices,
-                description: pkg.description,
-                features: pkg.features,
-              }}
-            />
+            <div key={pkg.id} className="w-[285px] sm:w-auto shrink-0 sm:shrink snap-start h-full flex flex-col">
+              <FptProductCard
+                item={{
+                  id: pkg.id,
+                  name: pkg.name,
+                  category: pkg.category,
+                  badge: pkg.badge,
+                  isPopular: pkg.isHot,
+                  image: pkg.image,
+                  price: pkg.price,
+                  speed: pkg.downloadSpeed,
+                  uploadSpeed: pkg.uploadSpeed,
+                  equipment: pkg.modem,
+                  recommendedDevices: pkg.recommendedDevices,
+                  description: pkg.description,
+                  features: pkg.features,
+                }}
+                className="h-full"
+              />
+            </div>
           ))}
         </div>
       </section>

@@ -228,6 +228,6 @@ export const WIFI7_FAQS = [
   },
   {
     question: "Quy trình đăng ký trang bị gói SpeedX Wi-Fi 7 như thế nào?",
-    answer: "Quý khách chỉ cần liên hệ Hotline đăng ký 0775 780 962 hoặc để lại thông tin trên website. Chuyên viên FPT sẽ tư vấn gói cước phù hợp và đội ngũ kỹ thuật sẽ đến tận nơi bàn giao, kết nối thiết bị Modem Wi-Fi 7 XGSPON chuẩn chỉ trong vòng 24 giờ.",
+    answer: "Quý khách chỉ cần liên hệ Hotline đăng ký 0784 930 338 hoặc để lại thông tin trên website. Chuyên viên FPT sẽ tư vấn gói cước phù hợp và đội ngũ kỹ thuật sẽ đến tận nơi bàn giao, kết nối thiết bị Modem Wi-Fi 7 XGSPON chuẩn chỉ trong vòng 24 giờ.",
   },
 ];

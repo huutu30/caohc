@@ -201,11 +201,11 @@ export default function HeaderNav() {
                     </span>
                   </div>
                   <a
-                    href="tel:0775780962"
+                    href="tel:0784930338"
                     className="flex items-center gap-1.5 text-xs font-extrabold text-[#004a9c] hover:text-[#f57020] transition-colors"
                   >
                     <PhoneCall className="size-3.5" />
-                    <span>0775 780 962</span>
+                    <span>0784 930 338</span>
                   </a>
                 </div>
               </div>

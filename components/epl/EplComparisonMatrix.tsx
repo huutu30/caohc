@@ -38,8 +38,8 @@ export default function EplComparisonMatrix() {
       platform: "Smart TV, Mobile, Web, App",
       eplDevices: "Xem đồng thời trên 2 thiết bị",
       internetDevices: "15 thiết bị",
-      badge: "Combo Tiết Kiệm Nhất",
-      isHot: true,
+      badge: null,
+      isHot: false,
     },
     {
       id: "combo-meta-vvip",
@@ -54,7 +54,7 @@ export default function EplComparisonMatrix() {
       platform: "Smart TV, Mobile, Web, App",
       eplDevices: "Xem đồng thời trên 2 thiết bị",
       internetDevices: "25 thiết bị",
-      badge: "1Gbps Đối Xứng",
+      badge: null,
       isHot: false,
     },
   ];
@@ -158,19 +158,10 @@ export default function EplComparisonMatrix() {
             {packages.map((pkg) => (
               <div
                 key={pkg.id}
-                className={`flex flex-col rounded-2xl p-4 transition-all ${
-                  pkg.isHot
-                    ? "bg-gradient-to-b from-[#10245a] to-[#0a183d] border-2 border-orange-500 shadow-xl shadow-orange-500/10 relative"
-                    : "bg-[#0b1b44]/70 border border-white/10 hover:border-white/20"
-                }`}
+                className="flex flex-col rounded-2xl p-4 transition-all bg-[#0b1b44]/80 border border-white/10 hover:border-orange-500/40 hover:bg-[#0f2152]/80 shadow-md"
               >
                 {/* PACKAGE HEADER */}
                 <div className="h-[96px] flex flex-col justify-between pb-3 border-b border-white/10 relative">
-                  {pkg.badge && (
-                    <span className="absolute -top-7 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-red-600 to-orange-500 text-white text-[10px] font-extrabold uppercase tracking-wider shadow">
-                      {pkg.badge}
-                    </span>
-                  )}
                   <div className="h-8 relative w-40">
                     <Image
                       src={pkg.headerImg}

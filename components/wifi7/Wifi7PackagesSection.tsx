@@ -63,9 +63,11 @@ export default function Wifi7PackagesSection() {
         </div>
 
         {/* 6 Packages Grid using standard FptProductCard */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+        <div className="flex overflow-x-auto gap-4 pb-4 pt-1 px-4 -mx-4 sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 items-stretch snap-x snap-mandatory no-scrollbar">
           {cardItems.map((item) => (
-            <FptProductCard key={item.id} item={item} className="h-full" />
+            <div key={item.id} className="w-[285px] sm:w-auto shrink-0 sm:shrink snap-start h-full flex flex-col">
+              <FptProductCard item={item} className="h-full" />
+            </div>
           ))}
         </div>
       </div>

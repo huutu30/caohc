@@ -273,7 +273,7 @@ export const GIA_DINH_FAQS = [
   },
   {
     question: "Thời gian đăng ký và bàn giao thiết bị mạng cho gia đình mất bao lâu?",
-    answer: "Sau khi quý khách đăng ký qua website hoặc Hotline 0775 780 962, chuyên viên FPT sẽ liên hệ hoàn tất thủ tục online nhanh chóng. Đội ngũ kỹ thuật sẽ tiến hành bàn giao, kết nối và hướng dẫn sử dụng tận nhà trong vòng 24 giờ.",
+    answer: "Sau khi quý khách đăng ký qua website hoặc Hotline 0784 930 338, chuyên viên FPT sẽ liên hệ hoàn tất thủ tục online nhanh chóng. Đội ngũ kỹ thuật sẽ tiến hành bàn giao, kết nối và hướng dẫn sử dụng tận nhà trong vòng 24 giờ.",
   },
   {
     question: "Tôi có được miễn phí thiết bị Modem Wi-Fi 6 khi đăng ký không?",

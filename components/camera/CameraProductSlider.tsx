@@ -69,13 +69,13 @@ export default function CameraProductSlider() {
         </div>
 
         {/* Product Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="flex overflow-x-auto gap-4 pb-4 pt-1 px-4 -mx-4 sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:gap-6 items-stretch snap-x snap-mandatory no-scrollbar">
           {filteredDevices.map((device) => {
             const isDiscounted = device.originalPrice && device.originalPrice > device.price;
             return (
               <div
                 key={device.id}
-                className="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group hover:-translate-y-1"
+                className="w-[280px] sm:w-auto shrink-0 sm:shrink snap-start bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group hover:-translate-y-1 h-full"
               >
                 {/* Image Container with Badges */}
                 <div className="relative w-full aspect-square bg-gradient-to-b from-slate-50 to-white p-6 flex items-center justify-center border-b border-slate-100">

@@ -65,7 +65,7 @@ export default function RootLayout({
     legalName: "Công ty Cổ phần Viễn thông FPT",
     url: "https://fpt.vn",
     logo: "https://fpt.vn/images/fpt.webp",
-    telephone: "0775780962",
+    telephone: "0784930338",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Số 10 Phạm Văn Bạch, Cầu Giấy",

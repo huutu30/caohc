@@ -164,10 +164,12 @@ export default function ComboPackagesPage() {
       </div>
 
       {/* COMBO PACKAGES GRID */}
-      <section className="max-w-[1440px] mx-auto px-4 sm:px-8 py-8 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="max-w-[1440px] mx-auto px-4 sm:px-8 py-8 sm:py-12 overflow-hidden">
+        <div className="flex overflow-x-auto gap-4 pb-4 pt-1 px-4 -mx-4 sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 items-stretch snap-x snap-mandatory no-scrollbar">
           {sportsCombos.map((pkg) => (
-            <FptProductCard key={pkg.id} item={pkg} />
+            <div key={pkg.id} className="w-[285px] sm:w-auto shrink-0 sm:shrink snap-start h-full flex flex-col">
+              <FptProductCard item={pkg} className="h-full" />
+            </div>
           ))}
         </div>
       </section>

@@ -497,11 +497,11 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
               <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
                 <span>Cần tư vấn trực tiếp ngay?</span>
                 <a
-                  href="tel:0775780962"
+                  href="tel:0784930338"
                   className="font-black text-[#F26F21] hover:underline flex items-center gap-1 text-sm"
                 >
                   <PhoneCall className="size-3.5" />
-                  0775 780 962
+                  0784 930 338
                 </a>
               </div>
             </div>

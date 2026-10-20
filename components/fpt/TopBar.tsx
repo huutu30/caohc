@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { MapPin, User, ChevronDown, Check, Building } from "lucide-react";
+import { MapPin, User, ChevronDown, Check, Building, X } from "lucide-react";
 import { useRegion, PROVINCES, Province } from "@/context/RegionContext";
 
 export default function TopBar() {
@@ -82,11 +82,27 @@ export default function TopBar() {
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 top-full mt-2 w-80 max-h-[440px] overflow-y-auto bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 p-3 z-50 animate-in fade-in slide-in-from-top-1">
-                <div className="px-2 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 flex items-center justify-between">
-                  <span>Xem giá cước theo khu vực</span>
-                  <span className="text-[10px] text-blue-600 font-bold">63 Tỉnh Thành</span>
-                </div>
+              <>
+                {/* BACKDROP FOR MOBILE */}
+                <div
+                  className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 sm:hidden"
+                  onClick={() => setDropdownOpen(false)}
+                />
+
+                <div className="fixed inset-x-3 sm:inset-auto top-12 sm:top-full sm:right-0 sm:mt-2 w-auto sm:w-80 max-h-[80vh] sm:max-h-[440px] overflow-y-auto bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-200 p-3 z-50 animate-in fade-in slide-in-from-top-1">
+                  <div className="px-2 py-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 flex items-center justify-between">
+                    <span>Xem giá cước theo khu vực</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] text-blue-600 font-bold">63 Tỉnh Thành</span>
+                      <button
+                        onClick={() => setDropdownOpen(false)}
+                        className="sm:hidden p-1 text-slate-400 hover:text-slate-600 rounded-lg cursor-pointer"
+                        aria-label="Đóng chọn vị trí"
+                      >
+                        <X className="size-4" />
+                      </button>
+                    </div>
+                  </div>
 
                 {/* SEARCH INPUT */}
                 <div className="p-1.5 border-b border-slate-100 my-1">
@@ -227,16 +243,17 @@ export default function TopBar() {
                   )}
                 </div>
               </div>
-            )}
-          </div>
+            </>
+          )}
+        </div>
 
           {/* ĐĂNG NHẬP / HOTLINE */}
           <a
-            href="tel:0775780962"
+            href="tel:0784930338"
             className="flex items-center gap-1.5 hover:opacity-90 transition-opacity text-slate-200 hover:text-white"
           >
             <User className="size-4 text-[#DDE4FC]" />
-            <span className="text-sm leading-6">Đăng ký: 0775 780 962</span>
+            <span className="text-sm leading-6">Đăng ký: 0784 930 338</span>
           </a>
         </div>
       </div>

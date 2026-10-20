@@ -7,7 +7,6 @@ import SportsComboCarousel from "@/components/fpt/SportsComboCarousel";
 import ExploreProductsTabs from "@/components/fpt/ExploreProductsTabs";
 import VvipExperienceBanner from "@/components/fpt/VvipExperienceBanner";
 import ProductCategories from "@/components/fpt/ProductCategories";
-import FptPlayBannerSlider from "@/components/fpt/FptPlayBannerSlider";
 import CoverageSection from "@/components/home/CoverageSection";
 import NewsEventsSection from "@/components/fpt/NewsEventsSection";
 import FaqSection from "@/components/home/FaqSection";
@@ -32,9 +31,6 @@ export default function HomePage() {
 
       {/* 6. DANH MỤC SẢN PHẨM ĐA DẠNG */}
       <ProductCategories />
-
-      {/* 7. FPT PLAY - GÓI XEM TRUYỀN HÌNH, GIẢI TRÍ, THỂ THAO ĐA PHƯƠNG TIỆN */}
-      <FptPlayBannerSlider />
 
       {/* 8. TRA CỨU HẠ TẦNG CÁP QUANG FPT 63 TỈNH THÀNH */}
       <CoverageSection />

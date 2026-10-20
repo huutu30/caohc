@@ -52,11 +52,11 @@ export default function Wifi7CtaSection() {
               Đăng ký Wi-Fi 7 ngay
             </button>
             <a
-              href="tel:0775780962"
+              href="tel:0784930338"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 border border-white/20 text-white font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2"
             >
               <PhoneCall className="w-4 h-4 text-cyan-400" />
-              <span>Hotline: 0775 780 962</span>
+              <span>Hotline: 0784 930 338</span>
             </a>
           </div>
         </div>

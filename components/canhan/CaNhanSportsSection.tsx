@@ -59,12 +59,14 @@ export default function CaNhanSportsSection() {
 
         {/* Cards Grid using standard FptProductCard */}
         <div
-          className={`grid gap-6 max-w-5xl mx-auto items-stretch ${
-            combos.length === 2 ? "grid-cols-1 md:grid-cols-2 max-w-3xl" : "grid-cols-1 md:grid-cols-3"
+          className={`flex overflow-x-auto gap-4 pb-4 pt-1 px-4 -mx-4 sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:gap-6 max-w-5xl mx-auto items-stretch snap-x snap-mandatory no-scrollbar ${
+            combos.length === 2 ? "sm:grid-cols-2 max-w-3xl" : "sm:grid-cols-2 md:grid-cols-3"
           }`}
         >
           {cardItems.map((item) => (
-            <FptProductCard key={item.id} item={item} className="h-full" />
+            <div key={item.id} className="w-[285px] sm:w-auto shrink-0 sm:shrink snap-start h-full flex flex-col">
+              <FptProductCard item={item} className="h-full" />
+            </div>
           ))}
         </div>
       </div>

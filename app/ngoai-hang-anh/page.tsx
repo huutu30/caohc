@@ -4,7 +4,6 @@ import React from "react";
 import EplHeroSection from "@/components/epl/EplHeroSection";
 import EplComparisonMatrix from "@/components/epl/EplComparisonMatrix";
 import EplPackagesSlider from "@/components/epl/EplPackagesSlider";
-import EplFptPlayOnlySection from "@/components/epl/EplFptPlayOnlySection";
 import EplPromotionFeatures from "@/components/epl/EplPromotionFeatures";
 import EplFaqSection from "@/components/epl/EplFaqSection";
 
@@ -20,10 +19,7 @@ export default function NgoaiHangAnhPage() {
       {/* 3. SLIDER BẢNG GIÁ COMBO INTERNET TRUYỀN HÌNH V.VIP KÈM BỘ LỌC KHU VỰC */}
       <EplPackagesSlider />
 
-      {/* 5. GÓI TÀI KHOẢN FPT PLAY ONLY (CHO KHÁCH ĐÃ CÓ MẠNG) */}
-      <EplFptPlayOnlySection />
-
-      {/* 6. ĐẶC QUYỀN & ƯU ĐÃI KHI XEM NGOẠI HẠNG ANH QUA FPT */}
+      {/* 4. ĐẶC QUYỀN & ƯU ĐÃI KHI XEM NGOẠI HẠNG ANH QUA FPT */}
       <EplPromotionFeatures />
 
       {/* 7. CÂU HỎI THƯỜNG GẶP (FAQS) */}
