@@ -107,26 +107,28 @@ export default function HeroSlider() {
           );
         })}
 
-        {/* LEFT / RIGHT ARROWS (FPT.VN STYLE) */}
+        {/* LEFT / RIGHT ARROWS (< and >) */}
         <button
+          type="button"
           onClick={(e) => {
             e.stopPropagation();
             prevSlide();
           }}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 size-11 rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-xs flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 hidden md:flex cursor-pointer"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 size-8 sm:size-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-xs flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-90 border border-white/20"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="size-6" />
+          <ChevronLeft className="size-5 sm:size-6" />
         </button>
         <button
+          type="button"
           onClick={(e) => {
             e.stopPropagation();
             nextSlide();
           }}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 size-11 rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-xs flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 hidden md:flex cursor-pointer"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 size-8 sm:size-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-xs flex items-center justify-center transition-all cursor-pointer shadow-md active:scale-90 border border-white/20"
           aria-label="Next slide"
         >
-          <ChevronRight className="size-6" />
+          <ChevronRight className="size-5 sm:size-6" />
         </button>
 
         {/* SLIDE DOTS (AUTHENTIC FPT.VN PILL CONTAINER) */}

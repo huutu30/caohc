@@ -219,30 +219,30 @@ export default function TopBar() {
   };
 
   return (
-    <div className="bg-[#0B1A3D] text-white text-xs border-b border-blue-950">
-      <div className="max-w-[1440px] mx-auto flex items-center justify-between px-4 sm:px-8 py-2">
+    <div className="bg-[#0B1A3D] text-white text-xs border-b border-blue-950 h-10 sm:h-10 flex items-center">
+      <div className="max-w-[1440px] w-full mx-auto flex items-center justify-between px-3 sm:px-8">
         {/* LEFT: SLOGAN THÔNG TIN */}
-        <div className="hidden sm:flex items-center gap-2 text-xs text-slate-300 font-medium">
+        <div className="hidden sm:flex items-center gap-2 text-xs text-slate-300 font-medium whitespace-nowrap">
           <span className="size-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
           <span>Website đăng ký dịch vụ trực tuyến chính hãng FPT Telecom</span>
         </div>
 
         {/* RIGHT: CHỌN VỊ TRÍ & ĐĂNG NHẬP / HOTLINE */}
-        <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto">
+        <div className="flex items-center justify-between sm:justify-end gap-2 sm:gap-6 w-full sm:w-auto">
           {/* LOCATION SELECTOR TRIGGER */}
-          <div className="relative" ref={dropdownRef}>
+          <div className="relative min-w-0" ref={dropdownRef}>
             <button
               type="button"
               onClick={() => setDropdownOpen((prev) => !prev)}
-              className="flex items-center gap-1.5 py-1 hover:opacity-90 transition-opacity cursor-pointer text-slate-200 hover:text-white"
+              className="flex items-center gap-1 sm:gap-1.5 py-1 hover:opacity-90 transition-opacity cursor-pointer text-slate-200 hover:text-white min-w-0"
               aria-label="Chọn vị trí xem giá"
             >
-              <MapPin className="size-4 text-[#ef4444]" />
-              <span className="text-sm leading-6 font-medium">
+              <MapPin className="size-3.5 sm:size-4 text-[#ef4444] shrink-0" />
+              <span className="text-xs sm:text-sm font-semibold truncate max-w-[130px] sm:max-w-none whitespace-nowrap">
                 {activeProvince.name}
               </span>
               <ChevronDown
-                className={`size-3.5 transition-transform duration-200 ${
+                className={`size-3 sm:size-3.5 shrink-0 transition-transform duration-200 ${
                   dropdownOpen ? "rotate-180" : ""
                 }`}
               />
@@ -278,10 +278,12 @@ export default function TopBar() {
           {/* HOTLINE LIÊN HỆ */}
           <a
             href="tel:0784930338"
-            className="flex items-center gap-1.5 hover:opacity-90 transition-opacity text-slate-200 hover:text-white"
+            className="flex items-center gap-1 sm:gap-1.5 hover:opacity-90 transition-opacity text-slate-200 hover:text-white shrink-0 whitespace-nowrap"
           >
-            <User className="size-4 text-[#DDE4FC]" />
-            <span className="text-sm leading-6">Đăng ký: 0784 930 338</span>
+            <User className="size-3.5 sm:size-4 text-[#DDE4FC] shrink-0" />
+            <span className="text-xs sm:text-sm whitespace-nowrap">
+              Đăng ký: <strong className="font-bold">0784 930 338</strong>
+            </span>
           </a>
         </div>
       </div>

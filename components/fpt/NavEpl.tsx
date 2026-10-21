@@ -8,7 +8,7 @@ export default function NavEpl() {
   const saleLink = "https://fpt.vn/sale/nguyenddb3";
 
   return (
-    <div className="w-[1440px] max-w-[calc(100%-20px)] sm:max-w-[calc(100%-32px)] mx-auto -mt-3 sm:-mt-6 mb-5 sm:mb-8 relative z-30">
+    <div className="w-[1440px] max-w-[calc(100%-20px)] sm:max-w-[calc(100%-32px)] mx-auto mt-3 sm:mt-5 mb-5 sm:mb-8 relative z-30">
       <div className="flex flex-row justify-center items-stretch gap-2.5 sm:gap-6">
         {/* CARD 1: ĐĂNG KÝ NGAY - BẠN CHƯA CÓ INTERNET FPT */}
         <a
