@@ -31,12 +31,6 @@ const SLIDES: BannerSlide[] = [
     mobileImg: "/images/fpt_banners/banner_3_mobile.jpg",
     alt: "Ưu đãi đăng ký gói FPT Play VVIP 12 tháng",
   },
-  {
-    id: 4,
-    desktopImg: "/images/fpt_banners/banner_4_desktop.jpg",
-    mobileImg: "/images/fpt_banners/banner_4_mobile.jpg",
-    alt: "Ưu đãi khuyến mại giới thiệu bạn bè đăng ký mạng FPT",
-  },
 ];
 
 export default function HeroSlider() {

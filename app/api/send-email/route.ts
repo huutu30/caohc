@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     const port = Number(process.env.SMTP_PORT) || 465;
     const user = process.env.SMTP_USER;
     const pass = process.env.SMTP_PASS?.replace(/\s+/g, ""); // strip any whitespace
-    const receiver = process.env.RECEIVER_EMAIL || user;
+    const receiver = process.env.RECEIVER_EMAIL || "NguyenDDB3@fpt.com";
 
     if (!user || !pass) {
       console.warn("SMTP chưa được cấu hình đầy đủ trong biến môi trường.");

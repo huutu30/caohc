@@ -136,8 +136,8 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="size-4 text-slate-400 shrink-0" />
-                <a href="mailto:lienhe@fpt.vn" className="hover:text-[#f57020]">
-                  lienhe@fpt.vn
+                <a href="mailto:NguyenDDB3@fpt.com" className="hover:text-[#f57020]">
+                  NguyenDDB3@fpt.com
                 </a>
               </div>
               <div className="flex items-center gap-2">
