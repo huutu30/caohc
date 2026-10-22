@@ -51,7 +51,7 @@ export default function RegistrationForm({
     }
   }, [initialPackageId]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let hasError = false;
 
@@ -75,11 +75,26 @@ export default function RegistrationForm({
     if (hasError) return;
 
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const pkg = allPackages.find((p) => p.id === selectedPackage);
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          phoneNumber,
+          province,
+          address,
+          packageName: pkg?.label || selectedPackage,
+          notes,
+        }),
+      });
+    } catch (err) {
+      console.error("Lỗi gửi form đăng ký:", err);
+    } finally {
       setIsSubmitting(false);
       setShowSuccessDialog(true);
-    }, 800);
+    }
   };
 
   const handleReset = () => {

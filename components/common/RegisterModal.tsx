@@ -134,16 +134,32 @@ export default function RegisterModal() {
   const rawPrice = getPrice(currentPkg);
   const pkgPrice: number = typeof rawPrice === "number" ? rawPrice : 0;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !phoneNumber) return;
 
     setIsSubmitting(true);
-    // Simulate high speed registration lead submission
-    setTimeout(() => {
+    try {
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          phoneNumber,
+          province:
+            PROVINCES.find((p) => p.id === provinceId)?.name ||
+            activeProvince.name,
+          address,
+          packageName: currentPkg?.name,
+          price: pkgPrice,
+        }),
+      });
+    } catch (err) {
+      console.error("Lỗi gửi form đăng ký:", err);
+    } finally {
       setIsSubmitting(false);
       setIsSuccess(true);
-    }, 800);
+    }
   };
 
   const handleResetAndClose = () => {
