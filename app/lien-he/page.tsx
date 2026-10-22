@@ -16,11 +16,39 @@ export default function ContactPage() {
   const [phone, setPhone] = React.useState("");
   const [address, setAddress] = React.useState("");
   const [service, setService] = React.useState("internet");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const serviceLabels: Record<string, string> = {
+    internet: "Internet Cáp Quang Wi-Fi 6",
+    combo: "Combo Internet + Truyền hình FPT Play",
+    camera: "FPT Camera An Ninh Cloud",
+    enterprise: "Internet Doanh Nghiệp IP Tĩnh",
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSuccess(true);
+    if (!fullName || !phone) return;
+
+    setIsSubmitting(true);
+    try {
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          phoneNumber: phone,
+          address,
+          packageName: serviceLabels[service] || service,
+          notes: "Khách gửi yêu cầu từ trang Liên hệ (/lien-he)",
+        }),
+      });
+    } catch (err) {
+      console.error("Lỗi gửi liên hệ:", err);
+    } finally {
+      setIsSubmitting(false);
+      setIsSuccess(true);
+    }
   };
 
   return (
@@ -117,7 +145,7 @@ export default function ContactPage() {
 
                 <div>
                   <label className="text-xs sm:text-sm font-semibold text-slate-700 block mb-1.5">
-                    Địa chỉ lắp đặt dự kiến <span className="text-red-500">*</span>
+                    Địa chỉ đăng ký hòa mạng <span className="text-red-500">*</span>
                   </label>
                   <Input
                     required
@@ -146,9 +174,10 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-[#F26F21] hover:bg-[#E05E10] text-white py-3.5 rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2 mt-4"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#F26F21] hover:bg-[#E05E10] text-white py-3.5 rounded-xl font-bold text-sm shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer flex items-center justify-center gap-2 mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <span>Gửi yêu cầu tư vấn miễn phí</span>
+                  <span>{isSubmitting ? "Đang gửi yêu cầu..." : "Gửi yêu cầu tư vấn miễn phí"}</span>
                   <Send className="size-4" />
                 </button>
 

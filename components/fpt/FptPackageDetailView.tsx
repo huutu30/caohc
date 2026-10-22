@@ -65,17 +65,33 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
   const speedNumber = data.downloadSpeed.replace(/[^0-9.]/g, "") || "1";
   const speedUnit = isGbps ? "Gbps" : "Mbps";
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!phone || phone.length < 9) {
       alert("Vui lòng nhập số điện thoại hợp lệ.");
       return;
     }
     setIsSubmitting(true);
-    setTimeout(() => {
+    try {
+      await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: fullName || "Khách hàng",
+          phoneNumber: phone,
+          province: activeProvince?.name || "Toàn quốc",
+          address,
+          packageName: `${data.name} (Chu kỳ ${billingCycle})`,
+          price: currentPrice,
+          notes: `Khách đăng ký từ trang chi tiết gói cước ${data.name}. Tạm tính: ${formattedTotal}đ.`,
+        }),
+      });
+    } catch (err) {
+      console.error("Lỗi gửi đăng ký gói cước:", err);
+    } finally {
       setIsSubmitting(false);
       setIsSuccess(true);
-    }, 800);
+    }
   };
 
   // Related packages
