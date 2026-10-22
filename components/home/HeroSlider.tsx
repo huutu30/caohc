@@ -25,12 +25,6 @@ const SLIDES: BannerSlide[] = [
     mobileImg: "/images/fpt_banners/banner_2_mobile.webp",
     alt: "Ưu đãi nâng cấp Combo Internet truyền hình xem Ngoại Hạng Anh",
   },
-  {
-    id: 3,
-    desktopImg: "/images/fpt_banners/banner_3_desktop.jpg",
-    mobileImg: "/images/fpt_banners/banner_3_mobile.jpg",
-    alt: "Ưu đãi đăng ký gói FPT Play VVIP 12 tháng",
-  },
 ];
 
 export default function HeroSlider() {
