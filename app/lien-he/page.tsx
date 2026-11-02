@@ -33,7 +33,7 @@ export default function ContactPage() {
 
     setIsSubmitting(true);
     try {
-      await fetch("/api/send-email", {
+      const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -44,15 +44,21 @@ export default function ContactPage() {
           notes: "Khách gửi yêu cầu từ trang Liên hệ (/lien-he)",
         }),
       });
-    } catch (err) {
-      console.error("Lỗi gửi liên hệ:", err);
-    } finally {
-      setIsSubmitting(false);
+
+      if (!res.ok) {
+        throw new Error("Gửi email thất bại");
+      }
+
       setIsSuccess(true);
       pushGTMEvent("Lượt Đăng Ký_Form", {
         form_name: "ContactPage",
         service,
       });
+    } catch (err) {
+      console.error("Lỗi gửi liên hệ:", err);
+      alert("Đã có lỗi xảy ra khi gửi thông tin. Quý khách vui lòng thử lại hoặc gọi Hotline.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 

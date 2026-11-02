@@ -188,7 +188,7 @@ export default function RegisterModal() {
         PROVINCES.find((p) => p.id === provinceId)?.name ||
         activeProvince.name;
 
-      await fetch("/api/send-email", {
+      const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -201,15 +201,22 @@ export default function RegisterModal() {
           notes: `Dịch vụ quan tâm: ${serviceNames || "Internet"}`,
         }),
       });
-    } catch (err) {
-      console.error("Lỗi gửi form đăng ký:", err);
-    } finally {
-      setIsSubmitting(false);
+
+      if (!res.ok) {
+        throw new Error("Gửi thông tin thất bại");
+      }
+
+      // CHỈ KHI GỬI THÀNH CÔNG VỀ MÁY CHỦ MỚI TÍNH LÀ CHUYỂN ĐỔI
       setIsSuccess(true);
       pushGTMEvent("Lượt Đăng Ký_Form", {
         form_name: "RegisterModal",
         package: selectedPackage?.name || currentPkg?.name,
       });
+    } catch (err) {
+      console.error("Lỗi gửi form đăng ký:", err);
+      alert("Đã có lỗi xảy ra khi gửi đăng ký. Quý khách vui lòng thử lại hoặc gọi Hotline.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 

@@ -11,13 +11,32 @@ export default function SopLiveChat() {
     if (document.getElementById("livechat-sop-script")) return;
 
     let hasTrackedSop = false;
+    const PHONE_REGEX = /(?:0|\+84)[35789][0-9]{8}/;
+
+    // Kiểm tra chuỗi payload có chứa số điện thoại hợp lệ không
+    const hasPhoneNumber = (text: string) => {
+      const cleaned = text.replace(/[\s.-]/g, "");
+      return PHONE_REGEX.test(cleaned);
+    };
+
+    // Kiểm tra các ô input bên trong khung chat SOP đã được nhập SĐT chưa
+    const hasSopInputPhone = () => {
+      const container = document.getElementById("livechat-sop");
+      if (!container) return false;
+      const inputs = Array.from(container.querySelectorAll("input"));
+      return inputs.some((inp) => {
+        const val = inp.value ? inp.value.replace(/[\s.-]/g, "") : "";
+        return PHONE_REGEX.test(val);
+      });
+    };
+
     const trackSopRegistration = (source: string) => {
       if (hasTrackedSop) return;
       hasTrackedSop = true;
       pushGTMEvent("Lượt Đăng Ký_SOP", { source });
       setTimeout(() => {
         hasTrackedSop = false;
-      }, 30000); // Cooldown 30s
+      }, 30000); // Cooldown 30s tránh ghi đè liên tục
     };
 
     try {
@@ -35,14 +54,9 @@ export default function SopLiveChat() {
           if (body.includes("www.foxfpt.vn")) {
             body = body.replace(/https:\/\/www\.foxfpt\.vn/g, "https://foxfpt.vn");
           }
-          if (
-            body.includes("phone") ||
-            body.includes("customer") ||
-            body.includes("contact") ||
-            body.includes("conversation") ||
-            body.includes("message")
-          ) {
-            trackSopRegistration("xhr_payload");
+          // CHỈ BẮN KHI REQUEST THỰC SỰ CHỨA SỐ ĐIỆN THOẠI KHÁCH HÀNG GỬI ĐI
+          if (hasPhoneNumber(body)) {
+            trackSopRegistration("xhr_phone_submit");
           }
         }
         return origSend.call(this, body);
@@ -55,23 +69,42 @@ export default function SopLiveChat() {
         if (init && typeof init.body === "string" && init.body.includes("www.foxfpt.vn")) {
           init.body = init.body.replace(/https:\/\/www\.foxfpt\.vn/g, "https://foxfpt.vn");
         }
+        // CHỈ BẮN KHI FETCH POST LÊN MÁY CHỦ SOP VÀ CHỨA SỐ ĐIỆN THOẠI THỰC TẾ
         if (init && init.method && init.method.toUpperCase() === "POST") {
           const urlStr = typeof resource === "string" ? resource : (resource as Request)?.url || "";
-          if (urlStr.includes("portal-sop.fpt.vn") && !urlStr.includes("get-config")) {
-            trackSopRegistration("fetch_api");
+          if (urlStr.includes("portal-sop.fpt.vn") && typeof init.body === "string" && hasPhoneNumber(init.body)) {
+            trackSopRegistration("fetch_phone_submit");
           }
         }
         return origFetch.apply(this, [resource, init]);
       };
     }
 
-    // Lắng nghe submit form trực tiếp bên trong widget SOP
+    // Lắng nghe người dùng bấm nút "Tư Vấn Ngay" / Submit khi đã điền SĐT
+    const handleSopClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target && target.closest("#livechat-sop")) {
+        const btn = target.closest("button, [role='button'], input[type='submit']");
+        if (btn) {
+          const btnText = btn.textContent || (btn as HTMLInputElement).value || "";
+          // Nếu bấm nút gửi/tư vấn và đã có số điện thoại trong input
+          if (/tư vấn|gửi|submit|bắt đầu/i.test(btnText) && hasSopInputPhone()) {
+            trackSopRegistration("button_click_submit");
+          }
+        }
+      }
+    };
+
     const handleDomSubmit = (e: Event) => {
       const target = e.target as HTMLElement;
       if (target && target.closest("#livechat-sop")) {
-        trackSopRegistration("dom_submit");
+        if (hasSopInputPhone()) {
+          trackSopRegistration("dom_form_submit");
+        }
       }
     };
+
+    document.addEventListener("click", handleSopClick, true);
     document.addEventListener("submit", handleDomSubmit, true);
 
     // 1. Nạp file CSS của SOP Livechat
@@ -101,6 +134,7 @@ export default function SopLiveChat() {
     document.body.appendChild(script);
 
     return () => {
+      document.removeEventListener("click", handleSopClick, true);
       document.removeEventListener("submit", handleDomSubmit, true);
     };
   }, []);

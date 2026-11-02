@@ -78,7 +78,7 @@ export default function RegistrationForm({
     setIsSubmitting(true);
     try {
       const pkg = allPackages.find((p) => p.id === selectedPackage);
-      await fetch("/api/send-email", {
+      const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -90,15 +90,22 @@ export default function RegistrationForm({
           notes,
         }),
       });
-    } catch (err) {
-      console.error("Lỗi gửi form đăng ký:", err);
-    } finally {
-      setIsSubmitting(false);
+
+      if (!res.ok) {
+        throw new Error("Gửi email thất bại");
+      }
+
+      // CHỈ KHI GỬI THÀNH CÔNG VỀ MÁY CHỦ MỚI TÍNH LÀ CHUYỂN ĐỔI
       setShowSuccessDialog(true);
       pushGTMEvent("Lượt Đăng Ký_Form", {
         form_name: "RegistrationForm",
         package: selectedPackage,
       });
+    } catch (err) {
+      console.error("Lỗi gửi form đăng ký:", err);
+      alert("Đã có lỗi xảy ra khi gửi yêu cầu. Quý khách vui lòng thử lại hoặc gọi Hotline.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
