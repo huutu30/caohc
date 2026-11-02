@@ -6,6 +6,7 @@ import NavEpl from "@/components/fpt/NavEpl";
 import SportsComboCarousel from "@/components/fpt/SportsComboCarousel";
 import ExploreProductsTabs from "@/components/fpt/ExploreProductsTabs";
 import VvipExperienceBanner from "@/components/fpt/VvipExperienceBanner";
+import HomeCameraSlider from "@/components/home/HomeCameraSlider";
 import ProductCategories from "@/components/fpt/ProductCategories";
 import CoverageSection from "@/components/home/CoverageSection";
 import NewsEventsSection from "@/components/fpt/NewsEventsSection";
@@ -28,6 +29,9 @@ export default function HomePage() {
 
       {/* 5. GÓI COMBO INTERNET TRUYỀN HÌNH V.VIP - CHO TRẢI NGHIỆM TRỌN VẸN NHẤT */}
       <VvipExperienceBanner />
+
+      {/* 5.5. SECTION THIẾT BỊ CAMERA AN NINH FPT (TRƯỢT NGANG MOBILE & DESKTOP) */}
+      <HomeCameraSlider />
 
       {/* 6. DANH MỤC SẢN PHẨM ĐA DẠNG */}
       <ProductCategories />
