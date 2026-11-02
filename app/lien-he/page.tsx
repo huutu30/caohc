@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { pushGTMEvent } from "@/lib/gtm";
 
 export default function ContactPage() {
   const [fullName, setFullName] = React.useState("");
@@ -48,6 +49,10 @@ export default function ContactPage() {
     } finally {
       setIsSubmitting(false);
       setIsSuccess(true);
+      pushGTMEvent("Lượt Đăng Ký_Form", {
+        form_name: "ContactPage",
+        service,
+      });
     }
   };
 

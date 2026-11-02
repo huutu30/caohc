@@ -19,6 +19,7 @@ import {
 import FptProductCard from "@/components/fpt/FptProductCard";
 import { FPT_PACKAGES } from "@/data/fptPackages";
 import { useRegion } from "@/context/RegionContext";
+import { pushGTMEvent } from "@/lib/gtm";
 
 export interface PackageDetailData {
   id: string;
@@ -91,6 +92,10 @@ export default function FptPackageDetailView({ data }: FptPackageDetailViewProps
     } finally {
       setIsSubmitting(false);
       setIsSuccess(true);
+      pushGTMEvent("Lượt Đăng Ký_Form", {
+        form_name: "FptPackageDetailView",
+        package: data.name,
+      });
     }
   };
 

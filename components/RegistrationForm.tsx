@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { INTERNET_PACKAGES, COMBO_PACKAGES, VIETNAM_PROVINCES } from "@/lib/packages";
 import { isValidVietnamesePhone } from "@/lib/utils";
+import { pushGTMEvent } from "@/lib/gtm";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -94,6 +95,10 @@ export default function RegistrationForm({
     } finally {
       setIsSubmitting(false);
       setShowSuccessDialog(true);
+      pushGTMEvent("Lượt Đăng Ký_Form", {
+        form_name: "RegistrationForm",
+        package: selectedPackage,
+      });
     }
   };
 

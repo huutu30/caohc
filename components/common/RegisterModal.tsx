@@ -18,6 +18,7 @@ import {
 import { useRegister } from "@/context/RegisterContext";
 import { useRegion, PROVINCES } from "@/context/RegionContext";
 import { FPT_PACKAGES } from "@/data/fptPackages";
+import { pushGTMEvent } from "@/lib/gtm";
 
 // DANH SÁCH GÓI SECTION 1 COMBO THỂ THAO V.VIP
 const SECTION_1_DROPDOWN_PACKAGES = [
@@ -205,6 +206,10 @@ export default function RegisterModal() {
     } finally {
       setIsSubmitting(false);
       setIsSuccess(true);
+      pushGTMEvent("Lượt Đăng Ký_Form", {
+        form_name: "RegisterModal",
+        package: selectedPackage?.name || currentPkg?.name,
+      });
     }
   };
 
