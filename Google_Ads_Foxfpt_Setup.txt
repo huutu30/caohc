@@ -1,0 +1,117 @@
+====================================================================
+           BỘ TÀI LIỆU SETUP CHIẾN DỊCH GOOGLE ADS - FOXFPT.VN
+         (Chuẩn 100% Chính Sách Google Ads & Quy Chuẩn Landing Page)
+====================================================================
+
+PHẦN 1: 15 TIÊU ĐỀ QUẢNG CÁO (HEADLINES)
+(Tối đa 30 ký tự/dòng - Không từ cấm - Không chứa giá tiền cụ thể)
+--------------------------------------------------------------------
+1. Đăng Ký Mạng WiFi FPT             (21 kt - Ghim vị trí 1)
+2. Đăng Ký WiFi FPT Mới Nhất         (25 kt)
+3. Ưu Đãi Đăng Ký Hôm Nay            (22 kt)
+4. Trang Bị Modem WiFi 6             (21 kt)
+5. Hòa Mạng Nhanh Trong 24H          (24 kt)
+6. Bảng Giá Cước WiFi Mới            (22 kt)
+7. Combo Mạng Và Truyền Hình         (25 kt)
+8. Xem Ngoại Hạng Anh Bản Quyền      (28 kt)
+9. Tặng Thêm 1 Đến 2 Tháng Cước      (28 kt)
+10. Thủ Tục Đơn Giản Chỉ Cần CCCD    (29 kt)
+11. Mạng WiFi Siêu Tốc Băng Rộng     (28 kt)
+12. Gói Cước Gia Đình Tiết Kiệm      (27 kt)
+13. Tặng Camera FPT An Ninh 0Đ       (26 kt)
+14. Đăng Ký Online Kích Hoạt Nhanh   (30 kt)
+15. Mở Thuê Bao Nhận Trọn Bộ Quà     (28 kt)
+
+
+PHẦN 2: 4 MÔ TẢ QUẢNG CÁO (DESCRIPTIONS)
+(Tối đa 90 ký tự/dòng - Đầy đủ thông tin ưu đãi & tính năng)
+--------------------------------------------------------------------
+Mô tả 1 (86 ký tự):
+Đăng ký WiFi FPT tốc độ cao trang bị Modem WiFi 6. Tặng thêm đến 2 tháng cước sử dụng.
+
+Mô tả 2 (87 ký tự):
+Xem trọn Ngoại Hạng Anh cùng combo mạng và FPT Play đỉnh cao. Đăng ký nhận trọn ưu đãi.
+
+Mô tả 3 (84 ký tự):
+Băng thông 1Gbps lướt web cực mượt. Thủ tục chỉ cần CCCD, kích hoạt nhanh trong 24h.
+
+Mô tả 4 (90 ký tự):
+Gói cước gia đình siêu tiết kiệm. Tặng kèm thiết bị an ninh, bàn giao tận nơi nhanh chóng.
+
+
+PHẦN 3: BỘ TỪ KHÓA TÌM KIẾM (KEYWORDS)
+(Tập trung 100% vào Đăng ký mới & Gói cước để đạt Điểm chất lượng 9-10/10)
+--------------------------------------------------------------------
+--- NHÓM 1: ĐĂNG KÝ MẠNG & WIFI FPT (Ưu tiên ngân sách chính) ---
+[đăng ký wifi fpt]
+"đăng ký wifi fpt"
+[đăng ký mạng fpt]
+"đăng ký mạng fpt"
+[bảng giá wifi fpt]
+"bảng giá wifi fpt"
+[gói cước wifi fpt]
+"gói cước wifi fpt"
+"bảng giá mạng fpt"
+"gói cước mạng fpt"
+
+--- NHÓM 2: COMBO THỂ THAO & FPT PLAY ---
+[combo fpt play]
+"combo fpt play"
+[truyền hình fpt play]
+"truyền hình fpt play"
+"combo mạng truyền hình fpt"
+"combo internet ngoại hạng anh"
+
+--- NHÓM 3: ĐỊA PHƯƠNG MỤC TIÊU ---
+[đăng ký wifi fpt tphcm]
+"đăng ký wifi fpt tphcm"
+[đăng ký mạng fpt tphcm]
+"đăng ký mạng fpt tphcm"
+"đăng ký wifi fpt bình dương"
+
+
+PHẦN 4: 6 ĐƯỜNG LIÊN KẾT TRANG WEB (SITELINKS CHUẨN CODEBASE)
+(Tiêu đề <= 25 kt | Dòng mô tả 1 <= 35 kt | Dòng mô tả 2 <= 35 kt)
+--------------------------------------------------------------------
+Sitelink 1: Gói Combo Thể Thao
+- URL đích: https://foxfpt.vn/ngoai-hang-anh
+- Tiêu đề liên kết: Combo Ngoại Hạng Anh         (20 kt)
+- Dòng mô tả 1: Bản quyền Ngoại Hạng Anh sắc nét  (32 kt)
+- Dòng mô tả 2: Trang bị FPT Play Box xem mượt    (30 kt)
+
+Sitelink 2: Gói Cước Gia Đình
+- URL đích: https://foxfpt.vn/internet/gia-dinh
+- Tiêu đề liên kết: Gói Cước Gia Đình             (17 kt)
+- Dòng mô tả 1: Trang bị Modem WiFi 6 Mesh xịn    (30 kt)
+- Dòng mô tả 2: Phủ sóng toàn diện mọi góc nhà    (30 kt)
+
+Sitelink 3: Gói Cước Cá Nhân & Sinh Viên
+- URL đích: https://foxfpt.vn/internet/ca-nhan
+- Tiêu đề liên kết: Gói Cước Cá Nhân              (16 kt)
+- Dòng mô tả 1: Tốc độ 1Gbps lướt web thả ga      (28 kt)
+- Dòng mô tả 2: Chi phí tiết kiệm cho sinh viên   (31 kt)
+
+Sitelink 4: FPT Camera An Ninh
+- URL đích: https://foxfpt.vn/camera
+- Tiêu đề liên kết: FPT Camera AI An Ninh         (21 kt)
+- Dòng mô tả 1: Lưu trữ Cloud Tier 3 an toàn      (28 kt)
+- Dòng mô tả 2: Nhận diện AI đàm thoại 2 chiều    (30 kt)
+
+Sitelink 5: Gói Cước Game Thủ
+- URL đích: https://foxfpt.vn/internet/game-thu
+- Tiêu đề liên kết: Gói Cước Game Thủ             (17 kt)
+- Dòng mô tả 1: Tích hợp Ultra Fast giảm ping     (29 kt)
+- Dòng mô tả 2: Chiến game đỉnh cao không giật lag (34 kt)
+
+Sitelink 6: Kênh Tư Vấn & Đăng Ký
+- URL đích: https://foxfpt.vn/lien-he
+- Tiêu đề liên kết: Đăng Ký Thuê Bao Mới          (20 kt)
+- Dòng mô tả 1: Tư vấn nhiệt tình phản hồi ngay   (31 kt)
+- Dòng mô tả 2: Bàn giao dịch vụ nhanh trong 24h  (32 kt)
+
+
+PHẦN 5: TIỆN ÍCH CUỘC GỌI (CALL ASSET)
+--------------------------------------------------------------------
+- Số điện thoại hiển thị: 0784 930 338
+- Tên hiển thị kèm cuộc gọi: Hotline Đăng Ký Thuê Bao
+====================================================================
