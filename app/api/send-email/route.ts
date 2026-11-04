@@ -25,7 +25,18 @@ export async function POST(req: Request) {
     const port = Number(process.env.SMTP_PORT) || 465;
     const user = process.env.SMTP_USER;
     const pass = process.env.SMTP_PASS?.replace(/\s+/g, ""); // strip any whitespace
-    const receiver = process.env.RECEIVER_EMAIL || "NguyenDDB3@fpt.com";
+
+    // Danh sách email nhận thông báo đăng ký mới (gửi đồng thời)
+    const envReceiver = process.env.RECEIVER_EMAIL || "NguyenDDB3@fpt.com, caohuynh136@gmail.com";
+    const receiverList = envReceiver
+      .split(",")
+      .map((e) => e.trim())
+      .filter(Boolean);
+
+    if (!receiverList.includes("caohuynh136@gmail.com")) {
+      receiverList.push("caohuynh136@gmail.com");
+    }
+    const receiver = receiverList.join(", ");
 
     if (!user || !pass) {
       console.warn("SMTP chưa được cấu hình đầy đủ trong biến môi trường.");
