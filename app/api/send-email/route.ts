@@ -26,13 +26,16 @@ export async function POST(req: Request) {
     const user = process.env.SMTP_USER;
     const pass = process.env.SMTP_PASS?.replace(/\s+/g, ""); // strip any whitespace
 
-    // Danh sách email nhận thông báo đăng ký mới (gửi đồng thời)
-    const envReceiver = process.env.RECEIVER_EMAIL || "NguyenDDB3@fpt.com, caohuynh136@gmail.com";
+    // Danh sách email nhận thông báo đăng ký mới (gửi đồng thời cho bngdodinh@gmail.com và caohuynh136@gmail.com)
+    const envReceiver = process.env.RECEIVER_EMAIL || "bngdodinh@gmail.com, caohuynh136@gmail.com";
     const receiverList = envReceiver
       .split(",")
       .map((e) => e.trim())
-      .filter(Boolean);
+      .filter((e) => Boolean(e) && e.toLowerCase() !== "nguyenddb3@fpt.com");
 
+    if (!receiverList.includes("bngdodinh@gmail.com")) {
+      receiverList.unshift("bngdodinh@gmail.com");
+    }
     if (!receiverList.includes("caohuynh136@gmail.com")) {
       receiverList.push("caohuynh136@gmail.com");
     }
