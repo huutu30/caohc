@@ -40,7 +40,7 @@ export default function SopLiveChat() {
     };
 
     try {
-      localStorage.setItem("sop_id", "3924");
+      localStorage.setItem("sop_id", "3703");
     } catch (e) {
       console.warn("SOP Widget: Không thể lưu sop_id vào localStorage", e);
     }

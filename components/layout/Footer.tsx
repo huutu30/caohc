@@ -95,11 +95,11 @@ export default function Footer() {
             <div className="flex items-center gap-2 border-l border-slate-200 pl-4 sm:pl-6">
               <span className="text-xs text-slate-500 font-medium">Hotline đăng ký:</span>
               <a
-                href="tel:0784930338"
+                href="tel:0387498332"
                 className="text-[#f57020] font-black text-lg tracking-tight hover:underline flex items-center gap-1.5"
               >
                 <Phone className="size-4 text-[#f57020]" />
-                <span>0784 930 338</span>
+                <span>0387 498 332</span>
               </a>
             </div>
           </div>
@@ -136,14 +136,14 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="size-4 text-slate-400 shrink-0" />
-                <a href="mailto:NguyenDDB3@fpt.com" className="hover:text-[#f57020]">
-                  NguyenDDB3@fpt.com
+                <a href="mailto:tunh27@fpt.com" className="hover:text-[#f57020]">
+                  tunh27@fpt.com
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="size-4 text-slate-400 shrink-0" />
-                <a href="tel:0784930338" className="hover:text-[#f57020] font-semibold text-slate-800">
-                  0784 930 338
+                <a href="tel:0387498332" className="hover:text-[#f57020] font-semibold text-slate-800">
+                  0387 498 332
                 </a>
               </div>
             </div>

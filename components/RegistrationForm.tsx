@@ -168,10 +168,10 @@ export default function RegistrationForm({
             <div className="relative z-10 pt-8 mt-8 border-t border-white/15">
               <p className="text-xs text-blue-200">Hotline đăng ký thuê bao:</p>
               <a
-                href="tel:0784930338"
+                href="tel:0387498332"
                 className="text-2xl font-black text-amber-400 hover:underline tracking-wide block mt-1"
               >
-                0784 930 338
+                0387 498 332
               </a>
             </div>
           </div>
@@ -212,7 +212,7 @@ export default function RegistrationForm({
                 </label>
                 <div className="relative">
                   <Input
-                    placeholder="VD: 0784930338 (10 chữ số)"
+                    placeholder="VD: 0387498332 (10 chữ số)"
                     value={phoneNumber}
                     onChange={(e) => {
                       setPhoneNumber(e.target.value);

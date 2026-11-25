@@ -52,11 +52,11 @@ export default function GameThuCtaSection() {
               Đăng ký chiến game ngay
             </button>
             <a
-              href="tel:0784930338"
+              href="tel:0387498332"
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 border border-white/20 text-white font-bold text-sm md:text-base transition-all flex items-center justify-center gap-2"
             >
               <PhoneCall className="w-4 h-4 text-amber-400" />
-              <span>Hotline: 0784 930 338</span>
+              <span>Hotline: 0387 498 332</span>
             </a>
           </div>
         </div>

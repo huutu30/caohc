@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRegisterModal } from "@/context/RegisterContext";
 
 export default function NavEpl() {
-  const saleLink = "https://fpt.vn/sale/nguyenddb3";
+  const saleLink = "https://fpt.vn/sale/tunh27";
   const { openRegisterModal } = useRegisterModal();
 
   return (

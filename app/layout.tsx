@@ -84,7 +84,7 @@ export default function RootLayout({
     legalName: "Công ty Cổ phần Viễn thông FPT",
     url: "https://fpt.vn",
     logo: "https://fpt.vn/images/fpt.webp",
-    telephone: "0784930338",
+    telephone: "0387498332",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Số 10 Phạm Văn Bạch, Cầu Giấy",
@@ -115,7 +115,7 @@ export default function RootLayout({
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-NQPBGX2C"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PMTX95WM"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
@@ -132,7 +132,7 @@ export default function RootLayout({
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NQPBGX2C');`,
+})(window,document,'script','dataLayer','GTM-PMTX95WM');`,
           }}
         />
 

@@ -277,12 +277,12 @@ export default function TopBar() {
 
           {/* HOTLINE LIÊN HỆ */}
           <a
-            href="tel:0784930338"
+            href="tel:0387498332"
             className="flex items-center gap-1 sm:gap-1.5 hover:opacity-90 transition-opacity text-slate-200 hover:text-white shrink-0 whitespace-nowrap"
           >
             <User className="size-3.5 sm:size-4 text-[#DDE4FC] shrink-0" />
             <span className="text-xs sm:text-sm whitespace-nowrap">
-              Đăng ký: <strong className="font-bold">0784 930 338</strong>
+              Đăng ký: <strong className="font-bold">0387 498 332</strong>
             </span>
           </a>
         </div>
