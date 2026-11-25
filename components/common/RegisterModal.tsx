@@ -97,9 +97,7 @@ export default function RegisterModal() {
   const [chosenPkgId, setChosenPkgId] = useState(
     selectedPackage?.id || "combo-sky-vvip"
   );
-  const [selectedServices, setSelectedServices] = useState<string[]>([
-    "internet",
-  ]);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -166,9 +164,7 @@ export default function RegisterModal() {
   const toggleService = (id: string) => {
     setSelectedServices((prev) =>
       prev.includes(id)
-        ? prev.length > 1
-          ? prev.filter((item) => item !== id)
-          : prev
+        ? prev.filter((item) => item !== id)
         : [...prev, id]
     );
   };
@@ -198,7 +194,9 @@ export default function RegisterModal() {
           address,
           packageName: selectedPackage?.name || currentPkg?.name,
           price: pkgPrice,
-          notes: `Dịch vụ quan tâm: ${serviceNames || "Internet"}`,
+          notes: serviceNames
+            ? `Dịch vụ quan tâm: ${serviceNames}`
+            : "Tư vấn gói cước chung",
         }),
       });
 
@@ -377,10 +375,10 @@ export default function RegisterModal() {
                 </div>
               </div>
 
-              {/* HÀNG 3: SẢN PHẨM QUAN TÂM (PILL TAGS CÓ ICON) */}
+              {/* HÀNG 3: SẢN PHẨM QUAN TÂM (PILL TAGS CÓ ICON - TÙY CHỌN) */}
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-2">
-                  Sản phẩm quan tâm
+                  Sản phẩm quan tâm <span className="text-[11px] font-normal text-slate-400">(Tùy chọn)</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {INTERESTED_SERVICES.map((srv) => {
