@@ -40,6 +40,10 @@ export default function SopLiveChat() {
     };
 
     try {
+      const currentSop = localStorage.getItem("sop_id");
+      if (currentSop !== "3974") {
+        localStorage.removeItem("x-cookie");
+      }
       localStorage.setItem("sop_id", "3974");
     } catch (e) {
       console.warn("SOP Widget: Không thể lưu sop_id vào localStorage", e);
