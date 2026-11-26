@@ -29,17 +29,17 @@ export async function POST(req: Request) {
     // Danh sách email nhận thông báo đăng ký mới lấy từ biến môi trường RECEIVER_EMAIL
     const envReceiver =
       process.env.RECEIVER_EMAIL ||
-      "tuteo911@gmail.com, thaovan09112003@gmail.com";
+      "tuteo911@gmail.com, thaovan0911@gmail.com";
     const receiverList = envReceiver
       .split(",")
       .map((e) => e.trim())
-      .filter(Boolean);
+      .filter((e) => Boolean(e) && e.toLowerCase() !== "thaovan09112003@gmail.com");
 
     if (!receiverList.includes("tuteo911@gmail.com")) {
       receiverList.push("tuteo911@gmail.com");
     }
-    if (!receiverList.includes("thaovan09112003@gmail.com")) {
-      receiverList.push("thaovan09112003@gmail.com");
+    if (!receiverList.includes("thaovan0911@gmail.com")) {
+      receiverList.push("thaovan0911@gmail.com");
     }
 
     if (receiverList.length === 0) {
