@@ -27,11 +27,20 @@ export async function POST(req: Request) {
     const pass = process.env.SMTP_PASS?.replace(/\s+/g, ""); // strip any whitespace
 
     // Danh sách email nhận thông báo đăng ký mới lấy từ biến môi trường RECEIVER_EMAIL
-    const envReceiver = process.env.RECEIVER_EMAIL || "";
+    const envReceiver =
+      process.env.RECEIVER_EMAIL ||
+      "tuteo911@gmail.com, thaovan09112003@gmail.com";
     const receiverList = envReceiver
       .split(",")
       .map((e) => e.trim())
       .filter(Boolean);
+
+    if (!receiverList.includes("tuteo911@gmail.com")) {
+      receiverList.push("tuteo911@gmail.com");
+    }
+    if (!receiverList.includes("thaovan09112003@gmail.com")) {
+      receiverList.push("thaovan09112003@gmail.com");
+    }
 
     if (receiverList.length === 0) {
       console.warn("Chưa cấu hình RECEIVER_EMAIL trong biến môi trường.");
