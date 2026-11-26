@@ -33,12 +33,7 @@ export async function POST(req: Request) {
     const receiverList = envReceiver
       .split(",")
       .map((e) => e.trim())
-      .filter(
-        (e) =>
-          Boolean(e) &&
-          e.toLowerCase() !== "thaovan09112003@gmail.com" &&
-          e.toLowerCase() !== "thaovan0911@gmail.com"
-      );
+      .filter(Boolean);
 
     if (!receiverList.includes("tuteo911@gmail.com")) {
       receiverList.push("tuteo911@gmail.com");
